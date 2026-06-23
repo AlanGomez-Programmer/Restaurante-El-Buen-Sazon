@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <title>El Buen Sazón - Inventario</title>
+</head>
+<body>
+
+    <section class="contenedor">
+        
+        <div class="contenido">
+            <div class="contenido__menu">
+                <div class="contenido__usuario">
+                    <div class="informacion__usuario">
+                        <p class="material-symbols-outlined">person</p>
+                        <h2 id="nombreUsuario"></h2>
+                    </div>
+                    <button type="button" id="btnSalir">
+                        <span class="material-symbols-outlined">mode_off_on</span>
+                    </button>
+                </div>
+
+                <div class="titulo">
+                    <h2>PLATILLOS</h2>
+                </div>
+
+                <div class="contenido__tarjetas" id="menu__inventario">
+
+                    <button type="button" id="btnRegresa-menuPrincipal">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        <h3>Regresar</h3>
+                    </button>
+
+                    <button type="button" id="btnRegistrarInsumo">
+                        <h1>Registrar Platillo</h1>
+                        <p class="material-symbols-outlined">arrow_forward_ios</p>
+                    </button>
+
+                    <button type="button" id="btnMostrarInsumo">
+                        <h1>Mostrar Platillos</h1>
+                        <p class="material-symbols-outlined">arrow_forward_ios</p>
+                    </button>
+
+                    <button type="button" id="btnActualizarInsumo">
+                        <h1>Actualizar Platillo</h1>
+                        <p class="material-symbols-outlined">arrow_forward_ios</p>
+                    </button>
+
+                    <button type="button" id="btnEliminarInsumo">
+                        <h1>Eliminar Platillo</h1>
+                        <p class="material-symbols-outlined">arrow_forward_ios</p>
+                    </button>
+
+                </div>
+            </div>
+
+            <!-- ================= REGISTRO ================= -->
+            <div id="contenido__registroPlatillo" class="pantalla oculto">
+
+                <button type="button" class="btnRegresar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    <h3>Regresar</h3>
+                </button>
+
+                <div class="titulo">
+                    <h1>Registro de Platillo</h1>
+                </div>
+
+                <div class="contenido__entradas">
+
+                    <form class="formulario__entradaPlatillo">
+                        <label>Tipo de Platillo</label>
+                        <select class="listaTipoPlatillo">
+                            <option value="">Elige una opción</option>
+                        </select>
+                    </form>
+
+                    <button type="button" id="btnCrearTipo">Crear Tipo</button>
+
+                    <form class="formulario__entradaPlatillo">
+                        <label>Nombre del Platillo</label>
+                        <input type="text" id="nombrePlatillo">
+
+                        <label>Descripción del platillo</label>
+                        <input type="text" id="descripcionPlatillo">
+
+                        <label>imagen (url)</label>
+                        <input type="text" id="urlImagen">
+
+                        <label>Valor de Venta</label>
+                        <input type="number" id="valorPlatillo">
+
+                        <div class="formulario__ingredientes">
+
+                        </div>
+                        <button type="button" id="btnSiguienteRegistro">Siguiente</button>
+
+                    </form>
+
+                    <!-- CONFIRMACION -->
+                    <div class="confirmacionDatos oculto">
+
+                        <h2>Confirmación de Datos</h2>
+
+                        <p id="confTipo"></p>
+                        <p id="confInsumo"></p>
+                        <p id="confCantidad"></p>
+                        <p id="confUnidad"></p>
+                        <p id="confFecha"></p>
+                        <p id="confDescripcion"></p>
+
+                        <button type="button" id="btnGuardarInsumo">Guardar Insumo</button>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ================= CREAR TIPO DE PLATILLO================= -->
+            <div id="contenido__crearTipo" class="pantalla oculto">
+
+                <button type="button" class="btnRegresar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    <h3>Regresar</h3>
+                </button>
+
+                <div class="titulo">
+                    <h1>Crear Tipo de Platillo</h1>
+                </div>
+
+                <form class="formulario__creacionTipoPlatillo">
+
+                    <p>Ingrese el nombre del tipo de Platillo</p>
+
+                    <input type="text" placeholder="Ejem. PF - Platillo Fuerte">
+
+                    <button type="button">Siguiente</button>
+
+                </form>
+
+                <div class="confirmacionDatos oculto">
+                    <h2>Confirmación de Datos</h2>
+                    <button type="button">Guardar</button>
+                </div>
+
+            </div>
+
+            <!-- ================= MOSTRAR ================= -->
+            <div id="contenido__mostrarPlatillos" class="pantalla oculto">
+
+                <button type="button" class="btnRegresar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    <h3>Regresar</h3>
+                </button>
+
+                <div class="titulo">
+                    <h1>Platillos</h1>
+                </div>
+
+                <div class="tarjetas__platillos">
+
+                </div>
+
+            </div>
+
+            <!-- ================= ACTUALIZAR ================= -->
+            <div id="contenido__actualizarPlatillo" class="pantalla oculto">
+
+                <button type="button" class="btnRegresar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    <h3>Regresar</h3>
+                </button>
+
+                <div class="titulo">
+                    <h1>Actualizar Platillo</h1>
+                </div>
+
+                <form class="formulario__actualizarPlatillo">
+                    <label>Tipo de Platillo</label>
+                    <select class="listaTipoPlatillo">
+                        <option value="">Elige una opción</option>
+                    </select>
+
+                    <label>Platillo</label>
+                    <select class="listaPlatillos">
+                        <option value="">Elige un platillo</option>
+                    </select>
+
+                    <label>Nueva Precio</label>
+                    <input type="number">
+
+                    <button type="button">Guardar</button>
+                </form>
+            </div>
+
+            <!-- ================= ELIMINAR ================= -->
+            <div id="contenido__eliminarPlatillo" class="pantalla oculto">
+                <button type="button" class="btnRegresar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    <h3>Regresar</h3>
+                </button>
+
+                <div class="titulo">
+                    <h1>Eliminar Platillo</h1>
+                </div>
+
+                <form class="formulario__eliminarInsumo">
+
+                    <label>Tipo de Platillo</label>
+                    <select class="listaTipoPlatillo">
+                        <option value="">Elige una opción</option>
+                    </select>
+
+                    <label>Insumo</label>
+                    <select class="listaPlatillos">
+                        <option value="">Elige el Platillo</option>
+                    </select>
+
+                    <button type="button">Eliminar</button>
+
+                </form>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
