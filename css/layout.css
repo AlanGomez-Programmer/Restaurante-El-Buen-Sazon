@@ -1,0 +1,11 @@
+/**
+ * Estilos de layout global
+ * Contenedor principal y estructura base de la aplicación
+ */
+
+/* Variables CSS adicionales para temas */
+:root {
+    --text-color: #000000;
+    --input-background: #f5f5f5;
+    --input-border: #ddd;
+}
