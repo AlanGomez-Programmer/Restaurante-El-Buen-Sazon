@@ -1,0 +1,247 @@
+.oculto {
+    display: none;
+}
+
+.pantalla {
+    width: 100%;
+}
+
+/*=========================
+MENU
+=========================*/
+.contenido__menu {
+    width: 100%;
+}
+
+.contenido__tarjetas {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 35px;
+    margin-top: 60px;
+}
+
+.tarjeta__menu {
+    width: 80%;
+    height: 100px;
+    margin: auto;
+    border: none;
+    border-radius: 10px;
+    background: var(--background-principal);
+    border: 1px solid var(--background-secundario);
+    box-shadow: 0 8px 0 #BDBDBD;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--background-secundario);
+}
+
+.tarjeta__menu h1 {
+    font-size: 1.4rem;
+    font-family: var(--font-Titulos);
+    font-weight: 400;
+}
+
+.tarjeta__menu:hover {
+    cursor: pointer;
+    transition: .3s;
+    box-shadow: 0 0 10px var(--background-secundario);
+}
+
+
+
+/* REGISTRO */
+.contenido__entradas {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formulario__entradaPlatillo {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.formulario__entradaPlatillo label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.formulario__entradaPlatillo input,
+.formulario__entradaPlatillo select {
+    width: 100%;
+    height: 45px;
+    padding-left: 10px;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+
+#btnCrearTipo {
+    width: 150px;
+    height: 40px;
+    margin-top: 20px;
+    margin-right: 10%;
+    align-self: flex-end;
+    border: none;
+    border-radius: 8px;
+    background: var(--background-secundario);
+    color: var(--background-principal);
+    cursor: pointer;
+}
+
+.formulario__ingredientes {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#btnSiguienteRegistro {
+    width: 180px;
+    height: 45px;
+    margin: auto;
+    margin-top: 25px;
+    border: none;
+    border-radius: 8px;
+    background: var(--background-secundario);
+    color: var(--background-principal);
+}
+
+/* CONFIRMACION */
+.confirmacionDatos {
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--background-principal);
+    box-shadow: 0 0 15px rgba(0, 0, 0, .15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.confirmacionDatos img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+#btnGuardarPlatillo {
+    width: 180px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    background: var(--background-secundario);
+    color: var(--background-principal);
+}
+
+/* CREAR TIPO */
+.formulario__creacionTipoPlatillo {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formulario__creacionTipoPlatillo input {
+    height: 45px;
+    padding-left: 10px;
+}
+
+.formulario__creacionTipoPlatillo button {
+    width: 180px;
+    height: 45px;
+    margin: auto;
+}
+
+/* MOSTRAR */
+.tarjetas__platillos {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.tarjeta__platillo {
+    width: 80%;
+    padding: 15px;
+    position: relative;
+    border-radius: 10px;
+    border: 1px solid gray;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+}
+
+.tarjeta__platillo img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.tarjeta__platillo h3 {
+    margin-top: 15px;
+}
+
+.btnEliminar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    background: #ff4444;
+    color: white;
+}
+
+/* ACTUALIZAR */
+.formulario__actualizarPlatillo {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formulario__actualizarPlatillo select,
+.formulario__actualizarPlatillo input {
+    height: 45px;
+    padding-left: 10px;
+}
+
+.formulario__actualizarPlatillo button {
+    width: 180px;
+    height: 45px;
+    margin: auto;
+}
+
+/* ELIMINAR */
+.formulario__eliminarInsumo {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formulario__eliminarInsumo select {
+    height: 45px;
+    padding-left: 10px;
+}
+
+.formulario__eliminarInsumo button {
+    width: 180px;
+    height: 45px;
+    margin: auto;
+    border: none;
+    border-radius: 8px;
+    background: #ff4444;
+    color: white;
+}
