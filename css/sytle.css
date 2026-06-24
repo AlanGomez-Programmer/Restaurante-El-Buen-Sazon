@@ -3,6 +3,7 @@
 :root {
     --background-principal: white;
     --background-secundario: black;
+    --background-terciario: #5c5b5b;
 
     --font-principal: "Roboto Mono", monospace;
     --font-Titulos: "Oswald", sans-serif;
