@@ -47,5 +47,5 @@ function aplicarTema(tema) {
 let btnIniciarSesion = document.getElementById('btnIniciarSesion');
 
 btnIniciarSesion.addEventListener('click', () => {
-    window.location.href = 'index.html';
+    window.location.href = 'menu.html';
 });
