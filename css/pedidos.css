@@ -1,0 +1,192 @@
+.oculto {
+    display: none;
+}
+
+.pantalla {
+    width: 100%;
+}
+
+/*=========================
+MENU
+=========================*/
+.contenido__menu {
+    width: 100%;
+}
+
+.contenido__tarjetas {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 35px;
+    margin-top: 60px;
+}
+
+.tarjeta__menu {
+    width: 80%;
+    height: 100px;
+    margin: auto;
+    border: none;
+    border-radius: 10px;
+    background: var(--background-principal);
+    border: 1px solid var(--background-secundario);
+    box-shadow: var(--shadow-card);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--background-secundario);
+}
+
+.tarjeta__menu h1 {
+    font-size: 1.4rem;
+    font-family: var(--font-Titulos);
+    font-weight: 400;
+}
+
+.tarjeta__menu:hover {
+    cursor: pointer;
+    transition: .3s;
+    box-shadow: 0 0 10px var(--background-secundario);
+}
+
+
+
+/* REGISTRO */
+.contenido__entradas {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formulario__entradaPedido {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.formulario__entradaPedido label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.formulario__entradaPedido input,
+.formulario__entradaPedido select {
+    width: 100%;
+    height: 45px;
+    padding-left: 10px;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+
+#btnSiguienteRegistro {
+    margin: auto;
+    margin-top: 25px;
+}
+
+/* CONFIRMACION */
+.confirmacionDatos {
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--background-principal);
+    box-shadow: 0 0 15px rgba(0, 0, 0, .15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.confirmacionDatos p {
+    font-size: 1rem;
+}
+
+#btnGuardarPedido,
+#btnGuardarActualizar {
+    margin: auto;
+}
+
+/*=========================
+FORMULARIOS BASE
+=========================*/
+.formulario {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formulario label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.formulario input,
+.formulario select {
+    height: 45px;
+    padding-left: 10px;
+    border-radius: 8px;
+    border: 1px solid gray;
+    width: 100%;
+}
+
+/*=========================
+BOTONES BASE
+=========================*/
+.btnPrincipal {
+    width: 180px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    background: var(--background-secundario);
+    color: var(--background-principal);
+    cursor: pointer;
+}
+
+.btnVerde {
+    width: 180px;
+    height: 45px;
+    margin: auto;
+    border: none;
+    border-radius: 8px;
+    background: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+/* MOSTRAR */
+.tarjetas__pedidos {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.tarjeta__pedido {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+}
+
+/* ACTUALIZAR */
+.formulario__actualizarPedido button {
+    margin: auto;
+}
+
+/* ELIMINAR */
+.formulario__eliminarPedido button {
+    width: 180px;
+    height: 45px;
+    margin: auto;
+    border: none;
+    border-radius: 8px;
+    background: #ff4444;
+    color: white;
+}
