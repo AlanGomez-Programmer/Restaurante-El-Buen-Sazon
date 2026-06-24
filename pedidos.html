@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <title>El Buen Sazón - Pedidos</title>
+</head>
+<body>
+
+    <section class="contenedor">
+        
+        <div class="contenido">
+            <div class="contenido__menu">
+                <div class="contenido__usuario">
+                    <div class="informacion__usuario">
+                        <p class="material-symbols-outlined">person</p>
+                        <h2 id="nombreUsuario"></h2>
+                    </div>
+                    <button type="button" id="btnSalir">
+                        <span class="material-symbols-outlined">mode_off_on</span>
+                    </button>
+                </div>
+
+                <div class="titulo">
+                    <h2>Pedidos</h2>
+                </div>
+
+                <div class="contenido__tarjetas" id="menu__inventario">
+
+                    <button type="button" id="btnRegresa-menuPrincipal">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        <h3>Regresar</h3>
+                    </button>
+
+                    <button type="button" id="btnRegistrarInsumo">
+                        <h1>Registrar Pedido</h1>
+                        <p class="material-symbols-outlined">arrow_forward_ios</p>
+                    </button>
+
+                    <button type="button" id="btnMostrarInsumo">
+                        <h1>Mostrar Pedidos</h1>
+                        <p class="material-symbols-outlined">arrow_forward_ios</p>
+                    </button>
+
+                    <button type="button" id="btnActualizarInsumo">
+                        <h1>Actualizar Pedido</h1>
+                        <p class="material-symbols-outlined">arrow_forward_ios</p>
+                    </button>
+
+                    <button type="button" id="btnEliminarInsumo">
+                        <h1>Eliminar Pedido</h1>
+                        <p class="material-symbols-outlined">arrow_forward_ios</p>
+                    </button>
+
+                </div>
+            </div>
+
+            <!-- ================= REGISTRO DE PEDIDO ================= -->
+            <div id="contenido__registroPlatillo" class="pantalla oculto">
+
+                <button type="button" class="btnRegresar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    <h3>Regresar</h3>
+                </button>
+
+                <div class="titulo">
+                    <h1>Registrar Pedido</h1>
+                </div>
+
+                <div class="contenido__entradas">
+                    <form class="formulario__entradaPedido">
+                        <label>Fecha</label>
+                        <input type="date" id="fechaPedido">
+
+                        <label>Hora</label>
+                        <input type="time" id="horaPedido">
+
+                        <label>Nombre del Cliente</label>
+                        <input type="text" id="nombreCleinte">
+
+                        <label>Número Teléfonico del cliente</label>
+                        <input type="number" id="numeroCliente">
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tipo Platillo</th>
+                                    <th>Platillo</th>
+                                    <th>Seleccionar</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cuerpoTabla__platillos">
+
+                            </tbody>
+                        </table>
+
+                        <button type="button" id="btnSiguienteRegistro">Siguiente</button>
+
+                    </form>
+
+                    <!-- CONFIRMACION -->
+                    <div class="confirmacionDatos oculto">
+
+                        <h2>Confirmación de Datos</h2>
+                        
+                        <p class="codigoClienteConfirmado"></p>
+                        <p class="nombreClienteConfirmado""></p>
+                        <p class="numeroClienteConfirmado"></p>
+                        <p class="fechaClienteConfirmado"></p>
+                        <p class="horaClienteConfirmado"></p>
+                        <table class="platillosConfirmados">
+                            <thead>
+                                <tr>Tipo de Platillo</tr>
+                                <tr>Platillo</tr>
+                            </thead>
+                            <tbody class="cuerpoTabla__platillosConfirmados"></tbody>
+                        </table>
+
+                        <button type="button" id="btnGuardarPedido">Guardar Pedido</button>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ================= MOSTRAR PEDIDOS ================= -->
+            <div id="contenido__mostrarPedidos" class="pantalla oculto">
+
+                <button type="button" class="btnRegresar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    <h3>Regresar</h3>
+                </button>
+
+                <div class="titulo">
+                    <h1>Pedidos</h1>
+                </div>
+
+                <div class="tarjetas__pedidos">
+
+                </div>
+
+            </div>
+
+            <!-- ================= ACTUALIZAR PEDIDO ================= -->
+            <div id="contenido__actualizarPlatillo" class="pantalla oculto">
+
+                <button type="button" class="btnRegresar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    <h3>Regresar</h3>
+                </button>
+
+                <div class="titulo">
+                    <h1>Actualizar Platillo</h1>
+                </div>
+
+                <form class="formulario__actualizarPlatillo">
+                    <label>Código del Pedido</label>
+                    <select class="listaCodigosPedidos">
+                        <option value="">Elige una opción</option>
+                    </select>
+
+                    <p>Estado del pedido</p>
+                    <p class="estadoPedidoActual"></p>
+
+                    <label>Nuevo estado del pedido</label>
+                    <select class="listaEstadoPedido">
+                        <option value="">Elige el Estado</option>
+                        <option value="en preparacion">En Preparación</option>
+                        <option value="Entregado">Entregado</option>
+                        <option value="Cancelado">Cancelado</option>
+                    </select>
+
+                    <label>Nueva Precio</label>
+                    <input type="number">
+
+                    <button type="button">Guardar</button>
+                </form>
+            </div>
+
+            <!-- ================= ELIMINAR PEDIDO ================= -->
+            <div id="contenido__eliminarPedido" class="pantalla oculto">
+                <button type="button" class="btnRegresar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    <h3>Regresar</h3>
+                </button>
+
+                <div class="titulo">
+                    <h1>Eliminar Pedido</h1>
+                </div>
+
+                <form class="formulario__eliminarPedido">
+
+                    <label>Tipo de Platillo</label>
+                    <select class="listaCodigosPedidos">
+                        <option value="">Elige una opción</option>
+                    </select>
+
+                    <div class="tarjetas__pedidos">
+
+                    </div>
+
+                    <button type="button" id="btnEliminarPedido">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
