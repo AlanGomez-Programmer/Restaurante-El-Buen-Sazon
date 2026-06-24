@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnPedidos = document.getElementById('btnPedidos');
 
     btnSalir.addEventListener('click', ()=>{
-        window.location.href = 'login.html';
+        window.location.href = 'index.html';
     });
 
     btnInventario.addEventListener('click', ()=>{
