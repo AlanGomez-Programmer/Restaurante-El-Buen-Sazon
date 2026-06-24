@@ -2,6 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Referencias a elementos del DOM
     const btnClaro = document.getElementById('btnClaro');
     const btnOscuro = document.getElementById('btnOscuro');
+    const formularioLogin = document.getElementById('formularioLogin');
+    const usuarioLogin = document.getElementById('usuario__login');
+    const contraseniaLogin = document.getElementById('contrasenia__login');
+    const errorUsuario = document.getElementById('errorUsuario');
+    const errorContrasenia = document.getElementById('errorContrasenia');
 
     // Cargar tema guardado
     cargarTema();
@@ -9,6 +14,36 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listeners para cambio de tema
     btnClaro.addEventListener('click', () => mostrarTema('claro'));
     btnOscuro.addEventListener('click', () => mostrarTema('oscuro'));
+
+    // Event listener para el formulario de login
+    formularioLogin.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Limpiar errores anteriores
+        errorUsuario.textContent = '';
+        errorContrasenia.textContent = '';
+        
+        let hayError = false;
+        
+        // Validar correo electrónico
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(usuarioLogin.value)) {
+            errorUsuario.textContent = 'Por favor ingrese un correo válido';
+            hayError = true;
+        }
+        
+        // Validar que la contraseña no esté vacía
+        if (contraseniaLogin.value.trim() === '') {
+            errorContrasenia.textContent = 'Por favor ingrese su contraseña';
+            hayError = true;
+        }
+        
+        // Si no hay errores, redirigir al menú
+        if (!hayError) {
+            window.location.href = 'menu.html';
+        }
+    });
+
 });
 
 
@@ -44,8 +79,3 @@ function aplicarTema(tema) {
     }
 }
 
-let btnIniciarSesion = document.getElementById('btnIniciarSesion');
-
-btnIniciarSesion.addEventListener('click', () => {
-    window.location.href = 'menu.html';
-});
