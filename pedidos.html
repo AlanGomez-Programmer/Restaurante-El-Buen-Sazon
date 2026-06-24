@@ -4,68 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="stylesheet" href="./css/sytle.css">
+    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/pedidos.css">
     <title>El Buen Sazón - Pedidos</title>
 </head>
 <body>
 
     <section class="contenedor">
-        
-        <div class="contenido">
-            <div class="contenido__menu">
-                <div class="contenido__usuario">
-                    <div class="informacion__usuario">
-                        <p class="material-symbols-outlined">person</p>
-                        <h2 id="nombreUsuario"></h2>
-                    </div>
-                    <button type="button" id="btnSalir">
-                        <span class="material-symbols-outlined">mode_off_on</span>
-                    </button>
-                </div>
+        <div class="contenido__usuario">
+            <div class="informacion__usuario">
+                <span class="material-symbols-outlined">person</span>
+                <h2 id="nombreUsuario"></h2>
+            </div>
+            <button type="button" id="btnSalir">
+                <span class="material-symbols-outlined">mode_off_on</span>
+            </button>
+        </div>
+        <div class="divider"></div>
+        <div class="contenido">            
+            <div id="contenido__menu" class="contenido__menu pantalla">
+                <button type="button" id="btnRegresa-menuPrincipal">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
 
                 <div class="titulo">
                     <h2>Pedidos</h2>
                 </div>
 
-                <div class="contenido__tarjetas" id="menu__inventario">
+                <div class="contenido__tarjetas" id="menu__pedidos">
 
-                    <button type="button" id="btnRegresa-menuPrincipal">
-                        <span class="material-symbols-outlined">arrow_back</span>
-                        <h3>Regresar</h3>
-                    </button>
-
-                    <button type="button" id="btnRegistrarInsumo">
+                    <button type="button" class="tarjeta__menu" id="btnRegistrarPedido">
                         <h1>Registrar Pedido</h1>
-                        <p class="material-symbols-outlined">arrow_forward_ios</p>
+                        <span class="material-symbols-outlined">arrow_forward_ios</span>
                     </button>
 
-                    <button type="button" id="btnMostrarInsumo">
+                    <button type="button" class="tarjeta__menu" id="btnMostrarPedidos">
                         <h1>Mostrar Pedidos</h1>
-                        <p class="material-symbols-outlined">arrow_forward_ios</p>
+                        <span class="material-symbols-outlined">arrow_forward_ios</span>
                     </button>
 
-                    <button type="button" id="btnActualizarInsumo">
+                    <button type="button" class="tarjeta__menu" id="btnActualizarPedido">
                         <h1>Actualizar Pedido</h1>
-                        <p class="material-symbols-outlined">arrow_forward_ios</p>
+                        <span class="material-symbols-outlined">arrow_forward_ios</span>
                     </button>
 
-                    <button type="button" id="btnEliminarInsumo">
+                    <button type="button" class="tarjeta__menu" id="btnEliminarPedido">
                         <h1>Eliminar Pedido</h1>
-                        <p class="material-symbols-outlined">arrow_forward_ios</p>
+                        <span class="material-symbols-outlined">arrow_forward_ios</span>
                     </button>
 
                 </div>
             </div>
 
-            <!-- ================= REGISTRO DE PEDIDO ================= -->
-            <div id="contenido__registroPlatillo" class="pantalla oculto">
+            <!-- ================= REGISTRO ================= -->
+            <div id="contenido__registroPedido" class="pantalla oculto">
 
                 <button type="button" class="btnRegresar">
                     <span class="material-symbols-outlined">arrow_back</span>
-                    <h3>Regresar</h3>
                 </button>
 
                 <div class="titulo">
-                    <h1>Registrar Pedido</h1>
+                    <h1>Registro de Pedido</h1>
                 </div>
 
                 <div class="contenido__entradas">
@@ -77,7 +77,7 @@
                         <input type="time" id="horaPedido">
 
                         <label>Nombre del Cliente</label>
-                        <input type="text" id="nombreCleinte">
+                        <input type="text" id="nombreCliente">
 
                         <label>Número Teléfonico del cliente</label>
                         <input type="number" id="numeroCliente">
@@ -95,7 +95,7 @@
                             </tbody>
                         </table>
 
-                        <button type="button" id="btnSiguienteRegistro">Siguiente</button>
+                        <button type="button" class="btnVerde" id="btnSiguienteRegistro">Siguiente</button>
 
                     </form>
 
@@ -105,31 +105,32 @@
                         <h2>Confirmación de Datos</h2>
                         
                         <p class="codigoClienteConfirmado"></p>
-                        <p class="nombreClienteConfirmado""></p>
+                        <p class="nombreClienteConfirmado"></p>
                         <p class="numeroClienteConfirmado"></p>
                         <p class="fechaClienteConfirmado"></p>
                         <p class="horaClienteConfirmado"></p>
                         <table class="platillosConfirmados">
                             <thead>
-                                <tr>Tipo de Platillo</tr>
-                                <tr>Platillo</tr>
+                                <tr>
+                                    <th>Tipo de Platillo</th>
+                                    <th>Platillo</th>
+                                </tr>
                             </thead>
                             <tbody class="cuerpoTabla__platillosConfirmados"></tbody>
                         </table>
 
-                        <button type="button" id="btnGuardarPedido">Guardar Pedido</button>
+                        <button type="button" class="btnVerde" id="btnGuardarPedido">Guardar Pedido</button>
 
                     </div>
 
                 </div>
             </div>
 
-            <!-- ================= MOSTRAR PEDIDOS ================= -->
+            <!-- ================= MOSTRAR ================= -->
             <div id="contenido__mostrarPedidos" class="pantalla oculto">
 
                 <button type="button" class="btnRegresar">
                     <span class="material-symbols-outlined">arrow_back</span>
-                    <h3>Regresar</h3>
                 </button>
 
                 <div class="titulo">
@@ -142,19 +143,18 @@
 
             </div>
 
-            <!-- ================= ACTUALIZAR PEDIDO ================= -->
-            <div id="contenido__actualizarPlatillo" class="pantalla oculto">
+            <!-- ================= ACTUALIZAR ================= -->
+            <div id="contenido__actualizarPedido" class="pantalla oculto">
 
                 <button type="button" class="btnRegresar">
                     <span class="material-symbols-outlined">arrow_back</span>
-                    <h3>Regresar</h3>
                 </button>
 
                 <div class="titulo">
-                    <h1>Actualizar Platillo</h1>
+                    <h1>Actualizar Pedido</h1>
                 </div>
 
-                <form class="formulario__actualizarPlatillo">
+                <form class="formulario formulario__actualizarPedido">
                     <label>Código del Pedido</label>
                     <select class="listaCodigosPedidos">
                         <option value="">Elige una opción</option>
@@ -171,27 +171,26 @@
                         <option value="Cancelado">Cancelado</option>
                     </select>
 
-                    <label>Nueva Precio</label>
+                    <label>Nuevo Precio</label>
                     <input type="number">
 
-                    <button type="button">Guardar</button>
+                    <button type="button" class="btnVerde" id="btnGuardarActualizar">Guardar</button>
                 </form>
             </div>
 
-            <!-- ================= ELIMINAR PEDIDO ================= -->
+            <!-- ================= ELIMINAR ================= -->
             <div id="contenido__eliminarPedido" class="pantalla oculto">
                 <button type="button" class="btnRegresar">
                     <span class="material-symbols-outlined">arrow_back</span>
-                    <h3>Regresar</h3>
                 </button>
 
                 <div class="titulo">
                     <h1>Eliminar Pedido</h1>
                 </div>
 
-                <form class="formulario__eliminarPedido">
+                <form class="formulario formulario__eliminarPedido">
 
-                    <label>Tipo de Platillo</label>
+                    <label>Código del Pedido</label>
                     <select class="listaCodigosPedidos">
                         <option value="">Elige una opción</option>
                     </select>
@@ -200,11 +199,12 @@
 
                     </div>
 
-                    <button type="button" id="btnEliminarPedido">Eliminar</button>
+                    <button type="button" id="btnEliminar">Eliminar</button>
                 </form>
             </div>
+
         </div>
     </section>
-
+    <script src="./js/pedidos.js"></script>
 </body>
 </html>
