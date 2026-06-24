@@ -29,9 +29,13 @@
 }
 
 .material-symbols-outlined {
-    font-size: 3rem;
+    font-size: 2rem;
     background-color: var(--background-principal);
     color: var(--background-secundario);
+}
+
+.informacion__usuario .material-symbols-outlined {
+    font-size: 3rem;
 }
 
 #btnSalir,

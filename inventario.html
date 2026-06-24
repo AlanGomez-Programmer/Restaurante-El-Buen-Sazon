@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="stylesheet" href="./css/sytle.css">
+    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/inventario.css">
+    <title>El Buen Sazón - Inventario</title>
+</head>
+<body>
+
+    <section class="contenedor">
+        <div class="contenido__usuario">
+            <div class="informacion__usuario">
+                <span class="material-symbols-outlined">person</span>
+                <h2 id="nombreUsuario"></h2>
+            </div>
+            <button type="button" id="btnSalir">
+                <span class="material-symbols-outlined">mode_off_on</span>
+            </button>
+        </div>
+        <div class="divider"></div>
+        <div class="contenido">            
+            <div id="contenido__menu" class="contenido__menu pantalla">
+                <button type="button" id="btnRegresa-menuPrincipal">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+
+                <div class="titulo">
+                    <h2>Inventario</h2>
+                </div>
+
+                <div class="contenido__tarjetas" id="menu__inventario">
+
+
+                    <button type="button" class="tarjeta__menu" id="btnRegistrarInsumo">
+                        <h1>Registrar Insumo</h1>
+                        <span class="material-symbols-outlined">arrow_forward_ios</span>
+                    </button>
+
+                    <button type="button" class="tarjeta__menu" id="btnMostrarInsumo">
+                        <h1>Mostrar Insumos</h1>
+                        <span class="material-symbols-outlined">arrow_forward_ios</span>
+                    </button>
+
+                    <button type="button" class="tarjeta__menu" id="btnActualizarInsumo">
+                        <h1>Actualizar Insumo</h1>
+                        <span class="material-symbols-outlined">arrow_forward_ios</span>
+                    </button>
+
+                    <button type="button" class="tarjeta__menu" id="btnEliminarInsumo">
+                        <h1>Eliminar Insumo</h1>
+                        <span class="material-symbols-outlined">arrow_forward_ios</span>
+                    </button>
+
+                </div>
+            </div>
+
+            <!-- ================= REGISTRO ================= -->
+            <div id="contenido__registroInsumo" class="pantalla oculto">
+
+                <button type="button" class="btnRegresar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+
+                <div class="titulo">
+                    <h1>Registro de Insumo</h1>
+                </div>
+
+                <div class="contenido__entradas">
+
+                    <form class="formulario__entradaInsumo">
+
+                        <label for="tipoInsumo">Tipo de Insumo</label>
+                        <select id="tipoInsumo" class="listaTipoInsumo">
+                            <option value="">Elige una opción</option>
+                        </select>
+
+                        <label for="insumo">Insumo</label>
+                        <select id="insumo" class="listaInsumo">
+                            <option value="">Elige una opción</option>
+                        </select>
+
+                    </form>
+
+                    <div class="contenido__botones">
+                        <button type="button" id="btnCrearCodigo">Agregar Insumo</button>
+                        <button type="button" id="btnCrearTipo">Crear Tipo</button>
+                    </div>
+
+                    <form class="formulario__entradaInsumo">
+
+                        <label for="cantidadInsumo">Cantidad de producto</label>
+                        <input type="number" id="cantidadInsumo">
+
+                        <label for="unidadInsumo">Unidad de medida</label>
+                        <select id="unidadInsumo">
+                            <option value="">Unidad de medida</option>
+                        </select>
+
+                        <label for="fechaIngreso">Fecha de ingreso</label>
+                        <input type="date" id="fechaIngreso">
+
+                        <label for="descripcionInsumo">Descripción</label>
+                        <input type="text" id="descripcionInsumo">
+
+                        <button type="button" class="btnVerde" id="btnSiguienteRegistro">Siguiente</button>
+
+                    </form>
+
+                    <!-- CONFIRMACION -->
+                    <div class="confirmacionDatos oculto">
+
+                        <h2>Confirmación de Datos</h2>
+
+                        <p id="confTipo"></p>
+                        <p id="confInsumo"></p>
+                        <p id="confCantidad"></p>
+                        <p id="confUnidad"></p>
+                        <p id="confFecha"></p>
+                        <p id="confDescripcion"></p>
+
+                        <button type="button" class="btnVerde" id="btnGuardarInsumo">Guardar Insumo</button>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ================= CREAR INSUMO ================= -->
+            <div id="contenido__crearInsumo" class="pantalla oculto">
+
+                <button type="button" class="btnRegresar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+
+                <div class="titulo">
+                    <h1>Crear Insumo</h1>
+                </div>
+
+                <form class="formulario formulario__creacionInsumo">
+
+                    <p>Ingrese el tipo de insumo al que pertenece el nuevo código</p>
+
+                    <label for="tipoInsumoCrear">Tipo de Insumo</label>
+                    <select id="tipoInsumoCrear" class="listaTipoInsumo">
+                        <option value="">Elige una opción</option>
+                    </select>
+
+                    <label for="nuevoInsumo">Nuevo Insumo</label>
+                    <input type="text" id="nuevoInsumo">
+
+                    <button type="button" class="btnVerde" id="btnSiguienteCrearInsumo">Siguiente</button>
+
+                </form>
+
+                <div class="confirmacionDatos oculto">
+                    <h2>Confirmación de Datos</h2>
+                    <button type="button" id="btnGuardarCrearInsumo">Guardar</button>
+                </div>
+
+            </div>
+
+            <!-- ================= CREAR TIPO ================= -->
+            <div id="contenido__crearTipo" class="pantalla oculto">
+
+                <button type="button" class="btnRegresar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+
+                <div class="titulo">
+                    <h1>Crear Tipo de Insumo</h1>
+                </div>
+
+                <form class="formulario formulario__creacionTipo">
+
+                    <p>Ingrese el nombre del tipo de insumo</p>
+
+                    <label for="nombreTipoInsumo">Nombre del Tipo</label>
+                    <input type="text" id="nombreTipoInsumo" placeholder="Ejem. L - Lacteos">
+
+                    <button type="button" class="btnVerde" id="btnSiguienteTipo">Siguiente</button>
+
+                </form>
+
+                <div class="confirmacionDatos oculto">
+                    <h2>Confirmación de Datos</h2>
+                    <button type="button" id="btnGuardarTipo">Guardar</button>
+                </div>
+
+            </div>
+
+            <!-- ================= MOSTRAR ================= -->
+            <div id="contenido__mostrarInsumos" class="pantalla oculto">
+
+                <button type="button" class="btnRegresar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+
+                <div class="titulo">
+                    <h1>Insumos</h1>
+                </div>
+
+                <table class="tabla__insumos">
+
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Nombre</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="tablaContenido__insumos"></tbody>
+
+                </table>
+
+            </div>
+
+            <!-- ================= ACTUALIZAR ================= -->
+            <div id="contenido__actualizarInsumo" class="pantalla oculto">
+
+                <button type="button" class="btnRegresar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+
+                <div class="titulo">
+                    <h1>Actualizar Insumo</h1>
+                </div>
+
+                <form class="formulario formulario__actualizarInsumo">
+
+                    <label for="tipoActualizar">Tipo</label>
+                    <select id="tipoActualizar" class="listaTipoInsumo">
+                        <option value="">Elige una opción</option>
+                    </select>
+
+                    <label for="insumoActualizar">Insumo</label>
+                    <select id="insumoActualizar" class="listaInsumo">
+                        <option value="">Elige el Insumo</option>
+                    </select>
+
+                    <label for="cantidadActualizar">Cantidad</label>
+                    <input type="number" id="cantidadActualizar">
+
+                    <button type="button" class="btnVerde" id="btnGuardarActualizar">Guardar</button>
+
+                </form>
+
+            </div>
+
+            <!-- ================= ELIMINAR ================= -->
+            <div id="contenido__eliminarInsumo" class="pantalla oculto">
+
+                <button type="button" class="btnRegresar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+
+                <div class="titulo">
+                    <h1>Eliminar Insumo</h1>
+                </div>
+
+                <form class="formulario formulario__eliminarInsumo">
+
+                    <label for="tipoEliminar">Tipo</label>
+                    <select id="tipoEliminar" class="listaTipoInsumo">
+                        <option value="">Elige una opción</option>
+                    </select>
+
+                    <label for="insumoEliminar">Insumo</label>
+                    <select id="insumoEliminar" class="listaInsumo">
+                        <option value="">Elige el insumo a eliminar</option>
+                    </select>
+
+                    <button type="button" id="btnEliminar">Eliminar</button>
+
+                </form>
+
+            </div>
+
+        </div>
+    </section>
+    <script src="./js/inventario.js"></script>
+</body>
+</html>
