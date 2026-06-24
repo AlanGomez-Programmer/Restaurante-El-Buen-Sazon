@@ -1,0 +1,46 @@
+.contenedor {
+    width: 100%;
+    min-height: 100vh;
+    background: var(--background-principal);
+    padding: 20px;
+}
+
+.contenido__usuario {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.divider {
+    height: 1px;
+    background-color: var(--background-secundario);
+    margin: 20px 0;
+}
+
+.informacion__usuario {
+    display: flex;
+    align-items: center;
+}
+
+.informacion__usuario h2 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.material-symbols-outlined {
+    font-size: 3rem;
+    background-color: var(--background-principal);
+    color: var(--background-secundario);
+}
+
+#btnSalir {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.contenido {
+    width: 100%;
+}
