@@ -147,6 +147,14 @@
 }
 
 /* Mensaje de error */
+.error {
+    color: #ff4444;
+    font-size: 12px;
+    margin-top: 5px;
+    min-height: 18px;
+    font-family: var(--font-principal);
+}
+
 .error-message {
     background: #ff4444;
     color: white;
