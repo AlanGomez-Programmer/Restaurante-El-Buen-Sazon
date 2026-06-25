@@ -1,7 +1,7 @@
 .contenedor {
     width: 100%;
     min-height: 100vh;
-    background: var(--background-principal);
+    background: var(--bg-color);
     padding: 20px;
 }
 
@@ -9,33 +9,35 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
 }
 
 .divider {
     height: 1px;
-    background-color: var(--background-secundario);
+    background-color: var(--divider-color);
     margin: 20px 0;
 }
 
 .informacion__usuario {
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
 .informacion__usuario h2 {
     font-size: 1rem;
     font-weight: bold;
+    color: var(--text-color);
+    margin: 0;
 }
 
 .material-symbols-outlined {
     font-size: 2rem;
-    background-color: var(--background-principal);
-    color: var(--background-secundario);
+    background-color: transparent;
+    color: var(--text-color);
 }
 
 .informacion__usuario .material-symbols-outlined {
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 #btnSalir,
@@ -45,11 +47,12 @@
     border: none;
     padding: 0;
     cursor: pointer;
+    color: var(--text-color);
 }
-
 
 #btnRegresa-menuPrincipal h3 {
     font-size: 1.2rem;
+    color: var(--text-color);
 }
 
 .contenido {
@@ -68,6 +71,7 @@
     font-family: var(--font-Titulos);
     font-size: 2rem;
     font-weight: 500;
+    color: var(--text-color);
 }
 
 /* REGRESAR */
@@ -82,4 +86,5 @@
 
 .btnRegresar h3 {
     font-size: 1.2rem;
+    color: var(--text-color);
 }

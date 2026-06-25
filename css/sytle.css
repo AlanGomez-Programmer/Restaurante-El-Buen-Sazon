@@ -1,14 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
 :root {
-    --background-principal: white;
-    --background-secundario: black;
+    /* Fondos y textos */
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --card-bg: #f5f5f5;
+    --card-border: #cccccc;
+    --input-bg: #ffffff;
+    --input-border: #999999;
+    --divider-color: #000000;
 
+    /* Botones */
+    --btn-primary-bg: #000000;
+    --btn-primary-text: #ffffff;
+
+    /* Sombras */
+    --shadow-card: 0 8px 0 #BDBDBD;
+
+    /* Estados */
+    --success-bg: #d4edda;
+    --success-text: #155724;
+    --success-border: #c3e6cb;
+    --error-bg: #f8d7da;
+    --error-text: #721c24;
+    --error-border: #f5c6cb;
+
+    /* Tipografía */
     --font-principal: "Roboto Mono", monospace;
     --font-Titulos: "Oswald", sans-serif;
-
     --font-size: 16px;
-    --shadow-card: 0 8px 0 #BDBDBD;
 }
 
 html {
@@ -24,4 +44,23 @@ html {
 body {
    min-height: 100vh;
    font-family: var(--font-principal);
+   background: var(--bg-color);
+   color: var(--text-color);
+}
+
+body.tema-oscuro {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --card-bg: #2d2d2d;
+    --card-border: #444444;
+    --input-bg: #2d2d2d;
+    --input-border: #555555;
+    --divider-color: #ffffff;
+    --shadow-card: 0 8px 0 #444444;
+    --success-bg: #1b5e20;
+    --success-text: #c8e6c9;
+    --success-border: #2e7d32;
+    --error-bg: #b71c1c;
+    --error-text: #ffcdd2;
+    --error-border: #c62828;
 }
