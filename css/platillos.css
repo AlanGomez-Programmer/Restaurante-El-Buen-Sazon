@@ -1,34 +1,5 @@
 /* ==================== VARIABLES CSS ==================== */
-:root {
-    --color-texto-principal: #333;
-    --color-texto-secundario: #555;
-    --color-fondo-tarjeta: #f9f9f9;
-    --color-borde-tarjeta: #ccc;
-    --color-borde-suave: #ddd;
-    --color-borde-muy-suave: #eee;
-    --color-exito-bg: #d4edda;
-    --color-exito-text: #155724;
-    --color-exito-borde: #c3e6cb;
-    --color-error-bg: #f8d7da;
-    --color-error-text: #721c24;
-    --color-error-borde: #f5c6cb;
-}
-
-/* Tema oscuro */
-body.tema-oscuro {
-    --color-texto-principal: #e0e0e0;
-    --color-texto-secundario: #b0b0b0;
-    --color-fondo-tarjeta: #2d2d2d;
-    --color-borde-tarjeta: #444;
-    --color-borde-suave: #555;
-    --color-borde-muy-suave: #666;
-    --color-exito-bg: #1b5e20;
-    --color-exito-text: #c8e6c9;
-    --color-exito-borde: #2e7d32;
-    --color-error-bg: #b71c1c;
-    --color-error-text: #ffcdd2;
-    --color-error-borde: #c62828;
-}
+/* Las variables globales de tema se definen en sytle.css */
 
 .oculto {
     display: none;
@@ -56,16 +27,15 @@ MENU
     width: 80%;
     height: 100px;
     margin: auto;
-    border: none;
     border-radius: 10px;
-    background: var(--background-principal);
-    border: 1px solid var(--background-secundario);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     box-shadow: var(--shadow-card);
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: var(--background-secundario);
+    color: var(--text-color);
 }
 
 .tarjeta__menu h1 {
@@ -77,7 +47,7 @@ MENU
 .tarjeta__menu:hover {
     cursor: pointer;
     transition: .3s;
-    box-shadow: 0 0 10px var(--background-secundario);
+    box-shadow: 0 0 10px var(--card-border);
 }
 
 
@@ -101,6 +71,7 @@ MENU
 .formulario__entradaPlatillo label {
     font-size: 1rem;
     font-weight: bold;
+    color: var(--text-color);
 }
 
 .formulario__entradaPlatillo input,
@@ -110,7 +81,9 @@ MENU
     height: 45px;
     padding-left: 10px;
     border-radius: 8px;
-    border: 1px solid gray;
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text-color);
 }
 
 .formulario__entradaPlatillo textarea {
@@ -133,19 +106,38 @@ MENU
     height: 40px;
     border: none;
     border-radius: 8px;
-    background: var(--background-secundario);
-    color: var(--background-principal);
+    background: #000000;
+    color: #ffffff;
     cursor: pointer;
 }
 
-#btnSiguienteRegistro {
-    margin: auto;
-    margin-top: 25px;
-}
-
+#btnSiguienteRegistro,
 #btnSiguienteCrearInsumo,
 #btnSiguienteTipo {
-    margin: auto;
+    display: block;
+    width: 180px;
+    height: 45px;
+    margin: 25px auto 0;
+    border: none;
+    border-radius: 8px;
+    background: #000000;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#btnSiguienteRegistro:hover,
+#btnSiguienteCrearInsumo:hover,
+#btnSiguienteTipo:hover {
+    background: #e55a2b;
+    transform: translateY(-2px);
+}
+
+#btnSiguienteRegistro:active,
+#btnSiguienteCrearInsumo:active,
+#btnSiguienteTipo:active {
+    transform: translateY(0);
 }
 
 /* CONFIRMACION */
@@ -155,7 +147,8 @@ MENU
     margin-top: 50px;
     padding: 20px;
     border-radius: 10px;
-    background: var(--background-principal);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     box-shadow: 0 0 15px rgba(0, 0, 0, .15);
     display: flex;
     flex-direction: column;
@@ -165,6 +158,7 @@ MENU
 
 .confirmacionDatos p {
     font-size: 1rem;
+    color: var(--text-color);
 }
 
 .confirmacionDatos img {
@@ -193,6 +187,7 @@ FORMULARIOS BASE
 .formulario label {
     font-size: 1rem;
     font-weight: bold;
+    color: var(--text-color);
 }
 
 .formulario input,
@@ -201,7 +196,9 @@ FORMULARIOS BASE
     height: 45px;
     padding-left: 10px;
     border-radius: 8px;
-    border: 1px solid gray;
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text-color);
     width: 100%;
 }
 
@@ -219,8 +216,8 @@ BOTONES BASE
     height: 45px;
     border: none;
     border-radius: 8px;
-    background: var(--background-secundario);
-    color: var(--background-principal);
+    background: #000000;
+    color: #ffffff;
     cursor: pointer;
 }
 
@@ -310,8 +307,8 @@ BOTONES BASE
 }
 
 .tarjeta__platillo {
-    background: var(--color-fondo-tarjeta, white);
-    border: 1px solid var(--color-borde-tarjeta, #ccc);
+    background: var(--card-bg, white);
+    border: 1px solid var(--card-border, #ccc);
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -333,18 +330,18 @@ BOTONES BASE
 .tarjeta__platillo h3 {
     margin: 0 0 15px 0;
     font-family: var(--font-Titulos);
-    color: var(--background-secundario);
+    color: var(--text-color);
     text-align: center;
 }
 
 .tarjeta__platillo p {
     margin: 8px 0;
-    color: var(--color-texto-secundario);
+    color: var(--text-color);
 }
 
 .tarjeta__platillo .info__destacada {
     font-weight: bold;
-    color: var(--color-texto-principal);
+    color: var(--text-color);
 }
 
 /* Ensure consistent padding and image handling like inventario cards */
@@ -354,7 +351,7 @@ BOTONES BASE
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 15px;
-    background: var(--color-fondo-tarjeta, #f9f9f9);
+    background: var(--card-bg, #f9f9f9);
 }
 
 .tarjeta__platillo button {
@@ -448,7 +445,7 @@ BOTONES BASE
 .tarjeta__platillo .formulario__actualizarTarjeta {
     margin-top: 15px;
     padding: 15px;
-    background: var(--color-fondo-tarjeta, #f9f9f9);
+    background: var(--card-bg, #f9f9f9);
     border-radius: 8px;
     display: none;
 }
@@ -461,15 +458,17 @@ BOTONES BASE
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: var(--color-texto-principal, #333);
+    color: var(--text-color, #333);
 }
 
 .tarjeta__platillo .formulario__actualizarTarjeta input {
     width: 100%;
     height: 35px;
     padding: 0 10px;
-    border: 1px solid var(--color-borde-tarjeta, #ccc);
+    border: 1px solid var(--card-border, #ccc);
     border-radius: 6px;
+    background: var(--input-bg);
+    color: var(--text-color);
     margin-bottom: 10px;
 }
 
@@ -492,7 +491,7 @@ BOTONES BASE
 .formulario__actualizarTarjeta {
     margin-top: 15px;
     padding: 15px;
-    background: var(--color-fondo-tarjeta, #f9f9f9);
+    background: var(--card-bg, #f9f9f9);
     border-radius: 8px;
     display: none;
 }
@@ -505,15 +504,17 @@ BOTONES BASE
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: var(--color-texto-principal, #333);
+    color: var(--text-color, #333);
 }
 
 .formulario__actualizarTarjeta input {
     width: 100%;
     height: 35px;
     padding: 0 10px;
-    border: 1px solid var(--color-borde-tarjeta, #ccc);
+    border: 1px solid var(--card-border, #ccc);
     border-radius: 6px;
+    background: var(--input-bg);
+    color: var(--text-color);
     margin-bottom: 10px;
 }
 
@@ -577,17 +578,17 @@ BOTONES BASE
 }
 
 .ingrediente__item {
-    background: var(--color-fondo-tarjeta);
+    background: var(--card-bg);
     padding: 15px;
     border-radius: 8px;
-    border: 1px solid var(--color-borde-suave);
+    border: 1px solid var(--card-border);
 }
 
 .ingrediente__item label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: var(--color-texto-principal);
+    color: var(--text-color);
 }
 
 .ingrediente__item input[type="checkbox"] {
@@ -601,7 +602,7 @@ BOTONES BASE
     height: 35px;
     padding: 0 5px;
     border-radius: 6px;
-    border: 1px solid var(--color-borde-tarjeta);
+    border: 1px solid var(--card-border);
 }
 
 .ingrediente__cantidad {
@@ -630,13 +631,19 @@ BOTONES BASE
 }
 
 .modal__contenido {
-    background: white;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     border-radius: 12px;
     padding: 30px;
     max-width: 600px;
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
+}
+
+.modal__info p,
+.modal__valor {
+    color: var(--text-color);
 }
 
 .modal__cerrar {
@@ -670,7 +677,7 @@ BOTONES BASE
 }
 
 .modal__info strong {
-    color: var(--color-texto-principal);
+    color: var(--text-color);
 }
 
 .modal__ingredientes {
@@ -684,7 +691,7 @@ BOTONES BASE
 
 .modal__ingredientes li {
     padding: 8px 0;
-    border-bottom: 1px solid var(--color-borde-muy-suave);
+    border-bottom: 1px solid var(--card-border);
 }
 
 /* MENSAJES EN PANTALLA */
@@ -697,13 +704,13 @@ BOTONES BASE
 }
 
 .mensaje.exito {
-    background: var(--color-exito-bg);
-    color: var(--color-exito-text);
-    border: 1px solid var(--color-exito-borde);
+    background: var(--success-bg);
+    color: var(--success-text);
+    border: 1px solid var(--success-border);
 }
 
 .mensaje.error {
-    background: var(--color-error-bg);
-    color: var(--color-error-text);
-    border: 1px solid var(--color-error-borde);
+    background: var(--error-bg);
+    color: var(--error-text);
+    border: 1px solid var(--error-border);
 }

@@ -1,34 +1,5 @@
 /* ==================== VARIABLES CSS ==================== */
-:root {
-    --color-texto-principal: #333;
-    --color-texto-secundario: #555;
-    --color-fondo-tarjeta: #f9f9f9;
-    --color-borde-tarjeta: #ccc;
-    --color-borde-suave: #ddd;
-    --color-borde-muy-suave: #eee;
-    --color-exito-bg: #d4edda;
-    --color-exito-text: #155724;
-    --color-exito-borde: #c3e6cb;
-    --color-error-bg: #f8d7da;
-    --color-error-text: #721c24;
-    --color-error-borde: #f5c6cb;
-}
-
-/* Tema oscuro */
-body.tema-oscuro {
-    --color-texto-principal: #e0e0e0;
-    --color-texto-secundario: #b0b0b0;
-    --color-fondo-tarjeta: #2d2d2d;
-    --color-borde-tarjeta: #444;
-    --color-borde-suave: #555;
-    --color-borde-muy-suave: #666;
-    --color-exito-bg: #1b5e20;
-    --color-exito-text: #c8e6c9;
-    --color-exito-borde: #2e7d32;
-    --color-error-bg: #b71c1c;
-    --color-error-text: #ffcdd2;
-    --color-error-borde: #c62828;
-}
+/* Las variables globales de tema se definen en sytle.css */
 
 .oculto {
     display: none;
@@ -56,16 +27,15 @@ MENU
     width: 80%;
     height: 100px;
     margin: auto;
-    border: none;
     border-radius: 10px;
-    background: var(--background-principal);
-    border: 1px solid var(--background-secundario);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     box-shadow: var(--shadow-card);
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: var(--background-secundario);
+    color: var(--text-color);
 }
 
 .tarjeta__menu h1 {
@@ -77,7 +47,7 @@ MENU
 .tarjeta__menu:hover {
     cursor: pointer;
     transition: .3s;
-    box-shadow: 0 0 10px var(--background-secundario);
+    box-shadow: 0 0 10px var(--card-border);
 }
 
 
@@ -101,6 +71,7 @@ MENU
 .formulario__entradaPedido label {
     font-size: 1rem;
     font-weight: bold;
+    color: var(--text-color);
 }
 
 .formulario__entradaPedido input,
@@ -109,7 +80,9 @@ MENU
     height: 45px;
     padding-left: 10px;
     border-radius: 8px;
-    border: 1px solid gray;
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text-color);
 }
 
 #btnSiguienteRegistro {
@@ -124,7 +97,8 @@ MENU
     margin-top: 50px;
     padding: 20px;
     border-radius: 10px;
-    background: var(--background-principal);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     box-shadow: 0 0 15px rgba(0, 0, 0, .15);
     display: flex;
     flex-direction: column;
@@ -134,6 +108,7 @@ MENU
 
 .confirmacionDatos p {
     font-size: 1rem;
+    color: var(--text-color);
 }
 
 #btnGuardarPedido,
@@ -155,6 +130,7 @@ FORMULARIOS BASE
 .formulario label {
     font-size: 1rem;
     font-weight: bold;
+    color: var(--text-color);
 }
 
 .formulario input,
@@ -162,7 +138,9 @@ FORMULARIOS BASE
     height: 45px;
     padding-left: 10px;
     border-radius: 8px;
-    border: 1px solid gray;
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text-color);
     width: 100%;
 }
 
@@ -174,8 +152,8 @@ BOTONES BASE
     height: 45px;
     border: none;
     border-radius: 8px;
-    background: var(--background-secundario);
-    color: var(--background-principal);
+    background: #000000;
+    color: #ffffff;
     cursor: pointer;
 }
 
@@ -236,8 +214,8 @@ BOTONES BASE
 }
 
 .tarjeta__pedido {
-    background: var(--color-fondo-tarjeta, white);
-    border: 1px solid var(--color-borde-tarjeta, #ccc);
+    background: var(--card-bg, white);
+    border: 1px solid var(--card-border, #ccc);
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -251,18 +229,18 @@ BOTONES BASE
 .tarjeta__pedido h3 {
     margin: 0 0 15px 0;
     font-family: var(--font-Titulos);
-    color: var(--background-secundario);
+    color: var(--text-color);
     text-align: center;
 }
 
 .tarjeta__pedido p {
     margin: 8px 0;
-    color: var(--color-texto-secundario);
+    color: var(--text-color);
 }
 
 .tarjeta__pedido .info__destacada {
     font-weight: bold;
-    color: var(--color-texto-principal);
+    color: var(--text-color);
 }
 
 .tarjeta__pedido button {
@@ -301,7 +279,7 @@ BOTONES BASE
 .formulario__actualizarTarjeta {
     margin-top: 15px;
     padding: 15px;
-    background: var(--color-fondo-tarjeta);
+    background: var(--card-bg);
     border-radius: 8px;
     display: none;
 }
@@ -314,15 +292,17 @@ BOTONES BASE
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: var(--color-texto-principal);
+    color: var(--text-color);
 }
 
 .formulario__actualizarTarjeta select {
     width: 100%;
     height: 35px;
     padding: 0 10px;
-    border: 1px solid var(--color-borde-tarjeta);
+    border: 1px solid var(--card-border);
     border-radius: 6px;
+    background: var(--input-bg);
+    color: var(--text-color);
     margin-bottom: 10px;
 }
 
@@ -415,7 +395,7 @@ BOTONES BASE
 .tarjeta__pedido .formulario__actualizarTarjeta {
     margin-top: 15px;
     padding: 15px;
-    background: var(--color-fondo-tarjeta, #f9f9f9);
+    background: var(--card-bg, #f9f9f9);
     border-radius: 8px;
     display: none;
 }
@@ -428,7 +408,7 @@ BOTONES BASE
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: var(--color-texto-principal, #333);
+    color: var(--text-color, #333);
 }
 
 .tarjeta__pedido .formulario__actualizarTarjeta select,
@@ -436,8 +416,10 @@ BOTONES BASE
     width: 100%;
     height: 35px;
     padding: 0 10px;
-    border: 1px solid var(--color-borde-tarjeta, #ccc);
+    border: 1px solid var(--card-border, #ccc);
     border-radius: 6px;
+    background: var(--input-bg);
+    color: var(--text-color);
     margin-bottom: 10px;
 }
 
@@ -517,16 +499,36 @@ BOTONES BASE
 }
 
 .estado__entregado {
-    background: var(--color-exito-bg);
-    color: var(--color-exito-text);
+    background: var(--success-bg);
+    color: var(--success-text);
 }
 
 .estado__cancelado {
-    background: var(--color-error-bg);
-    color: var(--color-error-text);
+    background: var(--error-bg);
+    color: var(--error-text);
 }
 
 /* TABLA DE PLATILLOS EN PEDIDO */
+.tabla__platillos,
+.modal__tabla {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    margin-top: 15px;
+    border-radius: 8px;
+}
+
+.tabla__platillos thead,
+.tabla__platillos tbody,
+.modal__tabla thead,
+.modal__tabla tbody {
+    display: table;
+    width: 100%;
+    min-width: 600px;
+}
+
 .tabla__platillos {
     width: 100%;
     border-collapse: collapse;
@@ -537,17 +539,17 @@ BOTONES BASE
 .tabla__platillos td {
     padding: 10px;
     text-align: left;
-    border-bottom: 1px solid var(--color-borde-suave);
+    border-bottom: 1px solid var(--card-border);
 }
 
 .tabla__platillos th {
-    background: var(--color-fondo-tarjeta);
+    background: var(--card-bg);
     font-weight: bold;
-    color: var(--color-texto-principal);
+    color: var(--text-color);
 }
 
 .tabla__platillos tr:hover {
-    background: var(--color-fondo-tarjeta);
+    background: var(--card-bg);
 }
 
 .tabla__platillos input[type="number"] {
@@ -555,7 +557,9 @@ BOTONES BASE
     height: 35px;
     padding: 0 5px;
     border-radius: 6px;
-    border: 1px solid var(--color-borde-tarjeta);
+    border: 1px solid var(--card-border);
+    background: var(--input-bg);
+    color: var(--text-color);
 }
 
 .tabla__platillos input[type="checkbox"] {
@@ -574,13 +578,13 @@ BOTONES BASE
 .tabla__platillos td {
     padding: 10px;
     text-align: center;
-    border: 1px solid var(--color-borde-tarjeta, #ccc);
+    border: 1px solid var(--card-border, #ccc);
 }
 
 .tabla__platillos th {
-    background: var(--color-fondo-tarjeta, #f9f9f9);
+    background: var(--card-bg, #f9f9f9);
     font-weight: bold;
-    color: var(--color-texto-principal, #333);
+    color: var(--text-color, #333);
     text-align: center;
 }
 
@@ -593,8 +597,10 @@ BOTONES BASE
     width: 70px;
     height: 32px;
     padding: 0 6px;
-    border: 1px solid var(--color-borde-tarjeta, #ccc);
+    border: 1px solid var(--card-border, #ccc);
     border-radius: 6px;
+    background: var(--input-bg);
+    color: var(--text-color);
     text-align: center;
 }
 
@@ -603,18 +609,18 @@ BOTONES BASE
     width: 80%;
     margin: 20px auto;
     padding: 20px;
-    background: var(--color-fondo-tarjeta);
+    background: var(--card-bg);
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .resumen__pedido p {
     margin: 10px 0;
-    color: var(--color-texto-secundario);
+    color: var(--text-color);
 }
 
 .resumen__pedido strong {
-    color: var(--color-texto-principal);
+    color: var(--text-color);
 }
 
 #totalPedido {
@@ -637,11 +643,11 @@ BOTONES BASE
 }
 
 .listaEstadoPedido option[value="entregado"] {
-    color: var(--color-exito-text);
+    color: var(--success-text);
 }
 
 .listaEstadoPedido option[value="cancelado"] {
-    color: var(--color-error-text);
+    color: var(--error-text);
 }
 
 /* MODAL */
@@ -663,13 +669,21 @@ BOTONES BASE
 }
 
 .modal__contenido {
-    background: white;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     border-radius: 12px;
     padding: 30px;
     max-width: 700px;
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
+}
+
+.modal__info p,
+.modal__tabla th,
+.modal__tabla td,
+.modal__total {
+    color: var(--text-color);
 }
 
 .modal__cerrar {
@@ -694,7 +708,7 @@ BOTONES BASE
 }
 
 .modal__info strong {
-    color: var(--color-texto-principal);
+    color: var(--text-color);
 }
 
 .modal__tabla {
@@ -707,13 +721,13 @@ BOTONES BASE
 .modal__tabla td {
     padding: 12px;
     text-align: left;
-    border-bottom: 1px solid var(--color-borde-suave);
+    border-bottom: 1px solid var(--card-border);
 }
 
 .modal__tabla th {
-    background: var(--color-fondo-tarjeta);
+    background: var(--card-bg);
     font-weight: bold;
-    color: var(--color-texto-principal);
+    color: var(--text-color);
 }
 
 .modal__total {
@@ -734,13 +748,13 @@ BOTONES BASE
 }
 
 .mensaje.exito {
-    background: var(--color-exito-bg);
-    color: var(--color-exito-text);
-    border: 1px solid var(--color-exito-borde);
+    background: var(--success-bg);
+    color: var(--success-text);
+    border: 1px solid var(--success-border);
 }
 
 .mensaje.error {
-    background: var(--color-error-bg);
-    color: var(--color-error-text);
-    border: 1px solid var(--color-error-borde);
+    background: var(--error-bg);
+    color: var(--error-text);
+    border: 1px solid var(--error-border);
 }

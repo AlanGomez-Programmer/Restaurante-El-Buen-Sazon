@@ -10,8 +10,9 @@
     width: 95%;
     height: 100px;
     border-radius: 10px;
-    border: 1px solid var(--background-secundario);
-    box-shadow: 0 8px 0 #BDBDBD;
+    border: 1px solid var(--card-border);
+    box-shadow: var(--shadow-card);
+    background: var(--card-bg);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -19,13 +20,13 @@
 }
 
 .tarjeta__menu h1 {
-    color: var(--background-secundario);
+    color: var(--text-color);
     font-size: 1.5rem;
     font-weight: bold;
 }
 
 .tarjeta__menu p {
-    color: var(--background-secundario);
+    color: var(--text-color);
     font-size: 1.5rem;
     font-weight: bold;
 }
@@ -33,5 +34,5 @@
 .tarjeta__menu:hover {
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 0 9px var(--background-secundario);
+    box-shadow: 0 0 9px var(--card-border);
 }
