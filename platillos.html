@@ -7,23 +7,50 @@
     <link rel="stylesheet" href="./css/sytle.css">
     <link rel="stylesheet" href="./css/layout.css">
     <link rel="stylesheet" href="./css/platillos.css">
+    <link rel="stylesheet" href="./css/desktop/layout-desktop.css">
+    <link rel="stylesheet" href="./css/desktop/platillos-desktop.css">
     <title>El Buen Sazón - Platillos</title>
 </head>
 <body>
-    <section class="contenedor">
-        <div class="contenido__usuario">
-            <div class="informacion__usuario">
-                <span class="material-symbols-outlined">person</span>
-                <h2 id="nombreUsuario"></h2>
+    <div class="layout">
+        <aside class="layout__sidebar">
+            <div class="sidebar__brand">
+                <img src="./icon/utensilios.png" alt="El Buen Sazón" class="sidebar__logo">
+                <h1>El Buen Sazón</h1>
+                <p>Gestión Restaurante</p>
             </div>
-            <button type="button" id="btnSalir">
-                <span class="material-symbols-outlined">mode_off_on</span>
-            </button>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="contenido">
+            <div class="sidebar__userbar">
+                <div class="informacion__usuario">
+                    <span class="material-symbols-outlined">person</span>
+                    <h2 id="nombreUsuario"></h2>
+                </div>
+                <button type="button" id="btnSalir" class="sidebar__logout">
+                    <span class="material-symbols-outlined">logout</span>
+                    <span>Cerrar sesión</span>
+                </button>
+            </div>
+            <nav class="sidebar__nav">
+                <a href="menu.html" class="sidebar__link">
+                    <span class="material-symbols-outlined">apps</span>
+                    <span>Menú</span>
+                </a>
+                <a href="inventario.html" class="sidebar__link">
+                    <span class="material-symbols-outlined">inventory_2</span>
+                    <span>Inventario</span>
+                </a>
+                <a href="platillos.html" class="sidebar__link sidebar__link--active">
+                    <span class="material-symbols-outlined">restaurant_menu</span>
+                    <span>Platillos</span>
+                </a>
+                <a href="pedidos.html" class="sidebar__link">
+                    <span class="material-symbols-outlined">receipt_long</span>
+                    <span>Pedidos</span>
+                </a>
+            </nav>
+        </aside>
+        <section class="contenedor layout__content">
+            <div class="divider"></div>
+            <div class="contenido">
             <div id="contenido__menu" class="contenido__menu pantalla">
                 <button type="button" id="btnRegresa-menuPrincipal">
                     <span class="material-symbols-outlined">arrow_back</span>
@@ -73,7 +100,7 @@
                         </select>
                     </form>
 
-                    <button type="button" id="btnCrearTipo">Crear Tipo</button>
+                    <button type="button" id="btnCrearTipo" class="btnVerde">Crear Tipo</button>
 
                     <form class="formulario__entradaPlatillo">
                         <label>Nombre del Platillo</label>
@@ -95,7 +122,7 @@
                             </div>
                         </div>
 
-                        <button type="button" id="btnSiguienteRegistro">Siguiente</button>
+                        <button type="button" id="btnSiguienteRegistro" class="btnVerde">Siguiente</button>
                     </form>
 
                     <div class="confirmacionDatos oculto">
@@ -106,7 +133,7 @@
                         <p id="confDescripcion"></p>
                         <p id="confValorVenta"></p>
                         <div id="confIngredientes"></div>
-                        <button type="button" id="btnGuardarPlatillo">Guardar Platillo</button>
+                        <button type="button" id="btnGuardarPlatillo" class="btnVerde">Guardar Platillo</button>
                     </div>
                 </div>
             </div>
@@ -123,13 +150,13 @@
                 <form class="formulario__creacionTipoPlatillo">
                     <p>Ingrese el nombre del tipo de Platillo</p>
                     <input type="text" id="nombreTipoPlatillo" placeholder="PF - Platillo Fuerte">
-                    <button type="button" id="btnSiguienteTipo">Siguiente</button>
+                    <button type="button" id="btnSiguienteTipo" class="btnVerde">Siguiente</button>
                 </form>
 
                 <div class="confirmacionDatos oculto">
                     <h2>Confirmación de Datos</h2>
                     <p id="confNombreTipo"></p>
-                    <button type="button" id="btnGuardarTipo">Guardar</button>
+                    <button type="button" id="btnGuardarTipo" class="btnVerde">Guardar</button>
                     <button type="button" class="btnRegresar">Cancelar</button>
                 </div>
             </div>
@@ -192,8 +219,9 @@
                 <div class="tarjetas__platillos" id="tarjetasEliminarPlatillo"></div>
                 <p id="mensajeEliminarPlatillo" class="mensaje"></p>
             </div>
-        </div>
-    </section>
+            </div>
+        </section>
+    </div>
     <script src="./js/utils.js"></script>
     <script src="./js/Insumos.js"></script>
     <script src="./js/persistencia.js"></script>

@@ -9,41 +9,71 @@
     <link rel="stylesheet" href="css/sytle.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/desktop/layout-desktop.css">
+    <link rel="stylesheet" href="css/desktop/menu-desktop.css">
 
     <title>El Buen Sazón - Menú Principal</title>
 </head>
 <body>
-    <section class="contenedor">
-        <div class="contenido__usuario">
-            <div class="informacion__usuario">
-                <p class="material-symbols-outlined">person</p>
-                <h2 id="nombreUsuario"></h2>
+    <div class="layout">
+        <aside class="layout__sidebar">
+            <div class="sidebar__brand">
+                <img src="./icon/utensilios.png" alt="El Buen Sazón" class="sidebar__logo">
+                <h1>El Buen Sazón</h1>
+                <p>Gestión Restaurante</p>
             </div>
-            <button type="button" id="btnSalir">
-                <span class="material-symbols-outlined">mode_off_on</span>
-            </button>
-        </div>
-        <div class="divider"></div>
-        <div class="contenido">
-            <div class="contenido__tarjetas">
-
-                <article class="tarjeta__menu" id="btnInventario">
-                    <h1>Inventario</h1>
-                    <span class="material-symbols-outlined">arrow_forward_ios</span>
-                </article>
-
-                <article class="tarjeta__menu" id="btnPlatillos">
-                    <h1>Platillos</h1>
-                    <span class="material-symbols-outlined">arrow_forward_ios</span>
-                </article>
-
-                <article class="tarjeta__menu" id="btnPedidos">
-                    <h1>Pedidos</h1>
-                    <span class="material-symbols-outlined">arrow_forward_ios</span>
-                </article>
+            <div class="sidebar__userbar">
+                <div class="informacion__usuario">
+                    <span class="material-symbols-outlined">person</span>
+                    <h2 id="nombreUsuario"></h2>
+                </div>
+                <button type="button" id="btnSalir" class="sidebar__logout">
+                    <span class="material-symbols-outlined">logout</span>
+                    <span>Cerrar sesión</span>
+                </button>
             </div>
-        </div>
-    </section>
+            <nav class="sidebar__nav">
+                <a href="menu.html" class="sidebar__link sidebar__link--active">
+                    <span class="material-symbols-outlined">apps</span>
+                    <span>Menú</span>
+                </a>
+                <a href="inventario.html" class="sidebar__link">
+                    <span class="material-symbols-outlined">inventory_2</span>
+                    <span>Inventario</span>
+                </a>
+                <a href="platillos.html" class="sidebar__link">
+                    <span class="material-symbols-outlined">restaurant_menu</span>
+                    <span>Platillos</span>
+                </a>
+                <a href="pedidos.html" class="sidebar__link">
+                    <span class="material-symbols-outlined">receipt_long</span>
+                    <span>Pedidos</span>
+                </a>
+            </nav>
+        </aside>
+        <section class="contenedor layout__content">
+            <div class="layout__divider divider"></div>
+            <div class="contenido">
+                <div class="contenido__tarjetas">
+
+                    <article class="tarjeta__menu" id="btnInventario">
+                        <h1>Inventario</h1>
+                        <span class="material-symbols-outlined">arrow_forward_ios</span>
+                    </article>
+
+                    <article class="tarjeta__menu" id="btnPlatillos">
+                        <h1>Platillos</h1>
+                        <span class="material-symbols-outlined">arrow_forward_ios</span>
+                    </article>
+
+                    <article class="tarjeta__menu" id="btnPedidos">
+                        <h1>Pedidos</h1>
+                        <span class="material-symbols-outlined">arrow_forward_ios</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </div>
     <script src="./js/utils.js"></script>
     <script src="./js/persistencia.js"></script>
     <script src="./js/menu.js"></script>

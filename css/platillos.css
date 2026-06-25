@@ -100,46 +100,6 @@ MENU
     justify-content: center;
 }
 
-#btnCrearCodigo,
-#btnCrearTipo {
-    width: 180px;
-    height: 40px;
-    border: none;
-    border-radius: 8px;
-    background: #000000;
-    color: #ffffff;
-    cursor: pointer;
-}
-
-#btnSiguienteRegistro,
-#btnSiguienteCrearInsumo,
-#btnSiguienteTipo {
-    display: block;
-    width: 180px;
-    height: 45px;
-    margin: 25px auto 0;
-    border: none;
-    border-radius: 8px;
-    background: #000000;
-    color: #ffffff;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-#btnSiguienteRegistro:hover,
-#btnSiguienteCrearInsumo:hover,
-#btnSiguienteTipo:hover {
-    background: #e55a2b;
-    transform: translateY(-2px);
-}
-
-#btnSiguienteRegistro:active,
-#btnSiguienteCrearInsumo:active,
-#btnSiguienteTipo:active {
-    transform: translateY(0);
-}
-
 /* CONFIRMACION */
 .confirmacionDatos {
     width: 80%;
@@ -211,25 +171,60 @@ FORMULARIOS BASE
 /*=========================
 BOTONES BASE
 =========================*/
-.btnPrincipal {
-    width: 180px;
-    height: 45px;
-    border: none;
-    border-radius: 8px;
-    background: #000000;
-    color: #ffffff;
-    cursor: pointer;
-}
-
+.btnPrincipal,
 .btnVerde {
     width: 180px;
     height: 45px;
-    margin: auto;
     border: none;
     border-radius: 8px;
-    background: #2E7D32;
-    color: white;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btnPrincipal {
+    background: #000000;
+    color: #ffffff;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.btnPrincipal:hover {
+    background: #1f1f1f;
+    transform: translateY(-2px);
+}
+
+.btnPrincipal:active {
+    transform: translateY(0);
+}
+
+.btnVerde {
+    margin: 0 auto;
+    background: #2E7D32;
+    color: #ffffff;
+    box-shadow: 0 4px 0 rgba(33, 94, 37, 0.25);
+}
+
+.btnVerde:hover {
+    background: #1B5E20;
+    transform: translateY(-2px);
+}
+
+.btnVerde:active {
+    transform: translateY(0);
+}
+
+#btnCrearTipo {
+    margin-top: 20px;
+}
+
+#btnSiguienteRegistro,
+#btnSiguienteTipo {
+    display: block;
+    margin: 25px auto 0;
 }
 
 /* CREAR PLATILLO */
@@ -354,31 +349,42 @@ BOTONES BASE
     background: var(--card-bg, #f9f9f9);
 }
 
-.tarjeta__platillo button {
-    margin-top: 15px;
-    width: 100%;
-    height: 40px;
-    border: none;
-    border-radius: 8px;
-    background: #2E7D32;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s ease;
-}
 
-.tarjeta__platillo button:hover {
-    background: #1B5E20;
-}
-
-/* Match inventario button structure: same height, radius, font, and hover behavior */
 .tarjeta__platillo button,
 .tarjeta__platillo .btnVer,
 .tarjeta__platillo .btnSeleccionarEliminar,
 .tarjeta__platillo .btnActualizar {
-    height: 40px;
+    margin-top: 12px;
+    width: 100%;
+    height: 42px;
+    border: none;
     border-radius: 8px;
-    font-weight: bold;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta__platillo button:hover,
+.tarjeta__platillo .btnVer:hover,
+.tarjeta__platillo .btnSeleccionarEliminar:hover,
+.tarjeta__platillo .btnActualizar:hover {
+    transform: translateY(-2px);
+}
+
+.tarjeta__platillo .btnVer,
+.tarjeta__platillo .btnSeleccionarEliminar {
+    background: #c62828;
+    color: white;
+    box-shadow: 0 4px 0 rgba(167, 29, 29, 0.35);
+}
+
+.tarjeta__platillo .btnVer:hover,
+.tarjeta__platillo .btnSeleccionarEliminar:hover {
+    background: #b71c1c;
 }
 
 .tarjeta__platillo .btnVer {

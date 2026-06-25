@@ -1,0 +1,149 @@
+@media (min-width: 1024px) {
+    .layout__content .titulo {
+        text-align: left;
+        margin-top: 0;
+        margin-bottom: 32px;
+    }
+
+    #contenido__menu .contenido__tarjetas,
+    .tarjetas__pedidos,
+    #contenido__mostrarPedidos .tarjetas__pedidos,
+    #contenido__actualizarPedido .tarjetas__pedidos,
+    #contenido__eliminarPedido .tarjetas__pedidos {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(200px, 1fr));
+        gap: 26px;
+        margin-top: 30px;
+    }
+
+    .tarjeta__menu,
+    .tarjeta__pedido {
+        width: 100%;
+        min-height: 180px;
+        padding: 26px;
+        border-radius: 18px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        background: var(--card-bg, var(--background-principal));
+        box-shadow: 0 12px 0 rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .tarjeta__menu:hover,
+    .tarjeta__pedido:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 24px rgba(0, 0, 0, 0.16);
+    }
+
+    .contenido__entradas,
+    .formulario__entradaPedido,
+    .confirmacionDatos,
+    .formulario__actualizarPedido,
+    .formulario__eliminarPedido {
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .formulario__entradaPedido {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        align-items: start;
+    }
+
+    .formulario__entradaPedido .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .formulario__entradaPedido label {
+        font-weight: 600;
+    }
+
+    .formulario__entradaPedido input,
+    .formulario__entradaPedido select {
+        width: 100%;
+        height: 45px;
+        padding-left: 10px;
+        border-radius: 8px;
+        border: 1px solid var(--input-border, #ccc);
+        background: var(--input-bg, white);
+        color: var(--text-color);
+    }
+
+    .formulario__entradaPedido .tabla__platillos {
+        grid-column: 1 / -1;
+        margin-top: 20px;
+    }
+
+    .formulario__entradaPedido .resumen__pedido {
+        grid-column: 1 / -1;
+        justify-self: center;
+    }
+
+    .formulario__entradaPedido button {
+        grid-column: 1 / -1;
+        justify-self: center;
+        margin-top: 10px;
+    }
+
+    .btnVerde,
+    .btnRegresar,
+    #btnSiguienteRegistro,
+    #btnGuardarPedido {
+        width: auto;
+        min-width: 184px;
+        height: 45px;
+        padding: 0 24px;
+    }
+
+    .confirmacionDatos {
+        margin-top: 36px;
+        padding: 28px;
+        border-radius: 18px;
+        max-width: 900px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .confirmacionDatos button {
+        margin-top: 10px;
+    }
+
+    .tabla__platillos,
+    .modal__tabla,
+    .tabla__confirmacion,
+    .tabla__estadoPedidos {
+        width: 100%;
+    }
+
+    .tabla__platillos thead,
+    .tabla__platillos tbody,
+    .modal__tabla thead,
+    .modal__tabla tbody {
+        min-width: 960px;
+    }
+
+    .modal__contenido {
+        max-width: 940px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .formulario__entradaPedido {
+        grid-template-columns: repeat(3, minmax(240px, 1fr));
+    }
+
+    .tabla__platillos thead,
+    .tabla__platillos tbody,
+    .modal__tabla thead,
+    .modal__tabla tbody {
+        min-width: 1040px;
+    }
+}

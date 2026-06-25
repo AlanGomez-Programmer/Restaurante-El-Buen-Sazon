@@ -7,22 +7,50 @@
     <link rel="stylesheet" href="./css/sytle.css">
     <link rel="stylesheet" href="./css/layout.css">
     <link rel="stylesheet" href="./css/pedidos.css">
+    <link rel="stylesheet" href="./css/desktop/layout-desktop.css">
+    <link rel="stylesheet" href="./css/desktop/pedidos-desktop.css">
     <title>El Buen Sazón - Pedidos</title>
 </head>
 <body>
 
-    <section class="contenedor">
-        <div class="contenido__usuario">
-            <div class="informacion__usuario">
-                <span class="material-symbols-outlined">person</span>
-                <h2 id="nombreUsuario"></h2>
+    <div class="layout">
+        <aside class="layout__sidebar">
+            <div class="sidebar__brand">
+                <img src="./icon/utensilios.png" alt="El Buen Sazón" class="sidebar__logo">
+                <h1>El Buen Sazón</h1>
+                <p>Gestión Restaurante</p>
             </div>
-            <button type="button" id="btnSalir">
-                <span class="material-symbols-outlined">mode_off_on</span>
-            </button>
-        </div>
-        <div class="divider"></div>
-        <div class="contenido">            
+            <div class="sidebar__userbar">
+                <div class="informacion__usuario">
+                    <span class="material-symbols-outlined">person</span>
+                    <h2 id="nombreUsuario"></h2>
+                </div>
+                <button type="button" id="btnSalir" class="sidebar__logout">
+                    <span class="material-symbols-outlined">logout</span>
+                    <span>Cerrar sesión</span>
+                </button>
+            </div>
+            <nav class="sidebar__nav">
+                <a href="menu.html" class="sidebar__link">
+                    <span class="material-symbols-outlined">apps</span>
+                    <span>Menú</span>
+                </a>
+                <a href="inventario.html" class="sidebar__link">
+                    <span class="material-symbols-outlined">inventory_2</span>
+                    <span>Inventario</span>
+                </a>
+                <a href="platillos.html" class="sidebar__link">
+                    <span class="material-symbols-outlined">restaurant_menu</span>
+                    <span>Platillos</span>
+                </a>
+                <a href="pedidos.html" class="sidebar__link sidebar__link--active">
+                    <span class="material-symbols-outlined">receipt_long</span>
+                    <span>Pedidos</span>
+                </a>
+            </nav>
+        </aside>
+        <section class="contenedor layout__content">
+            <div class="contenido">            
             <div id="contenido__menu" class="contenido__menu pantalla">
                 <button type="button" id="btnRegresa-menuPrincipal">
                     <span class="material-symbols-outlined">arrow_back</span>
@@ -70,17 +98,25 @@
 
                 <div class="contenido__entradas">
                     <form class="formulario__entradaPedido">
-                        <label>Fecha</label>
-                        <input type="date" id="fechaPedido">
+                        <div class="input-group">
+                            <label>Fecha</label>
+                            <input type="date" id="fechaPedido">
+                        </div>
 
-                        <label>Hora</label>
-                        <input type="time" id="horaPedido">
+                        <div class="input-group">
+                            <label>Hora</label>
+                            <input type="time" id="horaPedido">
+                        </div>
 
-                        <label>Nombre del Cliente</label>
-                        <input type="text" id="nombreCliente">
+                        <div class="input-group">
+                            <label>Nombre del Cliente</label>
+                            <input type="text" id="nombreCliente">
+                        </div>
 
-                        <label>Número Teléfonico del cliente</label>
-                        <input type="number" id="numeroCliente">
+                        <div class="input-group">
+                            <label>Número Teléfonico del cliente</label>
+                            <input type="number" id="numeroCliente">
+                        </div>
 
                         <table class="tabla__platillos">
                             <thead>
@@ -97,7 +133,7 @@
 
                             </tbody>
                         </table>
-                        
+
                         <div class="resumen__pedido">
                             <p><strong>Total del pedido:</strong> $<span id="totalPedido">0.00</span></p>
                         </div>
@@ -213,8 +249,9 @@
                 <p id="mensajeEliminarPedido" class="mensaje"></p>
             </div>
 
-        </div>
-    </section>
+            </div>
+        </section>
+    </div>
     <script src="./js/utils.js"></script>
     <script src="./js/Insumos.js"></script>
     <script src="./js/persistencia.js"></script>

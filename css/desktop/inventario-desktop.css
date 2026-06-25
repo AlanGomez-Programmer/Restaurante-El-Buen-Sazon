@@ -1,0 +1,257 @@
+@media (min-width: 1024px) {
+    .layout__content .titulo {
+        text-align: left;
+        margin-top: 0;
+        margin-bottom: 32px;
+    }
+
+    #contenido__menu .contenido__tarjetas,
+    .tarjetas__insumos,
+    #contenido__actualizarInsumo .tarjetas__insumos,
+    #contenido__eliminarInsumo .tarjetas__insumos {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(240px, 1fr));
+        gap: 28px;
+        margin-top: 28px;
+        justify-items: stretch;
+    }
+
+    .tarjeta__menu,
+    .tarjeta__insumo,
+    .formulario__actualizarTarjeta {
+        width: 100%;
+        min-height: 180px;
+        padding: 26px;
+        border-radius: 18px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        background: var(--card-bg, var(--background-principal));
+        box-shadow: 0 12px 0 rgba(0, 0, 0, 0.12);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .tarjeta__menu:hover,
+    .tarjeta__insumo:hover,
+    .formulario__actualizarTarjeta:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 18px 24px rgba(0, 0, 0, 0.16);
+    }
+
+    .contenido__entradas,
+    .formulario,
+    .formulario__entradaInsumo,
+    .formulario__creacionInsumo,
+    .formulario__creacionTipo,
+    .formulario__actualizarInsumo,
+    .formularioActualizacion {
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    #contenido__registroInsumo .contenido__entradas {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #contenido__registroInsumo .contenido__entradas > form:first-child {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        align-items: start;
+    }
+
+    #contenido__registroInsumo .contenido__entradas > form:first-child .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    #contenido__registroInsumo .contenido__entradas > .contenido__botones {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    #contenido__registroInsumo .contenido__entradas > form:nth-child(3) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        align-items: start;
+    }
+
+    #contenido__registroInsumo .contenido__entradas > form:nth-child(3) .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    #contenido__registroInsumo .contenido__entradas > form:nth-child(3) button {
+        grid-column: 1 / -1;
+        justify-self: center;
+        margin-top: 10px;
+    }
+
+    #contenido__registroInsumo .contenido__entradas > .contenido__botonesAbajo {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .formulario__entradaInsumo,
+    .formulario,
+    .formulario__creacionInsumo,
+    .formulario__creacionTipo,
+    .formulario__actualizarInsumo {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(250px, 1fr));
+        gap: 20px 28px;
+        align-items: end;
+        margin: 0 auto;
+    }
+
+    .formulario__entradaInsumo label,
+    .formulario label,
+    .formulario__creacionInsumo label,
+    .formulario__creacionTipo label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    #contenido__registroInsumo .formulario__entradaInsumo {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+
+    #contenido__registroInsumo .formulario__entradaInsumo > label,
+    #contenido__registroInsumo .formulario__entradaInsumo > input,
+    #contenido__registroInsumo .formulario__entradaInsumo > select {
+        grid-column: span 1;
+    }
+
+    .formulario__entradaInsumo input,
+    .formulario input,
+    .formulario__creacionInsumo input,
+    .formulario__creacionTipo input,
+    .formulario__actualizarInsumo input,
+    .formulario input[type="number"],
+    .formulario select,
+    .formulario__entradaInsumo select,
+    .formulario input[type="date"] {
+        width: 100%;
+        height: 45px;
+        padding-left: 10px;
+        border-radius: 8px;
+        border: 1px solid var(--input-border, #ccc);
+        background: var(--input-bg, white);
+        color: var(--text-color);
+    }
+
+    .contenido__botones,
+    .contenido__botonesAbajo,
+    .formulario__entradaInsumo button,
+    .formulario__creacionInsumo button,
+    .formulario__creacionTipo button,
+    .formulario__actualizarInsumo button,
+    .formulario button {
+        grid-column: 1 / -1;
+        justify-self: end;
+    }
+
+    .contenido__botones,
+    .contenido__botonesAbajo {
+        display: flex;
+        justify-content: flex-end;
+        gap: 18px;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 1000px;
+    }
+
+    .btnVerde,
+    .btnPrincipal,
+    #btnCrearCodigo,
+    #btnSiguienteRegistro,
+    #btnGuardarInsumo,
+    #btnGuardarActualizar,
+    .tarjeta__insumo button,
+    .formulario__actualizarTarjeta button {
+        width: auto;
+        min-width: 184px;
+        height: 45px;
+        padding: 0 24px;
+    }
+
+    #btnCrearCodigo,
+    #btnSiguienteRegistro,
+    #btnGuardarInsumo,
+    #btnGuardarActualizar {
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .confirmacionDatos {
+        margin-top: 36px;
+        padding: 28px;
+        border-radius: 18px;
+        width: 100%;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .formularioActualizacion,
+    .confirmacionEliminacion {
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+        padding: 32px;
+        background: var(--card-bg, var(--background-principal));
+        border-radius: 18px;
+    }
+
+    .tabla__confirmacion,
+    .tabla__totales,
+    .tabla__globales {
+        width: 100%;
+    }
+
+    .tabla__confirmacion thead,
+    .tabla__confirmacion tbody {
+        min-width: 880px;
+    }
+}
+
+@media (min-width: 1440px) {
+    #contenido__menu .contenido__tarjetas,
+    .tarjetas__insumos {
+        grid-template-columns: repeat(3, minmax(240px, 1fr));
+    }
+
+    .formulario__entradaInsumo,
+    .formulario,
+    .formulario__creacionInsumo,
+    .formulario__creacionTipo,
+    .formulario__actualizarInsumo {
+        grid-template-columns: repeat(3, minmax(240px, 1fr));
+    }
+
+    .contenido__botones,
+    .contenido__botonesAbajo {
+        grid-column: 2 / 4;
+    }
+
+    .formulario__entradaInsumo button,
+    .formulario__creacionInsumo button,
+    .formulario__creacionTipo button,
+    .formulario__actualizarInsumo button,
+    .formulario button {
+        grid-column: 3 / 4;
+    }
+}
