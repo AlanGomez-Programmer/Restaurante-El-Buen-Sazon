@@ -95,19 +95,19 @@ function aplicarTema(tema) {
     const contenedor = document.querySelector('.contenedor');
     
     if (tema === 'oscuro') {
+        document.body.classList.add('tema-oscuro');
         root.style.setProperty('--background-principal', '#1a1a1a');
         root.style.setProperty('--background-secundario', '#ffffff');
         root.style.setProperty('--text-color', '#ffffff');
         root.style.setProperty('--input-background', '#2d2d2d');
         root.style.setProperty('--input-border', '#444');
-        contenedor.style.backgroundImage = "url('../img/fondos/fondo_oscuro.png')";
     } else {
+        document.body.classList.remove('tema-oscuro');
         root.style.setProperty('--background-principal', '#ffffff');
         root.style.setProperty('--background-secundario', '#000000');
         root.style.setProperty('--text-color', '#000000');
         root.style.setProperty('--input-background', '#f5f5f5');
         root.style.setProperty('--input-border', '#ddd');
-        contenedor.style.backgroundImage = "url('../img/fondos/fondo_claro.png')";
     }
 }
 

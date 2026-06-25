@@ -4,12 +4,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--background-principal);
     background-image: url('../img/fondos/fondo_claro.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     padding: 20px;
+}
+
+/* Tema oscuro: usar fondo oscuro con imagen */
+body.tema-oscuro .contenedor {
+    background-image: url('../img/fondos/fondo_oscuro.png');
 }
 
 .contenido {
