@@ -82,11 +82,14 @@
                         <label>Número Teléfonico del cliente</label>
                         <input type="number" id="numeroCliente">
 
-                        <table>
+                        <table class="tabla__platillos">
                             <thead>
                                 <tr>
                                     <th>Tipo Platillo</th>
                                     <th>Platillo</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Subtotal</th>
                                     <th>Seleccionar</th>
                                 </tr>
                             </thead>
@@ -94,6 +97,10 @@
 
                             </tbody>
                         </table>
+                        
+                        <div class="resumen__pedido">
+                            <p><strong>Total del pedido:</strong> $<span id="totalPedido">0.00</span></p>
+                        </div>
 
                         <button type="button" class="btnVerde" id="btnSiguienteRegistro">Siguiente</button>
 
@@ -109,15 +116,22 @@
                         <p class="numeroClienteConfirmado"></p>
                         <p class="fechaClienteConfirmado"></p>
                         <p class="horaClienteConfirmado"></p>
-                        <table class="platillosConfirmados">
+                        <table class="tabla__platillos platillosConfirmados">
                             <thead>
                                 <tr>
                                     <th>Tipo de Platillo</th>
                                     <th>Platillo</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Subtotal</th>
                                 </tr>
                             </thead>
                             <tbody class="cuerpoTabla__platillosConfirmados"></tbody>
                         </table>
+                        
+                        <div class="resumen__pedido">
+                            <p><strong>Total del pedido:</strong> $<span id="totalPedidoConfirmado">0.00</span></p>
+                        </div>
 
                         <button type="button" class="btnVerde" id="btnGuardarPedido">Guardar Pedido</button>
 
@@ -137,10 +151,37 @@
                     <h1>Pedidos</h1>
                 </div>
 
-                <div class="tarjetas__pedidos">
+                <div class="tarjetas__pedidos" id="tarjetasMostrarPedidos"></div>
+                <p id="mensajeMostrarPedidos" class="mensaje"></p>
 
+            </div>
+            
+            <!-- Modal para ver detalles del pedido -->
+            <div id="modalPedido" class="modal">
+                <div class="modal__contenido">
+                    <button class="modal__cerrar">&times;</button>
+                    <h2 id="modalNumeroPedido"></h2>
+                    <div class="modal__info">
+                        <p><strong>Fecha:</strong> <span id="modalFecha"></span></p>
+                        <p><strong>Hora:</strong> <span id="modalHora"></span></p>
+                        <p><strong>Cliente:</strong> <span id="modalCliente"></span></p>
+                        <p><strong>Teléfono:</strong> <span id="modalTelefono"></span></p>
+                        <p><strong>Estado:</strong> <span id="modalEstado" class="estado__badge"></span></p>
+                    </div>
+                    <h3>Platillos</h3>
+                    <table class="modal__tabla">
+                        <thead>
+                            <tr>
+                                <th>Platillo</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modalPlatillos"></tbody>
+                    </table>
+                    <p class="modal__total">Total: $<span id="modalTotal">0.00</span></p>
                 </div>
-
             </div>
 
             <!-- ================= ACTUALIZAR ================= -->
@@ -154,28 +195,8 @@
                     <h1>Actualizar Pedido</h1>
                 </div>
 
-                <form class="formulario formulario__actualizarPedido">
-                    <label>Código del Pedido</label>
-                    <select class="listaCodigosPedidos">
-                        <option value="">Elige una opción</option>
-                    </select>
-
-                    <p>Estado del pedido</p>
-                    <p class="estadoPedidoActual"></p>
-
-                    <label>Nuevo estado del pedido</label>
-                    <select class="listaEstadoPedido">
-                        <option value="">Elige el Estado</option>
-                        <option value="en preparacion">En Preparación</option>
-                        <option value="Entregado">Entregado</option>
-                        <option value="Cancelado">Cancelado</option>
-                    </select>
-
-                    <label>Nuevo Precio</label>
-                    <input type="number">
-
-                    <button type="button" class="btnVerde" id="btnGuardarActualizar">Guardar</button>
-                </form>
+                <div class="tarjetas__pedidos" id="tarjetasActualizarPedido"></div>
+                <p id="mensajeActualizarPedido" class="mensaje"></p>
             </div>
 
             <!-- ================= ELIMINAR ================= -->
@@ -188,23 +209,15 @@
                     <h1>Eliminar Pedido</h1>
                 </div>
 
-                <form class="formulario formulario__eliminarPedido">
-
-                    <label>Código del Pedido</label>
-                    <select class="listaCodigosPedidos">
-                        <option value="">Elige una opción</option>
-                    </select>
-
-                    <div class="tarjetas__pedidos">
-
-                    </div>
-
-                    <button type="button" id="btnEliminar">Eliminar</button>
-                </form>
+                <div class="tarjetas__pedidos" id="tarjetasEliminarPedido"></div>
+                <p id="mensajeEliminarPedido" class="mensaje"></p>
             </div>
 
         </div>
     </section>
+    <script src="./js/utils.js"></script>
+    <script src="./js/Insumos.js"></script>
+    <script src="./js/persistencia.js"></script>
     <script src="./js/pedidos.js"></script>
 </body>
 </html>

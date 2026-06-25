@@ -68,7 +68,7 @@
                 <div class="contenido__entradas">
                     <form class="formulario__entradaPlatillo">
                         <label>Tipo de Platillo</label>
-                        <select class="listaTipoPlatillo">
+                        <select id="tipoPlatilloCrear" class="listaTipoPlatillo">
                             <option value="">Elige una opción</option>
                         </select>
                     </form>
@@ -88,7 +88,12 @@
                         <label>Valor de Venta</label>
                         <input type="number" id="valorPlatillo">
 
-                        <div class="formulario__ingredientes"></div>
+                        <div class="formulario__ingredientes">
+                            <label>Ingredientes</label>
+                            <div id="listaIngredientes" class="lista__ingredientes">
+                                <!-- Se populará dinámicamente con insumos registrados -->
+                            </div>
+                        </div>
 
                         <button type="button" id="btnSiguienteRegistro">Siguiente</button>
                     </form>
@@ -117,13 +122,15 @@
 
                 <form class="formulario__creacionTipoPlatillo">
                     <p>Ingrese el nombre del tipo de Platillo</p>
-                    <input type="text" placeholder="PF - Platillo Fuerte">
+                    <input type="text" id="nombreTipoPlatillo" placeholder="PF - Platillo Fuerte">
                     <button type="button" id="btnSiguienteTipo">Siguiente</button>
                 </form>
 
                 <div class="confirmacionDatos oculto">
                     <h2>Confirmación de Datos</h2>
+                    <p id="confNombreTipo"></p>
                     <button type="button" id="btnGuardarTipo">Guardar</button>
+                    <button type="button" class="btnRegresar">Cancelar</button>
                 </div>
             </div>
 
@@ -136,7 +143,28 @@
                     <h1>Platillos</h1>
                 </div>
 
-                <div class="tarjetas__platillos"></div>
+                <div id="tarjetasMostrarPlatillos" class="tarjetas__platillos"></div>
+                
+                <p id="mensajeMostrarPlatillos" class="mensaje"></p>
+            </div>
+            
+            <!-- Modal para ver detalles del platillo -->
+            <div id="modalPlatillo" class="modal">
+                <div class="modal__contenido">
+                    <button class="modal__cerrar">&times;</button>
+                    <img id="modalImagen" class="modal__imagen" alt="Imagen del platillo">
+                    <h2 id="modalNombre"></h2>
+                    <div class="modal__info">
+                        <p><strong>Tipo:</strong> <span id="modalTipo"></span></p>
+                        <p><strong>Código:</strong> <span id="modalCodigo"></span></p>
+                        <p><strong>Descripción:</strong> <span id="modalDescripcion"></span></p>
+                        <p><strong>Valor de venta:</strong> <span id="modalValor"></span></p>
+                    </div>
+                    <div class="modal__ingredientes">
+                        <h3>Ingredientes</h3>
+                        <ul id="modalIngredientes"></ul>
+                    </div>
+                </div>
             </div>
 
             <div id="contenido__actualizarPlatillo" class="pantalla oculto">
@@ -148,22 +176,8 @@
                     <h1>Actualizar Platillo</h1>
                 </div>
 
-                <form class="formulario__actualizarPlatillo">
-                    <label>Tipo de Platillo</label>
-                    <select class="listaTipoPlatillo">
-                        <option value="">Elige una opción</option>
-                    </select>
-
-                    <label>Platillo</label>
-                    <select class="listaPlatillos">
-                        <option value="">Elige un Platillo</option>
-                    </select>
-
-                    <label>Nuevo Precio</label>
-                    <input type="number">
-
-                    <button type="button" id="btnGuardarActualizar">Guardar</button>
-                </form>
+                <div class="tarjetas__platillos" id="tarjetasActualizarPlatillo"></div>
+                <p id="mensajeActualizarPlatillo" class="mensaje"></p>
             </div>
 
             <div id="contenido__eliminarPlatillo" class="pantalla oculto">
@@ -175,22 +189,14 @@
                     <h1>Eliminar Platillo</h1>
                 </div>
 
-                <form class="formulario__eliminarInsumo">
-                    <label>Tipo de Platillo</label>
-                    <select class="listaTipoPlatillo">
-                        <option value="">Elige una opción</option>
-                    </select>
-
-                    <label>Platillo</label>
-                    <select class="listaPlatillos">
-                        <option value="">Elige un Platillo</option>
-                    </select>
-
-                    <button type="button" id="btnConfirmarEliminar">Eliminar</button>
-                </form>
+                <div class="tarjetas__platillos" id="tarjetasEliminarPlatillo"></div>
+                <p id="mensajeEliminarPlatillo" class="mensaje"></p>
             </div>
         </div>
     </section>
+    <script src="./js/utils.js"></script>
+    <script src="./js/Insumos.js"></script>
+    <script src="./js/persistencia.js"></script>
     <script src="./js/platillos.js"></script>
 </body>
 </html>
