@@ -1,3 +1,35 @@
+/* ==================== VARIABLES CSS ==================== */
+:root {
+    --color-texto-principal: #333;
+    --color-texto-secundario: #555;
+    --color-fondo-tarjeta: #f9f9f9;
+    --color-borde-tarjeta: #ccc;
+    --color-borde-suave: #ddd;
+    --color-borde-muy-suave: #eee;
+    --color-exito-bg: #d4edda;
+    --color-exito-text: #155724;
+    --color-exito-borde: #c3e6cb;
+    --color-error-bg: #f8d7da;
+    --color-error-text: #721c24;
+    --color-error-borde: #f5c6cb;
+}
+
+/* Tema oscuro */
+body.tema-oscuro {
+    --color-texto-principal: #e0e0e0;
+    --color-texto-secundario: #b0b0b0;
+    --color-fondo-tarjeta: #2d2d2d;
+    --color-borde-tarjeta: #444;
+    --color-borde-suave: #555;
+    --color-borde-muy-suave: #666;
+    --color-exito-bg: #1b5e20;
+    --color-exito-text: #c8e6c9;
+    --color-exito-borde: #2e7d32;
+    --color-error-bg: #b71c1c;
+    --color-error-text: #ffcdd2;
+    --color-error-borde: #c62828;
+}
+
 .oculto {
     display: none;
 }
@@ -153,26 +185,294 @@ BOTONES BASE
     margin: auto;
     border: none;
     border-radius: 8px;
-    background: #4CAF50;
+    background: #2E7D32;
     color: white;
     cursor: pointer;
 }
 
-/* MOSTRAR */
+/* CREAR PEDIDO */
+#contenido__registroPedido .confirmacionDatos button {
+    width: 180px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 5px;
+    display: inline-block;
+}
+
+#contenido__registroPedido .confirmacionDatos #btnGuardarPedido {
+    background: #2E7D32;
+    color: white;
+}
+
+#contenido__registroPedido .confirmacionDatos .btnRegresar {
+    background: #c62828;
+    color: white;
+}
+
+/* ELIMINAR */
+#contenido__eliminarPedido .confirmacionDatos button {
+    width: 180px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 5px;
+    display: inline-block;
+}
+
+#contenido__eliminarPedido #btnConfirmarEliminar {
+    background: #c62828;
+    color: white;
+}
+
+/* MOSTRAR - match inventario grid and card structure */
 .tarjetas__pedidos {
-    width: 80%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
 }
 
 .tarjeta__pedido {
+    background: var(--color-fondo-tarjeta, white);
+    border: 1px solid var(--color-borde-tarjeta, #ccc);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.tarjeta__pedido:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.tarjeta__pedido h3 {
+    margin: 0 0 15px 0;
+    font-family: var(--font-Titulos);
+    color: var(--background-secundario);
+    text-align: center;
+}
+
+.tarjeta__pedido p {
+    margin: 8px 0;
+    color: var(--color-texto-secundario);
+}
+
+.tarjeta__pedido .info__destacada {
+    font-weight: bold;
+    color: var(--color-texto-principal);
+}
+
+.tarjeta__pedido button {
+    margin-top: 15px;
     width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    background: #2E7D32;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.tarjeta__pedido button:hover {
+    background: #1B5E20;
+}
+
+.tarjeta__pedido .btnVer {
+    background: #c62828;
+}
+
+.tarjeta__pedido .btnVer:hover {
+    background: #b71c1c;
+}
+
+.tarjeta__pedido .btnSeleccionarEliminar {
+    background: #c62828;
+}
+
+.tarjeta__pedido .btnSeleccionarEliminar:hover {
+    background: #b71c1c;
+}
+
+.formulario__actualizarTarjeta {
+    margin-top: 15px;
     padding: 15px;
-    border-radius: 10px;
-    border: 1px solid gray;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+    background: var(--color-fondo-tarjeta);
+    border-radius: 8px;
+    display: none;
+}
+
+.formulario__actualizarTarjeta.active {
+    display: block;
+}
+
+.formulario__actualizarTarjeta label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--color-texto-principal);
+}
+
+.formulario__actualizarTarjeta select {
+    width: 100%;
+    height: 35px;
+    padding: 0 10px;
+    border: 1px solid var(--color-borde-tarjeta);
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.formulario__actualizarTarjeta button {
+    margin: 5px;
+    width: 100%;
+    padding: 0;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formulario__actualizarTarjeta .btnVerde {
+    background: #2E7D32;
+    color: white;
+}
+
+.formulario__actualizarTarjeta .btnVerde:hover {
+    background: #1B5E20;
+}
+
+.formulario__actualizarTarjeta .btnRegresar {
+    background: #c62828;
+    color: white;
+}
+
+.formulario__actualizarTarjeta .btnRegresar:hover {
+    background: #b71c1c;
+}
+
+/* =====================================================
+   PEDIDOS: estilos de botones y formularios inline dentro de tarjetas
+   para que coincidan exactamente con inventario (tarjeta__insumo)
+   ===================================================== */
+
+/* Botones generales dentro de tarjetas de pedido */
+.tarjeta__pedido .btnActualizar,
+.tarjeta__pedido .btnGuardarActualizar,
+.tarjeta__pedido .btnCancelarActualizar,
+.tarjeta__pedido .btnVer,
+.tarjeta__pedido .btnSeleccionarEliminar {
+    margin: 5px 0;
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Colores de botones dentro de tarjetas */
+.tarjeta__pedido .btnActualizar {
+    background: #1976D2;
+    color: white;
+}
+
+.tarjeta__pedido .btnActualizar:hover {
+    background: #1565C0;
+}
+
+.tarjeta__pedido .btnGuardarActualizar {
+    background: #2E7D32;
+    color: white;
+}
+
+.tarjeta__pedido .btnGuardarActualizar:hover {
+    background: #1B5E20;
+}
+
+.tarjeta__pedido .btnCancelarActualizar {
+    background: #c62828;
+    color: white;
+}
+
+.tarjeta__pedido .btnCancelarActualizar:hover {
+    background: #b71c1c;
+}
+
+/* Formulario inline de actualizar estado (igual que en inventario) */
+.tarjeta__pedido .formulario__actualizarTarjeta {
+    margin-top: 15px;
+    padding: 15px;
+    background: var(--color-fondo-tarjeta, #f9f9f9);
+    border-radius: 8px;
+    display: none;
+}
+
+.tarjeta__pedido .formulario__actualizarTarjeta.active {
+    display: block;
+}
+
+.tarjeta__pedido .formulario__actualizarTarjeta label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--color-texto-principal, #333);
+}
+
+.tarjeta__pedido .formulario__actualizarTarjeta select,
+.tarjeta__pedido .formulario__actualizarTarjeta input {
+    width: 100%;
+    height: 35px;
+    padding: 0 10px;
+    border: 1px solid var(--color-borde-tarjeta, #ccc);
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.tarjeta__pedido .formulario__actualizarTarjeta button {
+    margin: 5px 0;
+    width: 100%;
+    padding: 0;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Asegurar que los botones dentro del formulario inline hereden el mismo look que en inventario */
+.tarjeta__pedido .formulario__actualizarTarjeta .btnVerde {
+    background: #2E7D32;
+    color: white;
+}
+
+.tarjeta__pedido .formulario__actualizarTarjeta .btnVerde:hover {
+    background: #1B5E20;
+}
+
+.tarjeta__pedido .formulario__actualizarTarjeta .btnRegresar {
+    background: #c62828;
+    color: white;
+}
+
+.tarjeta__pedido .formulario__actualizarTarjeta .btnRegresar:hover {
+    background: #b71c1c;
 }
 
 /* ACTUALIZAR */
@@ -187,6 +487,260 @@ BOTONES BASE
     margin: auto;
     border: none;
     border-radius: 8px;
-    background: #ff4444;
+}
+
+/* Asegurar consistencia de altura/radio en botones de tarjetas (sin prefijo) */
+.tarjeta__pedido button {
+    height: 40px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* ESTADOS DE PEDIDO */
+.estado__badge {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.estado__pendiente {
+    background: #fff9c4;
+    color: #f57f17;
+}
+
+.estado__en_preparacion {
+    background: #fff3e0;
+    color: #ef6c00;
+}
+
+.estado__entregado {
+    background: var(--color-exito-bg);
+    color: var(--color-exito-text);
+}
+
+.estado__cancelado {
+    background: var(--color-error-bg);
+    color: var(--color-error-text);
+}
+
+/* TABLA DE PLATILLOS EN PEDIDO */
+.tabla__platillos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.tabla__platillos th,
+.tabla__platillos td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-borde-suave);
+}
+
+.tabla__platillos th {
+    background: var(--color-fondo-tarjeta);
+    font-weight: bold;
+    color: var(--color-texto-principal);
+}
+
+.tabla__platillos tr:hover {
+    background: var(--color-fondo-tarjeta);
+}
+
+.tabla__platillos input[type="number"] {
+    width: 70px;
+    height: 35px;
+    padding: 0 5px;
+    border-radius: 6px;
+    border: 1px solid var(--color-borde-tarjeta);
+}
+
+.tabla__platillos input[type="checkbox"] {
+    width: auto;
+    height: auto;
+}
+
+/* Mejorar estructura visual de la tabla de platillos en registro */
+.tabla__platillos {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+
+.tabla__platillos th,
+.tabla__platillos td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid var(--color-borde-tarjeta, #ccc);
+}
+
+.tabla__platillos th {
+    background: var(--color-fondo-tarjeta, #f9f9f9);
+    font-weight: bold;
+    color: var(--color-texto-principal, #333);
+    text-align: center;
+}
+
+.tabla__platillos td:first-child,
+.tabla__platillos th:first-child {
+    text-align: left;
+}
+
+.tabla__platillos input[type="number"] {
+    width: 70px;
+    height: 32px;
+    padding: 0 6px;
+    border: 1px solid var(--color-borde-tarjeta, #ccc);
+    border-radius: 6px;
+    text-align: center;
+}
+
+/* RESUMEN DE PEDIDO */
+.resumen__pedido {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background: var(--color-fondo-tarjeta);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.resumen__pedido p {
+    margin: 10px 0;
+    color: var(--color-texto-secundario);
+}
+
+.resumen__pedido strong {
+    color: var(--color-texto-principal);
+}
+
+#totalPedido {
+    font-size: 1.5rem;
+    color: #2E7D32;
+    font-weight: bold;
+}
+
+/* SELECT DE ESTADO COLOREADO */
+.listaEstadoPedido option {
+    padding: 10px;
+}
+
+.listaEstadoPedido option[value="pendiente"] {
+    color: #f57f17;
+}
+
+.listaEstadoPedido option[value="en_preparacion"] {
+    color: #ef6c00;
+}
+
+.listaEstadoPedido option[value="entregado"] {
+    color: var(--color-exito-text);
+}
+
+.listaEstadoPedido option[value="cancelado"] {
+    color: var(--color-error-text);
+}
+
+/* MODAL */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal__contenido {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal__cerrar {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #c62828;
     color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal__info {
+    margin-bottom: 15px;
+}
+
+.modal__info strong {
+    color: var(--color-texto-principal);
+}
+
+.modal__tabla {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.modal__tabla th,
+.modal__tabla td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-borde-suave);
+}
+
+.modal__tabla th {
+    background: var(--color-fondo-tarjeta);
+    font-weight: bold;
+    color: var(--color-texto-principal);
+}
+
+.modal__total {
+    text-align: right;
+    font-size: 1.5rem;
+    color: #2E7D32;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* MENSAJES EN PANTALLA */
+.mensaje {
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.mensaje.exito {
+    background: var(--color-exito-bg);
+    color: var(--color-exito-text);
+    border: 1px solid var(--color-exito-borde);
+}
+
+.mensaje.error {
+    background: var(--color-error-bg);
+    color: var(--color-error-text);
+    border: 1px solid var(--color-error-borde);
 }
