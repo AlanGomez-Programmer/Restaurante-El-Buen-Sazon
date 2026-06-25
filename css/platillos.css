@@ -1,3 +1,35 @@
+/* ==================== VARIABLES CSS ==================== */
+:root {
+    --color-texto-principal: #333;
+    --color-texto-secundario: #555;
+    --color-fondo-tarjeta: #f9f9f9;
+    --color-borde-tarjeta: #ccc;
+    --color-borde-suave: #ddd;
+    --color-borde-muy-suave: #eee;
+    --color-exito-bg: #d4edda;
+    --color-exito-text: #155724;
+    --color-exito-borde: #c3e6cb;
+    --color-error-bg: #f8d7da;
+    --color-error-text: #721c24;
+    --color-error-borde: #f5c6cb;
+}
+
+/* Tema oscuro */
+body.tema-oscuro {
+    --color-texto-principal: #e0e0e0;
+    --color-texto-secundario: #b0b0b0;
+    --color-fondo-tarjeta: #2d2d2d;
+    --color-borde-tarjeta: #444;
+    --color-borde-suave: #555;
+    --color-borde-muy-suave: #666;
+    --color-exito-bg: #1b5e20;
+    --color-exito-text: #c8e6c9;
+    --color-exito-borde: #2e7d32;
+    --color-error-bg: #b71c1c;
+    --color-error-text: #ffcdd2;
+    --color-error-borde: #c62828;
+}
+
 .oculto {
     display: none;
 }
@@ -28,7 +60,7 @@ MENU
     border-radius: 10px;
     background: var(--background-principal);
     border: 1px solid var(--background-secundario);
-    box-shadow: 0 8px 0 #BDBDBD;
+    box-shadow: var(--shadow-card);
     padding: 20px;
     display: flex;
     justify-content: space-between;
@@ -63,6 +95,7 @@ MENU
     display: flex;
     flex-direction: column;
     gap: 15px;
+    margin-top: 30px;
 }
 
 .formulario__entradaPlatillo label {
@@ -71,7 +104,8 @@ MENU
 }
 
 .formulario__entradaPlatillo input,
-.formulario__entradaPlatillo select {
+.formulario__entradaPlatillo select,
+.formulario__entradaPlatillo textarea {
     width: 100%;
     height: 45px;
     padding-left: 10px;
@@ -79,12 +113,24 @@ MENU
     border: 1px solid gray;
 }
 
-#btnCrearTipo {
-    width: 150px;
-    height: 40px;
+.formulario__entradaPlatillo textarea {
+    height: 100px;
+    padding-top: 10px;
+    resize: vertical;
+}
+
+.contenido__botones {
+    width: 80%;
+    display: flex;
+    gap: 15px;
     margin-top: 20px;
-    margin-right: 10%;
-    align-self: flex-end;
+    justify-content: center;
+}
+
+#btnCrearCodigo,
+#btnCrearTipo {
+    width: 180px;
+    height: 40px;
     border: none;
     border-radius: 8px;
     background: var(--background-secundario);
@@ -92,21 +138,14 @@ MENU
     cursor: pointer;
 }
 
-.formulario__ingredientes {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
 #btnSiguienteRegistro {
-    width: 180px;
-    height: 45px;
     margin: auto;
     margin-top: 25px;
-    border: none;
-    border-radius: 8px;
-    background: var(--background-secundario);
-    color: var(--background-principal);
+}
+
+#btnSiguienteCrearInsumo,
+#btnSiguienteTipo {
+    margin: auto;
 }
 
 /* CONFIRMACION */
@@ -124,6 +163,10 @@ MENU
     gap: 15px;
 }
 
+.confirmacionDatos p {
+    font-size: 1rem;
+}
+
 .confirmacionDatos img {
     width: 180px;
     height: 180px;
@@ -131,17 +174,15 @@ MENU
     border-radius: 10px;
 }
 
-#btnGuardarPlatillo {
-    width: 180px;
-    height: 45px;
-    border: none;
-    border-radius: 8px;
-    background: var(--background-secundario);
-    color: var(--background-principal);
+#btnGuardarPlatillo,
+#btnGuardarActualizar {
+    margin: auto;
 }
 
-/* CREAR TIPO */
-.formulario__creacionTipoPlatillo {
+/*=========================
+FORMULARIOS BASE
+=========================*/
+.formulario {
     width: 80%;
     margin: auto;
     display: flex;
@@ -149,33 +190,136 @@ MENU
     gap: 20px;
 }
 
-.formulario__creacionTipoPlatillo input {
-    height: 45px;
-    padding-left: 10px;
+.formulario label {
+    font-size: 1rem;
+    font-weight: bold;
 }
 
-.formulario__creacionTipoPlatillo button {
+.formulario input,
+.formulario select,
+.formulario textarea {
+    height: 45px;
+    padding-left: 10px;
+    border-radius: 8px;
+    border: 1px solid gray;
+    width: 100%;
+}
+
+.formulario textarea {
+    height: 100px;
+    padding-top: 10px;
+    resize: vertical;
+}
+
+/*=========================
+BOTONES BASE
+=========================*/
+.btnPrincipal {
+    width: 180px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    background: var(--background-secundario);
+    color: var(--background-principal);
+    cursor: pointer;
+}
+
+.btnVerde {
     width: 180px;
     height: 45px;
     margin: auto;
+    border: none;
+    border-radius: 8px;
+    background: #2E7D32;
+    color: white;
+    cursor: pointer;
 }
 
-/* MOSTRAR */
+/* CREAR PLATILLO */
+.formulario__creacionPlatillo button {
+    margin: auto;
+}
+
+#contenido__registroPlatillo .confirmacionDatos button {
+    width: 180px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 5px;
+    display: inline-block;
+}
+
+#contenido__registroPlatillo .confirmacionDatos #btnGuardarPlatillo {
+    background: #2E7D32;
+    color: white;
+}
+
+#contenido__registroPlatillo .confirmacionDatos .btnRegresar {
+    background: #c62828;
+    color: white;
+}
+
+/* CREAR TIPO */
+.formulario__creacionTipo button {
+    margin: auto;
+}
+
+#contenido__crearTipo .confirmacionDatos button {
+    width: 180px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 5px;
+    display: inline-block;
+}
+
+#contenido__crearTipo .confirmacionDatos #btnGuardarTipo {
+    background: #2E7D32;
+    color: white;
+}
+
+#contenido__crearTipo .confirmacionDatos .btnRegresar {
+    background: #c62828;
+    color: white;
+}
+
+/* ELIMINAR */
+#contenido__eliminarPlatillo .confirmacionDatos button {
+    width: 180px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 5px;
+    display: inline-block;
+}
+
+#contenido__eliminarPlatillo #btnConfirmarEliminar {
+    background: #c62828;
+    color: white;
+}
+
+/* MOSTRAR - match inventario grid structure */
 .tarjetas__platillos {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
 }
 
 .tarjeta__platillo {
-    width: 80%;
-    padding: 15px;
-    position: relative;
-    border-radius: 10px;
-    border: 1px solid gray;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+    background: var(--color-fondo-tarjeta, white);
+    border: 1px solid var(--color-borde-tarjeta, #ccc);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.tarjeta__platillo:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 .tarjeta__platillo img {
@@ -183,65 +327,383 @@ MENU
     height: 180px;
     object-fit: cover;
     border-radius: 8px;
+    margin-bottom: 15px;
 }
 
 .tarjeta__platillo h3 {
-    margin-top: 15px;
+    margin: 0 0 15px 0;
+    font-family: var(--font-Titulos);
+    color: var(--background-secundario);
+    text-align: center;
 }
 
-.btnEliminar {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 30px;
-    height: 30px;
+.tarjeta__platillo p {
+    margin: 8px 0;
+    color: var(--color-texto-secundario);
+}
+
+.tarjeta__platillo .info__destacada {
+    font-weight: bold;
+    color: var(--color-texto-principal);
+}
+
+/* Ensure consistent padding and image handling like inventario cards */
+.tarjeta__platillo img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background: var(--color-fondo-tarjeta, #f9f9f9);
+}
+
+.tarjeta__platillo button {
+    margin-top: 15px;
+    width: 100%;
+    height: 40px;
     border: none;
-    border-radius: 50%;
-    background: #ff4444;
+    border-radius: 8px;
+    background: #2E7D32;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.tarjeta__platillo button:hover {
+    background: #1B5E20;
+}
+
+/* Match inventario button structure: same height, radius, font, and hover behavior */
+.tarjeta__platillo button,
+.tarjeta__platillo .btnVer,
+.tarjeta__platillo .btnSeleccionarEliminar,
+.tarjeta__platillo .btnActualizar {
+    height: 40px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.tarjeta__platillo .btnVer {
+    background: #c62828;
+}
+
+.tarjeta__platillo .btnVer:hover {
+    background: #b71c1c;
+}
+
+.tarjeta__platillo .btnSeleccionarEliminar {
+    background: #c62828;
+}
+
+.tarjeta__platillo .btnSeleccionarEliminar:hover {
+    background: #b71c1c;
+}
+
+/* Estilos de botones dentro de tarjetas de platillo para coincidir con inventario */
+.tarjeta__platillo .btnActualizar,
+.tarjeta__platillo .btnGuardarActualizar,
+.tarjeta__platillo .btnCancelarActualizar {
+    margin: 5px 0;
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tarjeta__platillo .btnActualizar {
+    background: #1976D2;
     color: white;
 }
 
-/* ACTUALIZAR */
-.formulario__actualizarPlatillo {
-    width: 80%;
-    margin: auto;
+.tarjeta__platillo .btnActualizar:hover {
+    background: #1565C0;
+}
+
+.tarjeta__platillo .btnGuardarActualizar {
+    background: #2E7D32;
+    color: white;
+}
+
+.tarjeta__platillo .btnGuardarActualizar:hover {
+    background: #1B5E20;
+}
+
+.tarjeta__platillo .btnCancelarActualizar {
+    background: #c62828;
+    color: white;
+}
+
+.tarjeta__platillo .btnCancelarActualizar:hover {
+    background: #b71c1c;
+}
+
+/* Asegurar que los formularios inline de actualizar en tarjetas tengan el mismo estilo que en inventario */
+.tarjeta__platillo .formulario__actualizarTarjeta {
+    margin-top: 15px;
+    padding: 15px;
+    background: var(--color-fondo-tarjeta, #f9f9f9);
+    border-radius: 8px;
+    display: none;
+}
+
+.tarjeta__platillo .formulario__actualizarTarjeta.active {
+    display: block;
+}
+
+.tarjeta__platillo .formulario__actualizarTarjeta label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--color-texto-principal, #333);
+}
+
+.tarjeta__platillo .formulario__actualizarTarjeta input {
+    width: 100%;
+    height: 35px;
+    padding: 0 10px;
+    border: 1px solid var(--color-borde-tarjeta, #ccc);
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.tarjeta__platillo .formulario__actualizarTarjeta button {
+    margin: 5px 0;
+    width: 100%;
+    padding: 0;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    align-items: center;
+    justify-content: center;
 }
 
-.formulario__actualizarPlatillo select,
-.formulario__actualizarPlatillo input {
-    height: 45px;
-    padding-left: 10px;
+/* General form styles fallback (use variables to match inventario) */
+.formulario__actualizarTarjeta {
+    margin-top: 15px;
+    padding: 15px;
+    background: var(--color-fondo-tarjeta, #f9f9f9);
+    border-radius: 8px;
+    display: none;
 }
 
+.formulario__actualizarTarjeta.active {
+    display: block;
+}
+
+.formulario__actualizarTarjeta label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--color-texto-principal, #333);
+}
+
+.formulario__actualizarTarjeta input {
+    width: 100%;
+    height: 35px;
+    padding: 0 10px;
+    border: 1px solid var(--color-borde-tarjeta, #ccc);
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.formulario__actualizarTarjeta button {
+    margin: 5px;
+    width: 100%;
+    padding: 0;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formulario__actualizarTarjeta .btnVerde {
+    background: #2E7D32;
+    color: white;
+}
+
+.formulario__actualizarTarjeta .btnVerde:hover {
+    background: #1B5E20;
+}
+
+.formulario__actualizarTarjeta .btnRegresar {
+    background: #c62828;
+    color: white;
+}
+
+.formulario__actualizarTarjeta .btnRegresar:hover {
+    background: #b71c1c;
+}
+
+/* ACTUALIZAR */
 .formulario__actualizarPlatillo button {
-    width: 180px;
-    height: 45px;
     margin: auto;
 }
 
 /* ELIMINAR */
-.formulario__eliminarInsumo {
-    width: 80%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.formulario__eliminarInsumo select {
-    height: 45px;
-    padding-left: 10px;
-}
-
-.formulario__eliminarInsumo button {
+.formulario__eliminarPlatillo button {
     width: 180px;
     height: 45px;
     margin: auto;
     border: none;
     border-radius: 8px;
-    background: #ff4444;
+}
+
+/* INGREDIENTES */
+.formulario__ingredientes {
+    margin-top: 15px;
+}
+
+.lista__ingredientes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.ingrediente__item {
+    background: var(--color-fondo-tarjeta);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--color-borde-suave);
+}
+
+.ingrediente__item label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--color-texto-principal);
+}
+
+.ingrediente__item input[type="checkbox"] {
+    width: auto;
+    height: auto;
+    margin-right: 10px;
+}
+
+.ingrediente__item input[type="number"] {
+    width: 80px;
+    height: 35px;
+    padding: 0 5px;
+    border-radius: 6px;
+    border: 1px solid var(--color-borde-tarjeta);
+}
+
+.ingrediente__cantidad {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* MODAL */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal__contenido {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal__cerrar {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #c62828;
     color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal__imagen {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 8px;
+    margin: 0 auto 20px;
+    display: block;
+}
+
+.modal__info {
+    margin-bottom: 15px;
+}
+
+.modal__info strong {
+    color: var(--color-texto-principal);
+}
+
+.modal__ingredientes {
+    margin-top: 20px;
+}
+
+.modal__ingredientes ul {
+    list-style: none;
+    padding: 0;
+}
+
+.modal__ingredientes li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--color-borde-muy-suave);
+}
+
+/* MENSAJES EN PANTALLA */
+.mensaje {
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.mensaje.exito {
+    background: var(--color-exito-bg);
+    color: var(--color-exito-text);
+    border: 1px solid var(--color-exito-borde);
+}
+
+.mensaje.error {
+    background: var(--color-error-bg);
+    color: var(--color-error-text);
+    border: 1px solid var(--color-error-borde);
 }
