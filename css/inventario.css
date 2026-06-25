@@ -6,9 +6,7 @@
     width: 100%;
 }
 
-/*=========================
-MENU
-=========================*/
+/* MENU */
 .contenido__menu {
     width: 100%;
 }
@@ -88,8 +86,7 @@ MENU
     justify-content: center;
 }
 
-#btnCrearCodigo,
-#btnCrearTipo {
+#btnCrearCodigo {
     width: 180px;
     height: 40px;
     border: none;
@@ -99,9 +96,51 @@ MENU
     cursor: pointer;
 }
 
+/* Crear Tipo más abajo y de color verde (cuando tiene clase btnVerde) */
+#btnCrearTipo {
+    width: 180px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #2E7D32;
+    color: white;
+    font-weight: bold;
+}
+
+#btnCrearTipo:hover {
+    background: #1B5E20;
+}
+
 #btnSiguienteRegistro {
     margin: auto;
     margin-top: 25px;
+}
+
+/* Botón Siguiente */
+.btnSiguienteMejorado {
+    width: 180px;
+    height: 45px;
+    margin: 20px auto 0;
+    display: block;
+    background: #2E7D32;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btnSiguienteMejorado:hover {
+    background: #1B5E20;
+}
+
+/* Contenedor inferior para botón Crear Tipo */
+.contenido__botonesAbajo {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    margin: 25px auto 10px;
 }
 
 #btnSiguienteCrearInsumo,
@@ -133,9 +172,7 @@ MENU
     margin: auto;
 }
 
-/*=========================
-FORMULARIOS BASE
-=========================*/
+/* FORMULARIOS BASE */
 .formulario {
     width: 80%;
     margin: auto;
@@ -158,9 +195,7 @@ FORMULARIOS BASE
     width: 100%;
 }
 
-/*=========================
-BOTONES BASE
-=========================*/
+/* BOTONES BASE */
 .btnPrincipal {
     width: 180px;
     height: 45px;
@@ -177,7 +212,7 @@ BOTONES BASE
     margin: auto;
     border: none;
     border-radius: 8px;
-    background: #4CAF50;
+    background: #2E7D32;
     color: white;
     cursor: pointer;
 }
@@ -187,37 +222,184 @@ BOTONES BASE
     margin: auto;
 }
 
+#contenido__crearInsumo .confirmacionDatos button {
+    width: 180px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 5px;
+    display: inline-block;
+}
+
+#contenido__crearInsumo .confirmacionDatos #btnGuardarCrearInsumo {
+    background: #2E7D32;
+    color: white;
+}
+
+#contenido__crearInsumo .confirmacionDatos .btnRegresar {
+    background: #c62828;
+    color: white;
+}
+
 /* CREAR TIPO */
 .formulario__creacionTipo button {
     margin: auto;
 }
 
+#contenido__crearTipo .confirmacionDatos button {
+    width: 180px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 5px;
+    display: inline-block;
+}
+
+#contenido__crearTipo .confirmacionDatos #btnGuardarTipo {
+    background: #2E7D32;
+    color: white;
+}
+
+#contenido__crearTipo .confirmacionDatos .btnRegresar {
+    background: #c62828;
+    color: white;
+}
+
+/* ELIMINAR */
+#contenido__eliminarInsumo .confirmacionDatos button {
+    width: 180px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 5px;
+    display: inline-block;
+}
+
+#contenido__eliminarInsumo #btnConfirmarEliminar {
+    background: #c62828;
+    color: white;
+}
+
 /* MOSTRAR */
-.tabla__insumos {
-    width: 80%;
-    margin: auto;
-    border-collapse: collapse;
-    margin-top: 30px;
+.tarjetas__insumos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
 }
 
-.tabla__insumos thead {
-    background: var(--background-secundario);
-    color: var(--background-principal);
+.tarjeta__insumo {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
 }
 
-.tabla__insumos th {
-    padding: 15px;
-    text-align: left;
+.tarjeta__insumo:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.tarjeta__insumo h3 {
+    margin: 0 0 15px 0;
     font-family: var(--font-Titulos);
+    color: var(--background-secundario);
+    text-align: center;
 }
 
-.tabla__insumos tbody td {
+.tarjeta__insumo p {
+    margin: 8px 0;
+    color: #555;
+}
+
+.tarjeta__insumo .info__destacada {
+    font-weight: bold;
+    color: #333;
+}
+
+.tarjeta__insumo button {
+    margin-top: 15px;
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    background: #2E7D32;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.tarjeta__insumo button:hover {
+    background: #1B5E20;
+}
+
+.tarjeta__insumo .btnSeleccionarEliminar {
+    background: #2E7D32;
+}
+
+.formulario__actualizarTarjeta {
+    margin-top: 15px;
     padding: 15px;
-    border-bottom: 1px solid gray;
+    background: #f9f9f9;
+    border-radius: 8px;
+    display: none;
 }
 
-.tabla__insumos tbody tr:hover {
-    background: #f5f5f5;
+.formulario__actualizarTarjeta.active {
+    display: block;
+}
+
+.formulario__actualizarTarjeta label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.formulario__actualizarTarjeta input {
+    width: 100%;
+    height: 35px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.formulario__actualizarTarjeta button {
+    margin: 5px;
+    width: 100%;
+    padding: 0;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formulario__actualizarTarjeta .btnVerde {
+    background: #2E7D32;
+    color: white;
+}
+
+.formulario__actualizarTarjeta .btnVerde:hover {
+    background: #1B5E20;
+}
+
+.formulario__actualizarTarjeta .btnRegresar {
+    background: #c62828;
+    color: white;
+}
+
+.formulario__actualizarTarjeta .btnRegresar:hover {
+    background: #b71c1c;
 }
 
 /* ACTUALIZAR */
@@ -232,6 +414,201 @@ BOTONES BASE
     margin: auto;
     border: none;
     border-radius: 8px;
-    background: #ff4444;
+}
+
+/* FORMULARIO ACTUALIZACIÓN */
+.formularioActualizacion {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 12px;
+    margin-top: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.formularioActualizacion h2 {
+    margin-bottom: 20px;
+    font-family: var(--font-Titulos);
+    color: var(--background-secundario);
+}
+
+.formularioActualizacion p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #555;
+}
+
+.formularioActualizacion label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.formularioActualizacion input {
+    width: 100%;
+    max-width: 300px;
+    height: 45px;
+    padding: 0 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin: 0 auto 20px;
+    display: block;
+}
+
+.formularioActualizacion button {
+    margin: 5px;
+    display: inline-block;
+}
+
+.formularioActualizacion .btnRegresar {
+    background: #c62828;
     color: white;
+    width: 180px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.formularioActualizacion .btnVerde {
+    width: 180px;
+    height: 45px;
+}
+
+/* CONFIRMACIÓN ELIMINACIÓN */
+.confirmacionEliminacion {
+    background: #fff5f5;
+    padding: 30px;
+    border-radius: 12px;
+    margin-top: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 2px solid #ffcdd2;
+}
+
+.confirmacionEliminacion h2 {
+    margin-bottom: 20px;
+    font-family: var(--font-Titulos);
+    color: #c62828;
+}
+
+.tabla__confirmacion {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: white;
+}
+
+.tabla__confirmacion thead {
+    background: #c62828;
+    color: white;
+}
+
+.tabla__confirmacion th {
+    padding: 12px;
+    text-align: left;
+    font-family: var(--font-Titulos);
+}
+
+.tabla__confirmacion tbody td {
+    padding: 12px;
+    border-bottom: 1px solid #ffcdd2;
+}
+
+.tabla__confirmacion tbody tr:hover {
+    background: #ffebee;
+}
+
+.confirmacionEliminacion button {
+    margin: 5px;
+    display: inline-block;
+}
+
+.confirmacionEliminacion .btnRegresar {
+    background: #c62828;
+    color: white;
+    width: 180px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.confirmacionEliminacion .btnVerde {
+    width: 180px;
+    height: 45px;
+}
+
+/* MENSAJES EN PANTALLA */
+.mensaje {
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.mensaje.exito {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.mensaje.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* TABLA DE TOTALES GLOBALES EN MOSTRAR INSUMOS */
+.tabla__totales {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: var(--color-fondo-tarjeta, #f9f9f9);
+    border: 1px solid var(--color-borde-tarjeta, #ccc);
+    border-radius: 12px;
+}
+
+.tabla__totales h3 {
+    margin: 0 0 10px 0;
+    font-family: var(--font-Titulos);
+    color: var(--color-texto-principal, #333);
+    text-align: center;
+}
+
+.tabla__globales {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla__globales th,
+.tabla__globales td {
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-borde-suave, #ddd);
+}
+
+.tabla__globales th {
+    background: var(--color-fondo-tarjeta, #f5f5f5);
+    font-weight: bold;
+    color: var(--color-texto-principal, #333);
+}
+
+.tabla__globales td {
+    color: var(--color-texto-secundario, #555);
+}
+
+body.tema-oscuro .tabla__totales {
+    background: var(--color-fondo-tarjeta, #2d2d2d);
+    border-color: var(--color-borde-tarjeta, #444);
+}
+
+body.tema-oscuro .tabla__globales th {
+    background: var(--color-fondo-tarjeta, #333);
+    color: var(--color-texto-principal, #e0e0e0);
+}
+
+body.tema-oscuro .tabla__globales td {
+    color: var(--color-texto-secundario, #b0b0b0);
 }

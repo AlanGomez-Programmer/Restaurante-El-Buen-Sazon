@@ -87,7 +87,6 @@
 
                     <div class="contenido__botones">
                         <button type="button" id="btnCrearCodigo">Agregar Insumo</button>
-                        <button type="button" id="btnCrearTipo">Crear Tipo</button>
                     </div>
 
                     <form class="formulario__entradaInsumo">
@@ -106,9 +105,13 @@
                         <label for="descripcionInsumo">Descripción</label>
                         <input type="text" id="descripcionInsumo">
 
-                        <button type="button" class="btnVerde" id="btnSiguienteRegistro">Siguiente</button>
+                        <button type="button" class="btnVerde btnSiguienteMejorado" id="btnSiguienteRegistro">Siguiente</button>
 
                     </form>
+
+                    <div class="contenido__botones contenido__botonesAbajo">
+                        <button type="button" id="btnCrearTipo" class="btnVerde">Crear Tipo</button>
+                    </div>
 
                     <!-- CONFIRMACION -->
                     <div class="confirmacionDatos oculto">
@@ -158,8 +161,13 @@
 
                 <div class="confirmacionDatos oculto">
                     <h2>Confirmación de Datos</h2>
+                    <p id="confTipoCrear"></p>
+                    <p id="confNuevoInsumo"></p>
                     <button type="button" id="btnGuardarCrearInsumo">Guardar</button>
+                    <button type="button" id="btnCancelarCrearInsumo" class="btnRegresar">Cancelar</button>
                 </div>
+
+                <p id="mensajeCrearInsumo" class="mensaje"></p>
 
             </div>
 
@@ -181,14 +189,30 @@
                     <label for="nombreTipoInsumo">Nombre del Tipo</label>
                     <input type="text" id="nombreTipoInsumo" placeholder="Ejem. L - Lacteos">
 
+                    <label for="unidadTipoInsumo">Unidad de Medida</label>
+                    <select id="unidadTipoInsumo">
+                        <option value="">Seleccione unidad</option>
+                        <option value="libras">libras</option>
+                        <option value="litros">litros</option>
+                        <option value="unidades">unidades</option>
+                        <option value="kg">kg</option>
+                        <option value="gramos">gramos</option>
+                        <option value="ml">ml</option>
+                    </select>
+
                     <button type="button" class="btnVerde" id="btnSiguienteTipo">Siguiente</button>
 
                 </form>
 
                 <div class="confirmacionDatos oculto">
                     <h2>Confirmación de Datos</h2>
+                    <p id="confNombreTipo"></p>
+                    <p id="confUnidadTipo"></p>
                     <button type="button" id="btnGuardarTipo">Guardar</button>
+                    <button type="button" id="btnCancelarTipo" class="btnRegresar">Cancelar</button>
                 </div>
+
+                <p id="mensajeCrearTipo" class="mensaje"></p>
 
             </div>
 
@@ -203,19 +227,21 @@
                     <h1>Insumos</h1>
                 </div>
 
-                <table class="tabla__insumos">
+                <!-- TABLA DE TOTALES GLOBALES -->
+                <div class="tabla__totales">
+                    <h3>Totales Globales</h3>
+                    <table class="tabla__globales">
+                        <thead>
+                            <tr>
+                                <th>Insumo</th>
+                                <th>Cantidad Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaTotalesInsumos"></tbody>
+                    </table>
+                </div>
 
-                    <thead>
-                        <tr>
-                            <th>Tipo</th>
-                            <th>Nombre</th>
-                            <th>Cantidad</th>
-                        </tr>
-                    </thead>
-
-                    <tbody class="tablaContenido__insumos"></tbody>
-
-                </table>
+                <div id="tarjetasInsumos" class="tarjetas__insumos"></div>
 
             </div>
 
@@ -230,24 +256,8 @@
                     <h1>Actualizar Insumo</h1>
                 </div>
 
-                <form class="formulario formulario__actualizarInsumo">
-
-                    <label for="tipoActualizar">Tipo</label>
-                    <select id="tipoActualizar" class="listaTipoInsumo">
-                        <option value="">Elige una opción</option>
-                    </select>
-
-                    <label for="insumoActualizar">Insumo</label>
-                    <select id="insumoActualizar" class="listaInsumo">
-                        <option value="">Elige el Insumo</option>
-                    </select>
-
-                    <label for="cantidadActualizar">Cantidad</label>
-                    <input type="number" id="cantidadActualizar">
-
-                    <button type="button" class="btnVerde" id="btnGuardarActualizar">Guardar</button>
-
-                </form>
+                <div id="tarjetasActualizar" class="tarjetas__insumos"></div>
+                <p id="mensajeActualizar" class="mensaje"></p>
 
             </div>
 
@@ -262,26 +272,16 @@
                     <h1>Eliminar Insumo</h1>
                 </div>
 
-                <form class="formulario formulario__eliminarInsumo">
-
-                    <label for="tipoEliminar">Tipo</label>
-                    <select id="tipoEliminar" class="listaTipoInsumo">
-                        <option value="">Elige una opción</option>
-                    </select>
-
-                    <label for="insumoEliminar">Insumo</label>
-                    <select id="insumoEliminar" class="listaInsumo">
-                        <option value="">Elige el insumo a eliminar</option>
-                    </select>
-
-                    <button type="button" id="btnEliminar">Eliminar</button>
-
-                </form>
+                <div id="tarjetasEliminar" class="tarjetas__insumos"></div>
+                <p id="mensajeEliminar" class="mensaje"></p>
 
             </div>
 
         </div>
     </section>
+    <script src="./js/utils.js"></script>
+    <script src="./js/Insumos.js"></script>
+    <script src="./js/persistencia.js"></script>
     <script src="./js/inventario.js"></script>
 </body>
 </html>
