@@ -26,7 +26,7 @@ Sistema de gestión integral para restaurante con funcionalidades completas de i
 - Interfaz moderna y accesible
 
 #### 📦 Gestión de Inventario
-- **Registro de Insumos**: Alta de nuevos insumos con tipo, cantidad, unidad, fecha y descripción
+- **Registro de Insumos**: Registro de nuevos insumos con tipo, cantidad, unidad, fecha y descripción
 - **Visualización**: Tarjetas informativas con datos completos de cada insumo
 - **Actualización**: Modificación de información de insumos existentes
 - **Eliminación**: Baja de insumos del inventario
@@ -111,32 +111,6 @@ Restaurante-El-Buen-Sazon/
 ├── index.html             # Página principal
 └── README.md              # Este archivo
 ```
-
-### 🎯 Funcionalidades Técnicas
-
-#### Formularios
-- Validación de campos
-- Alineación responsive de inputs
-- Labels e inputs agrupados para mejor UX
-- Confirmación de datos antes de guardar
-
-#### Tablas
-- Diseño responsive con scroll horizontal
-- Información organizada en columnas
-- Estilos consistentes en desktop
-
-#### Tarjetas
-- Diseño moderno con sombras y transiciones
-- Información clara y organizada
-- Hover effects para interactividad
-- Botones de acción integrados
-
-#### Modales
-- Visualización de información detallada
-- Cierre fácil con botón o click fuera
-- Diseño responsive
-- Animaciones suaves
-
 ### 🚀 Instalación y Uso
 
 1. **Clonar el repositorio**:
@@ -159,38 +133,11 @@ Restaurante-El-Buen-Sazon/
    - Utilizar las funciones de CRUD según necesidad
    - Activar/desactivar modo oscuro según preferencia
 
-### 🎨 Diseño Visual
-
-#### Paleta de Colores
-- **Principal**: Negro y blanco con acentos
-- **Acciones**: Verde (#2E7D32) para acciones positivas, Rojo (#c62828) para acciones negativas
-- **Fondo**: Variables CSS para adaptación a temas
-
-#### Tipografía
-- Títulos con fuente personalizada
-- Peso de fuente para jerarquía visual
-- Letter-spacing para legibilidad
-
-#### Componentes
-- **Botones**: Diseño consistente con sombras y hover effects
-- **Inputs**: Bordes redondeados con validación visual
-- **Tarjetas**: Sombras sutiles con hover elevation
-- **Tablas**: Diseño limpio con filas alternadas
-
 ### 📱 Responsive Breakpoints
 
 - **Mobile**: < 1024px
 - **Desktop**: ≥ 1024px
 - **Desktop Large**: ≥ 1440px
-
-### 🔧 Características Adicionales
-
-- **Persistencia Local**: Datos guardados en localStorage
-- **Validación de Formularios**: Feedback visual de errores
-- **Animaciones Suaves**: Transiciones CSS para mejor UX
-- **Accesibilidad**: Estructura semántica HTML5
-- **Performance**: Optimizado para carga rápida
-- **Cross-browser**: Compatibilidad con navegadores modernos
 
 ### 👥 Desarrollo
 
