@@ -37,6 +37,10 @@
                     <span class="material-symbols-outlined">receipt_long</span>
                     <span>Pedidos</span>
                 </a>
+                <a href="clientes.html" class="sidebar__link">
+                    <span class="material-symbols-outlined">people</span>
+                    <span>Clientes</span>
+                </a>
             </nav>
             <div class="sidebar__userbar">
                 <div class="informacion__usuario">
@@ -109,13 +113,15 @@
                         </div>
 
                         <div class="input-group">
-                            <label>Nombre del Cliente</label>
-                            <input type="text" id="nombreCliente">
+                            <label for="selectClientePedido">Cliente</label>
+                            <select id="selectClientePedido">
+                                <option value="">Seleccione un cliente</option>
+                            </select>
                         </div>
 
                         <div class="input-group">
-                            <label>Número Teléfonico del cliente</label>
-                            <input type="number" id="numeroCliente">
+                            <label for="numeroCliente">Teléfono del cliente</label>
+                            <input type="text" id="numeroCliente" readonly placeholder="Se autocompleta al elegir cliente">
                         </div>
 
                         <table class="tabla__platillos">

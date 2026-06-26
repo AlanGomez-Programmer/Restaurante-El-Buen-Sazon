@@ -1,0 +1,152 @@
+@media (min-width: 1024px) {
+    .layout__content .titulo {
+        text-align: left;
+        margin-top: 0;
+        margin-bottom: 32px;
+    }
+
+    #contenido__menu .contenido__tarjetas,
+    .tarjetas__clientes,
+    #contenido__actualizarCliente .tarjetas__clientes,
+    #contenido__eliminarCliente .tarjetas__clientes {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(240px, 1fr));
+        gap: 28px;
+        margin-top: 28px;
+        justify-items: stretch;
+    }
+
+    .tarjeta__menu,
+    .tarjeta__cliente,
+    .formulario__actualizarTarjeta {
+        width: 100%;
+        min-height: 180px;
+        padding: 26px;
+        border-radius: 18px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        background: var(--card-bg, var(--background-principal));
+        box-shadow: 0 12px 0 rgba(0, 0, 0, 0.12);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        animation: ingreso 0.5s ease-in-out;
+    }
+
+    @keyframes ingreso {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .tarjeta__cliente:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 18px 24px rgba(0, 0, 0, 0.16);
+    }
+
+    .contenido__entradas,
+    .formulario__entradaCliente {
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    #contenido__registroCliente .contenido__entradas {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .formulario__entradaCliente {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        align-items: start;
+    }
+
+    .formulario__entradaCliente .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .formulario__entradaCliente label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .formulario__entradaCliente input,
+    .formulario__entradaCliente select {
+        width: 100%;
+        height: 45px;
+        padding-left: 10px;
+        border-radius: 8px;
+        border: 1px solid var(--input-border, #ccc);
+        background: var(--input-bg, white);
+        color: var(--text-color);
+    }
+
+    .formulario__entradaCliente button {
+        grid-column: 1 / -1;
+        justify-self: center;
+        margin-top: 10px;
+        width: auto;
+        min-width: 184px;
+        height: 45px;
+        padding: 0 24px;
+    }
+
+    .confirmacionDatos {
+        margin-top: 36px;
+        padding: 28px;
+        border-radius: 18px;
+        width: 100%;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (min-width: 1440px) {
+    #contenido__menu .contenido__tarjetas,
+    .tarjetas__clientes {
+        grid-template-columns: repeat(2, minmax(240px, 1fr));
+    }
+
+    .formulario__entradaCliente {
+        grid-template-columns: repeat(3, minmax(240px, 1fr));
+    }
+}
+
+/* Botones del menú de Clientes (igual diseño que menú principal) */
+@media (min-width: 1024px) {
+    #menu__clientes .tarjeta__menu {
+        border: 1px solid #222;
+        background: #000000;
+        color: #ffffff;
+        box-shadow: 0 12px 0 rgba(0, 0, 0, 0.12);
+        transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+    }
+    #menu__clientes .tarjeta__menu:hover {
+        background: #111111;
+        border-color: #333333;
+        transform: translateY(-6px);
+        box-shadow: 0 18px 24px rgba(0, 0, 0, 0.16);
+    }
+    #menu__clientes .tarjeta__menu h1,
+    #menu__clientes .tarjeta__menu .material-symbols-outlined { color: inherit; }
+
+    body.tema-oscuro #menu__clientes .tarjeta__menu {
+        background: #ffffff;
+        color: #000000;
+        border-color: #dddddd;
+        box-shadow: 0 12px 0 rgba(255, 255, 255, 0.12);
+    }
+    body.tema-oscuro #menu__clientes .tarjeta__menu:hover {
+        background: #f5f5f5;
+        border-color: #cccccc;
+    }
+}

@@ -53,6 +53,36 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = "./index.html";
     });
 
+    // ================== CLIENTES EN EL PEDIDO ==================
+    const selectClientePedido = document.getElementById('selectClientePedido');
+    const inputNumeroCliente = document.getElementById('numeroCliente');
+
+    function cargarClientesEnSelect() {
+        if (!selectClientePedido) return;
+        const clientes = obtenerClientes();
+        selectClientePedido.innerHTML = '<option value="">Seleccione un cliente</option>';
+        clientes.forEach(cliente => {
+            const option = document.createElement('option');
+            option.value = cliente.id;
+            option.textContent = `${cliente.nombre} - ${cliente.identificacion}`;
+            selectClientePedido.appendChild(option);
+        });
+    }
+
+    if (selectClientePedido) {
+        selectClientePedido.addEventListener('change', () => {
+            const id = parseInt(selectClientePedido.value);
+            const cliente = obtenerClientePorId(id);
+            if (cliente && inputNumeroCliente) {
+                inputNumeroCliente.value = cliente.telefono || '';
+            } else if (inputNumeroCliente) {
+                inputNumeroCliente.value = '';
+            }
+        });
+    }
+
+    cargarClientesEnSelect();
+
     // ================== LÓGICA DE PEDIDOS ==================
     
     // Cargar platillos en la tabla de registro
@@ -131,8 +161,11 @@ document.addEventListener('DOMContentLoaded', () => {
         btnSiguienteRegistro.addEventListener('click', () => {
             const fechaPedido = document.getElementById('fechaPedido').value;
             const horaPedido = document.getElementById('horaPedido').value;
-            const nombreCliente = document.getElementById('nombreCliente').value;
-            const numeroCliente = document.getElementById('numeroCliente').value;
+            const clienteId = selectClientePedido ? parseInt(selectClientePedido.value) : NaN;
+            const clienteSeleccionado = obtenerClientePorId(clienteId);
+            const nombreCliente = clienteSeleccionado ? clienteSeleccionado.nombre : '';
+            const numeroCliente = clienteSeleccionado ? clienteSeleccionado.telefono : '';
+            const identificacionCliente = clienteSeleccionado ? clienteSeleccionado.identificacion : '';
             
             // Obtener platillos seleccionados con cantidades
             const checkboxes = document.querySelectorAll('.checkbox-platillo:checked');
@@ -185,8 +218,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             
-            if (!fechaPedido || !horaPedido || !nombreCliente || !numeroCliente || platillosSeleccionados.length === 0) {
-                alert('Por favor complete todos los campos y seleccione al menos un platillo');
+            if (!fechaPedido || !horaPedido || !clienteSeleccionado || platillosSeleccionados.length === 0) {
+                alert('Por favor complete la fecha, hora, seleccione un cliente y al menos un platillo');
                 return;
             }
             
@@ -201,6 +234,8 @@ document.addEventListener('DOMContentLoaded', () => {
             datosPedidoTemporal = {
                 fecha: fechaPedido,
                 hora: horaPedido,
+                clienteId: clienteId,
+                identificacionCliente: identificacionCliente,
                 nombreCliente: nombreCliente,
                 numeroCliente: numeroCliente,
                 platillos: platillosSeleccionados,
@@ -211,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             
             // Mostrar confirmación
-            document.querySelector('.codigoClienteConfirmado').textContent = `Código: ${Date.now()}`;
+            document.querySelector('.codigoClienteConfirmado').textContent = `Identificación: ${identificacionCliente}`;
             document.querySelector('.nombreClienteConfirmado').textContent = `Cliente: ${nombreCliente}`;
             document.querySelector('.numeroClienteConfirmado').textContent = `Teléfono: ${numeroCliente}`;
             document.querySelector('.fechaClienteConfirmado').textContent = `Fecha: ${fechaPedido}`;
@@ -262,8 +297,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Limpiar campos
             document.getElementById('fechaPedido').value = '';
             document.getElementById('horaPedido').value = '';
-            document.getElementById('nombreCliente').value = '';
-            document.getElementById('numeroCliente').value = '';
+            if (selectClientePedido) selectClientePedido.value = '';
+            if (inputNumeroCliente) inputNumeroCliente.value = '';
             
             // Limpiar checkboxes
             document.querySelectorAll('.checkbox-platillo').forEach(checkbox => {
