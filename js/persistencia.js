@@ -540,3 +540,95 @@ function restarIngredientesDelInventario(pedido) {
     
     return false;
 }
+
+// ================== CLIENTES ==================
+const STORAGE_KEY_CLIENTES = 'el_buen_sazon_clientes';
+
+// Cargar datos de clientes del localStorage
+function cargarDatosClientes() {
+    const datosGuardados = localStorage.getItem(STORAGE_KEY_CLIENTES);
+    if (datosGuardados) {
+        return JSON.parse(datosGuardados);
+    }
+    return {
+        clientesRegistrados: []
+    };
+}
+
+// Guardar datos de clientes en localStorage
+function guardarDatosClientes(datos) {
+    localStorage.setItem(STORAGE_KEY_CLIENTES, JSON.stringify(datos));
+}
+
+// Obtener todos los clientes registrados
+function obtenerClientes() {
+    const datos = cargarDatosClientes();
+    return datos.clientesRegistrados;
+}
+
+// Obtener un cliente por ID
+function obtenerClientePorId(id) {
+    const clientes = obtenerClientes();
+    return clientes.find(c => c.id === id) || null;
+}
+
+// Verificar si ya existe un cliente con esa identificación (opcionalmente excluyendo un ID)
+function existeClienteIdentificacion(identificacion, exceptId = null) {
+    const idNorm = (identificacion || '').trim().toLowerCase();
+    return obtenerClientes().some(c =>
+        (c.identificacion || '').trim().toLowerCase() === idNorm &&
+        (exceptId === null || c.id !== exceptId)
+    );
+}
+
+// Registrar un nuevo cliente.
+function registrarCliente(cliente) {
+    if (existeClienteIdentificacion(cliente.identificacion)) {
+        return { ok: false, error: 'Ya existe un cliente con esa identificación' };
+    }
+    const datos = cargarDatosClientes();
+    datos.clientesRegistrados.push({
+        id: Date.now(),
+        identificacion: (cliente.identificacion || '').trim(),
+        nombre: normalizarNombre(cliente.nombre || ''),
+        telefono: (cliente.telefono || '').trim(),
+        email: (cliente.email || '').trim(),
+        genero: cliente.genero || '',
+        fechaRegistro: new Date().toISOString()
+    });
+    guardarDatosClientes(datos);
+    return { ok: true };
+}
+
+// Actualizar un cliente por ID. Retorna { ok, error }.
+function actualizarCliente(id, campos) {
+    const datos = cargarDatosClientes();
+    const index = datos.clientesRegistrados.findIndex(c => c.id === id);
+    if (index === -1) {
+        return { ok: false, error: 'El cliente no existe' };
+    }
+    if (campos.identificacion && existeClienteIdentificacion(campos.identificacion, id)) {
+        return { ok: false, error: 'Ya existe otro cliente con esa identificación' };
+    }
+    const actualizado = { ...datos.clientesRegistrados[index] };
+    if (campos.identificacion !== undefined) actualizado.identificacion = (campos.identificacion || '').trim();
+    if (campos.nombre !== undefined) actualizado.nombre = normalizarNombre(campos.nombre || '');
+    if (campos.telefono !== undefined) actualizado.telefono = (campos.telefono || '').trim();
+    if (campos.email !== undefined) actualizado.email = (campos.email || '').trim();
+    if (campos.genero !== undefined) actualizado.genero = campos.genero || '';
+    datos.clientesRegistrados[index] = actualizado;
+    guardarDatosClientes(datos);
+    return { ok: true };
+}
+
+// Eliminar un cliente por ID
+function eliminarCliente(id) {
+    const datos = cargarDatosClientes();
+    const index = datos.clientesRegistrados.findIndex(c => c.id === id);
+    if (index !== -1) {
+        datos.clientesRegistrados.splice(index, 1);
+        guardarDatosClientes(datos);
+        return true;
+    }
+    return false;
+}

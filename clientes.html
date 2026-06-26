@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="stylesheet" href="./css/sytle.css">
+    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/clientes.css">
+    <link rel="stylesheet" href="./css/desktop/layout-desktop.css">
+    <link rel="stylesheet" href="./css/desktop/clientes-desktop.css">
+    <title>El Buen Sazón - Clientes</title>
+</head>
+<body>
+    <div class="layout">
+        <aside class="layout__sidebar">
+            <div class="sidebar__brand">
+                <img src="./icon/utensilios.png" alt="El Buen Sazón" class="sidebar__logo">
+                <h1>El Buen Sazón</h1>
+                <p>Gestión Restaurante</p>
+            </div>
+            <nav class="sidebar__nav">
+                <a href="menu.html" class="sidebar__link">
+                    <span class="material-symbols-outlined">apps</span>
+                    <span>Menú</span>
+                </a>
+                <a href="inventario.html" class="sidebar__link">
+                    <span class="material-symbols-outlined">inventory_2</span>
+                    <span>Inventario</span>
+                </a>
+                <a href="platillos.html" class="sidebar__link">
+                    <span class="material-symbols-outlined">restaurant_menu</span>
+                    <span>Platillos</span>
+                </a>
+                <a href="pedidos.html" class="sidebar__link">
+                    <span class="material-symbols-outlined">receipt_long</span>
+                    <span>Pedidos</span>
+                </a>
+                <a href="clientes.html" class="sidebar__link sidebar__link--active">
+                    <span class="material-symbols-outlined">people</span>
+                    <span>Clientes</span>
+                </a>
+            </nav>
+            <div class="sidebar__userbar">
+                <div class="informacion__usuario">
+                    <span class="material-symbols-outlined">person</span>
+                    <h2 id="nombreUsuario"></h2>
+                </div>
+                <button type="button" id="btnSalir" class="sidebar__logout">
+                    <span class="material-symbols-outlined">logout</span>
+                    <span>Cerrar sesión</span>
+                </button>
+            </div>
+        </aside>
+        <section class="contenedor layout__content">
+            <div class="divider"></div>
+            <div class="contenido">            
+            <div id="contenido__menu" class="contenido__menu pantalla">
+                <button type="button" id="btnRegresa-menuPrincipal">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+
+                <div class="titulo">
+                    <h2>Clientes</h2>
+                </div>
+                <div class="contenido__tarjetas" id="menu__clientes">
+                    <button type="button" class="tarjeta__menu" id="btnRegistrarCliente">
+                        <h1>Registrar Cliente</h1>
+                        <span class="material-symbols-outlined">arrow_forward_ios</span>
+                    </button>
+
+                    <button type="button" class="tarjeta__menu" id="btnMostrarClientes">
+                        <h1>Mostrar Clientes</h1>
+                        <span class="material-symbols-outlined">arrow_forward_ios</span>
+                    </button>
+
+                    <button type="button" class="tarjeta__menu" id="btnActualizarCliente">
+                        <h1>Actualizar Cliente</h1>
+                        <span class="material-symbols-outlined">arrow_forward_ios</span>
+                    </button>
+
+                    <button type="button" class="tarjeta__menu" id="btnEliminarCliente">
+                        <h1>Eliminar Cliente</h1>
+                        <span class="material-symbols-outlined">arrow_forward_ios</span>
+                    </button>
+
+                </div>
+            </div>
+
+            <!-- ================= REGISTRO ================= -->
+            <div id="contenido__registroCliente" class="pantalla oculto">
+                <button type="button" class="btnRegresar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <div class="titulo">
+                    <h1>Registro de Cliente</h1>
+                </div>
+
+                <div class="contenido__entradas">
+
+                    <form class="formulario__entradaCliente">
+
+                        <div class="input-group">
+                            <label for="identificacionCliente">Identificación</label>
+                            <input type="text" id="identificacionCliente" placeholder="Ej. 1098765432">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="nombreClienteReg">Nombre</label>
+                            <input type="text" id="nombreClienteReg" placeholder="Ej. Juan Pérez">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="telefonoCliente">Teléfono</label>
+                            <input type="text" id="telefonoCliente" placeholder="Ej. 3001234567">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="emailCliente">Email</label>
+                            <input type="email" id="emailCliente" placeholder="Ej. juan@correo.com">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="generoCliente">Género (opcional)</label>
+                            <select id="generoCliente">
+                                <option value="">Seleccione</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+
+                        <button type="button" class="btnVerde btnSiguienteMejorado" id="btnSiguienteRegistroCliente">Siguiente</button>
+
+                    </form>
+
+                    <!-- CONFIRMACION -->
+                    <div class="confirmacionDatos oculto">
+
+                        <h2>Confirmación de Datos</h2>
+
+                        <p id="confIdentificacion"></p>
+                        <p id="confNombre"></p>
+                        <p id="confTelefono"></p>
+                        <p id="confEmail"></p>
+                        <p id="confGenero"></p>
+
+                        <button type="button" class="btnVerde" id="btnGuardarCliente">Guardar Cliente</button>
+
+                    </div>
+
+                    <p id="mensajeRegistroCliente" class="mensaje"></p>
+
+                </div>
+            </div>
+
+            <!-- ================= MOSTRAR ================= -->
+            <div id="contenido__mostrarClientes" class="pantalla oculto">
+
+                <button type="button" class="btnRegresar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+
+                <div class="titulo">
+                    <h1>Clientes</h1>
+                </div>
+
+                <div id="tarjetasClientes" class="tarjetas__clientes"></div>
+
+            </div>
+
+            <!-- ================= ACTUALIZAR ================= -->
+            <div id="contenido__actualizarCliente" class="pantalla oculto">
+
+                <button type="button" class="btnRegresar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+
+                <div class="titulo">
+                    <h1>Actualizar Cliente</h1>
+                </div>
+
+                <div id="tarjetasActualizarCliente" class="tarjetas__clientes"></div>
+                <p id="mensajeActualizarCliente" class="mensaje"></p>
+
+            </div>
+
+            <!-- ================= ELIMINAR ================= -->
+            <div id="contenido__eliminarCliente" class="pantalla oculto">
+
+                <button type="button" class="btnRegresar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+
+                <div class="titulo">
+                    <h1>Eliminar Cliente</h1>
+                </div>
+
+                <div id="tarjetasEliminarCliente" class="tarjetas__clientes"></div>
+                <p id="mensajeEliminarCliente" class="mensaje"></p>
+
+            </div>
+
+            </div>
+        </section>
+    </div>
+    <script src="./js/utils.js"></script>
+    <script src="./js/persistencia.js"></script>
+    <script src="./js/clientes.js"></script>
+</body>
+</html>
