@@ -18,7 +18,19 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-}
+    animation: ingreso 1s ease-in-out;
+    }
+
+    @keyframes ingreso {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 
 .tarjeta__menu h1 {
     color: inherit;
