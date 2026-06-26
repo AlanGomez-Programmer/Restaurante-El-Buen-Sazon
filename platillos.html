@@ -19,16 +19,6 @@
                 <h1>El Buen Sazón</h1>
                 <p>Gestión Restaurante</p>
             </div>
-            <div class="sidebar__userbar">
-                <div class="informacion__usuario">
-                    <span class="material-symbols-outlined">person</span>
-                    <h2 id="nombreUsuario"></h2>
-                </div>
-                <button type="button" id="btnSalir" class="sidebar__logout">
-                    <span class="material-symbols-outlined">logout</span>
-                    <span>Cerrar sesión</span>
-                </button>
-            </div>
             <nav class="sidebar__nav">
                 <a href="menu.html" class="sidebar__link">
                     <span class="material-symbols-outlined">apps</span>
@@ -47,6 +37,16 @@
                     <span>Pedidos</span>
                 </a>
             </nav>
+            <div class="sidebar__userbar">
+                <div class="informacion__usuario">
+                    <span class="material-symbols-outlined">person</span>
+                    <h2 id="nombreUsuario"></h2>
+                </div>
+                <button type="button" id="btnSalir" class="sidebar__logout">
+                    <span class="material-symbols-outlined">logout</span>
+                    <span>Cerrar sesión</span>
+                </button>
+            </div>
         </aside>
         <section class="contenedor layout__content">
             <div class="divider"></div>
@@ -149,7 +149,7 @@
 
                 <form class="formulario__creacionTipoPlatillo">
                     <p>Ingrese el nombre del tipo de Platillo</p>
-                    <input type="text" id="nombreTipoPlatillo" placeholder="PF - Platillo Fuerte">
+                    <input type="text" id="nombreTipoPlatillo" placeholder="Platillo Fuerte">
                     <button type="button" id="btnSiguienteTipo" class="btnVerde">Siguiente</button>
                 </form>
 

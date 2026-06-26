@@ -20,16 +20,6 @@
                 <h1>El Buen Sazón</h1>
                 <p>Gestión Restaurante</p>
             </div>
-            <div class="sidebar__userbar">
-                <div class="informacion__usuario">
-                    <span class="material-symbols-outlined">person</span>
-                    <h2 id="nombreUsuario"></h2>
-                </div>
-                <button type="button" id="btnSalir" class="sidebar__logout">
-                    <span class="material-symbols-outlined">logout</span>
-                    <span>Cerrar sesión</span>
-                </button>
-            </div>
             <nav class="sidebar__nav">
                 <a href="menu.html" class="sidebar__link">
                     <span class="material-symbols-outlined">apps</span>
@@ -48,6 +38,16 @@
                     <span>Pedidos</span>
                 </a>
             </nav>
+            <div class="sidebar__userbar">
+                <div class="informacion__usuario">
+                    <span class="material-symbols-outlined">person</span>
+                    <h2 id="nombreUsuario"></h2>
+                </div>
+                <button type="button" id="btnSalir" class="sidebar__logout">
+                    <span class="material-symbols-outlined">logout</span>
+                    <span>Cerrar sesión</span>
+                </button>
+            </div>
         </aside>
         <section class="contenedor layout__content">
             <div class="divider"></div>
@@ -228,7 +228,7 @@
                     <p>Ingrese el nombre del tipo de insumo</p>
 
                     <label for="nombreTipoInsumo">Nombre del Tipo</label>
-                    <input type="text" id="nombreTipoInsumo" placeholder="Ejem. L - Lacteos">
+                    <input type="text" id="nombreTipoInsumo" placeholder="Ejem. Lacteos">
 
                     <label for="unidadTipoInsumo">Unidad de Medida</label>
                     <select id="unidadTipoInsumo">

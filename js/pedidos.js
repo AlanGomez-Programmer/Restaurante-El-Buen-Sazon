@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${platillo.tipoNombre}</td>
                 <td>${platillo.nombre}</td>
                 <td>$${platillo.valorVenta.toFixed(2)}</td>
-                <td><input type="number" class="cantidad-platillo" data-id="${platillo.id}" data-precio="${platillo.valorVenta}" min="1" value="1" style="width: 70px;"></td>
+                <td><input type="number" class="cantidad-platillo" data-id="${platillo.id}" data-precio="${platillo.valorVenta}" min="1" step="1" value="1" style="width: 70px;"></td>
                 <td class="subtotal-platillo" data-id="${platillo.id}">$${platillo.valorVenta.toFixed(2)}</td>
                 <td><input type="checkbox" class="checkbox-platillo" data-id="${platillo.id}" data-nombre="${platillo.nombre}" data-precio="${platillo.valorVenta}" data-tipo="${platillo.tipoNombre || ''}"></td>
             `;
@@ -100,7 +100,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = checkbox.getAttribute('data-id');
             const precio = parseFloat(checkbox.getAttribute('data-precio'));
             const cantidadInput = document.querySelector(`.cantidad-platillo[data-id="${id}"]`);
-            const cantidad = cantidadInput ? parseInt(cantidadInput.value) || 1 : 1;
+            let cantidad = cantidadInput ? parseInt(cantidadInput.value) || 1 : 1;
+            if (cantidadInput && cantidad < 1) {
+                alert('La cantidad de platillos no puede ser menor a 1');
+                cantidad = 1;
+                cantidadInput.value = '1';
+            }
             const subtotal = precio * cantidad;
             
             const subtotalCell = document.querySelector(`.subtotal-platillo[data-id="${id}"]`);
@@ -140,7 +145,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const tipo = checkbox.getAttribute('data-tipo') || '';
                 const precio = parseFloat(checkbox.getAttribute('data-precio'));
                 const cantidadInput = document.querySelector(`.cantidad-platillo[data-id="${id}"]`);
-                const cantidad = cantidadInput ? parseInt(cantidadInput.value) || 1 : 1;
+                let cantidad = cantidadInput ? parseInt(cantidadInput.value) || 1 : 1;
+                if (cantidad < 1) {
+                    alert('La cantidad de platillos no puede ser menor a 1');
+                    return;
+                }
                 const subtotal = precio * cantidad;
                 
                 platillosSeleccionados.push({
@@ -246,6 +255,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             registrarPedido(datosPedidoTemporal);
+            
+            // Restar ingredientes del inventario
+            restarIngredientesDelInventario(datosPedidoTemporal);
             
             // Limpiar campos
             document.getElementById('fechaPedido').value = '';

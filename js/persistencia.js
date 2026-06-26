@@ -4,6 +4,12 @@
 // ================== INVENTARIO ==================
 const STORAGE_KEY_INVENTARIO = 'el_buen_sazon_inventario';
 
+// Normaliza nombres: trim, colapsa espacios y capitaliza cada palabra
+function normalizarNombre(nombre) {
+    const base = (nombre || '').trim().replace(/\s+/g, ' ');
+    return base.split(' ').map(p => p ? p.charAt(0).toUpperCase() + p.slice(1).toLowerCase() : '').join(' ');
+}
+
 // Cargar datos del inventario del localStorage
 function cargarDatosInventario() {
     const datosGuardados = localStorage.getItem(STORAGE_KEY_INVENTARIO);
@@ -12,8 +18,22 @@ function cargarDatosInventario() {
     }
     // Si no hay datos, sembrar desde el catálogo base de Insumos.js
     const datosInsumos = obtenerDatosInsumos();
+    const tiposNormalizados = {};
+    Object.entries(datosInsumos).forEach(([codigoTipo, tipo]) => {
+        const prefijo = (codigoTipo || '').toString().replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+        const insumos = Array.isArray(tipo.insumos) ? tipo.insumos : [];
+        tiposNormalizados[codigoTipo] = {
+            tipo: codigoTipo,
+            nombre: tipo.nombre,
+            unidadMedida: tipo.unidadMedida || 'unidad',
+            insumos: insumos.map((insumo, idx) => ({
+                codigo: `${prefijo}-${String(idx + 1).padStart(2, '0')}`,
+                nombre: insumo.nombre || `Insumo ${idx + 1}`
+            }))
+        };
+    });
     return {
-        tiposInsumos: JSON.parse(JSON.stringify(datosInsumos)),
+        tiposInsumos: tiposNormalizados,
         insumosRegistrados: []
     };
 }
@@ -60,58 +80,70 @@ function obtenerNombreInsumo(codigoTipo, codigoInsumo) {
     return insumo ? insumo.nombre : '';
 }
 
-// Agregar nuevo tipo de insumo
+// Agregar nuevo tipo de insumo (evita duplicados por código o nombre). Retorna true si creó, false si ya existe.
 function agregarTipoInsumo(codigo, nombre, unidadMedida) {
     const datos = cargarDatosInventario();
-    datos.tiposInsumos[codigo] = {
-        codigo: codigo,
-        nombre: nombre,
+    const tipos = datos.tiposInsumos || {};
+    // Validar duplicado por código
+    if (tipos[codigo]) {
+        return false;
+    }
+    // Validar duplicado por nombre (insensible a mayúsculas/minúsculas)
+    const nombreNorm = (nombre || '').trim().toLowerCase();
+    const duplicadoNombre = Object.values(tipos).some(t => (t.nombre || '').trim().toLowerCase() === nombreNorm);
+    if (duplicadoNombre) {
+        return false;
+    }
+    const nombreFmt = normalizarNombre(nombre);
+    tipos[codigo] = {
+        tipo: codigo,
+        nombre: nombreFmt,
         unidadMedida: unidadMedida,
         insumos: []
     };
+    datos.tiposInsumos = tipos;
     guardarDatosInventario(datos);
+    return true;
 }
 
-// Agregar nuevo insumo a un tipo existente
-function agregarInsumo(codigoTipo, codigoInsumo, nombreInsumo) {
+// Agregar nuevo insumo a un tipo existente (código generado automáticamente, no incremental)
+function agregarInsumo(codigoTipo, nombreInsumo) {
     const datos = cargarDatosInventario();
     if (datos.tiposInsumos[codigoTipo]) {
-        datos.tiposInsumos[codigoTipo].insumos.push({
-            codigo: codigoInsumo,
-            nombre: nombreInsumo
+        const lista = datos.tiposInsumos[codigoTipo].insumos || [];
+        const nombreNorm = (nombreInsumo || '').trim().toLowerCase();
+        const duplicado = lista.some(i => (i.nombre || '').trim().toLowerCase() === nombreNorm);
+        if (duplicado) {
+            return false;
+        }
+
+        const prefijo = (codigoTipo || '').toString().replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+        let codigoGenerado = `${prefijo}-${Date.now().toString().slice(-6)}`;
+        const existeCodigo = (c) => lista.some(i => i.codigo === c);
+        if (existeCodigo(codigoGenerado)) {
+            codigoGenerado = `${prefijo}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+        }
+        const nombreFmt = normalizarNombre(nombreInsumo);
+        lista.push({
+            codigo: codigoGenerado,
+            nombre: nombreFmt
         });
+        datos.tiposInsumos[codigoTipo].insumos = lista;
         guardarDatosInventario(datos);
+        return true;
     }
+    return false;
 }
 
 // Registrar insumo completo (cantidad, unidad, fecha, descripción)
-// Si ya existe un registro con el mismo tipoCodigo e insumoCodigo, suma la cantidad al existente
+// Siempre crea un nuevo registro; los totales globales se agrupan aparte
 function registrarInsumo(insumo) {
     const datos = cargarDatosInventario();
-    
-    // Buscar si ya existe un registro con el mismo tipo e insumo
-    const existente = datos.insumosRegistrados.find(i => 
-        i.tipoCodigo === insumo.tipoCodigo && i.insumoCodigo === insumo.insumoCodigo
-    );
-    
-    if (existente) {
-        // Sumar la cantidad al registro existente
-        const cantidadActual = parseFloat(existente.cantidad) || 0;
-        const cantidadNueva = parseFloat(insumo.cantidad) || 0;
-        existente.cantidad = cantidadActual + cantidadNueva;
-        // Actualizar otros campos opcionales si se proporcionan
-        if (insumo.fechaIngreso) existente.fechaIngreso = insumo.fechaIngreso;
-        if (insumo.descripcion !== undefined) existente.descripcion = insumo.descripcion;
-        existente.fechaRegistro = new Date().toISOString();
-    } else {
-        // Registrar como nuevo
-        datos.insumosRegistrados.push({
-            id: Date.now(),
-            ...insumo,
-            fechaRegistro: new Date().toISOString()
-        });
-    }
-    
+    datos.insumosRegistrados.push({
+        id: Date.now(),
+        ...insumo,
+        fechaRegistro: new Date().toISOString()
+    });
     guardarDatosInventario(datos);
 }
 
@@ -173,6 +205,7 @@ function eliminarInsumoRegistrado(id) {
 
 // ================== PLATILLOS ==================
 const STORAGE_KEY_PLATILLOS = 'el_buen_sazon_platillos';
+const STORAGE_KEY_CONTADOR_PLATILLOS = 'el_buen_sazon_contador_platillos';
 
 // Cargar datos de platillos del localStorage
 // Siempre fusiona los tipos predefinidos para que los 10 tipos base estén disponibles
@@ -186,17 +219,48 @@ function cargarDatosPlatillos() {
     if (datosGuardados) {
         datos = JSON.parse(datosGuardados);
     }
-    
-    // Asegurar que existan los tipos base (fusionar)
-    if (!datos.tiposPlatillos) {
-        datos.tiposPlatillos = {};
+    // Migración: claves de tipos por NOMBRE (ya no por código)
+    if (!datos.tiposPlatillos) datos.tiposPlatillos = {};
+    const mappingCodigoANombre = Object.fromEntries(
+        Object.entries(datosTiposPlatillosBase).map(([cod, obj]) => [cod, obj.nombre])
+    );
+    let cambio = false;
+    const nuevosTipos = {};
+    for (const [clave, tipo] of Object.entries(datos.tiposPlatillos)) {
+        const nombreTipo = (tipo && tipo.nombre) ? tipo.nombre : mappingCodigoANombre[clave] || clave;
+        const nuevaClave = (typeof normalizarNombre === 'function') ? normalizarNombre(nombreTipo) : nombreTipo;
+        if (!nuevosTipos[nuevaClave]) {
+            nuevosTipos[nuevaClave] = {
+                nombre: nombreTipo,
+                platillos: Array.isArray(tipo?.platillos) ? tipo.platillos : []
+            };
+        }
+        if (nuevaClave !== clave) cambio = true;
     }
-    
+    if (cambio) {
+        datos.tiposPlatillos = nuevosTipos;
+        // Migrar platillos existentes: tipoCodigo de código -> nombre
+        if (Array.isArray(datos.platillosRegistrados)) {
+            datos.platillosRegistrados = datos.platillosRegistrados.map(p => {
+                const nuevoTipo = mappingCodigoANombre[p.tipoCodigo] || p.tipoCodigo;
+                return { ...p, tipoCodigo: nuevoTipo };
+            });
+        }
+    }
+
+    // Asegurar que existan los tipos base por NOMBRE
     Object.keys(datosTiposPlatillosBase).forEach(codigo => {
-        if (!datos.tiposPlatillos[codigo]) {
-            datos.tiposPlatillos[codigo] = JSON.parse(JSON.stringify(datosTiposPlatillosBase[codigo]));
+        const nombreBase = datosTiposPlatillosBase[codigo].nombre;
+        const clave = (typeof normalizarNombre === 'function') ? normalizarNombre(nombreBase) : nombreBase;
+        if (!datos.tiposPlatillos[clave]) {
+            datos.tiposPlatillos[clave] = { nombre: nombreBase, platillos: [] };
+            cambio = true;
         }
     });
+
+    if (cambio) {
+        localStorage.setItem(STORAGE_KEY_PLATILLOS, JSON.stringify(datos));
+    }
     
     return datos;
 }
@@ -204,12 +268,13 @@ function cargarDatosPlatillos() {
 // Guardar datos de platillos en localStorage
 // Antes de guardar, fusiona los tipos base para que nunca se pierdan
 function guardarDatosPlatillos(datos) {
-    if (!datos.tiposPlatillos) {
-        datos.tiposPlatillos = {};
-    }
+    if (!datos.tiposPlatillos) datos.tiposPlatillos = {};
+    // Asegurar base por NOMBRE
     Object.keys(datosTiposPlatillosBase).forEach(codigo => {
-        if (!datos.tiposPlatillos[codigo]) {
-            datos.tiposPlatillos[codigo] = JSON.parse(JSON.stringify(datosTiposPlatillosBase[codigo]));
+        const nombreBase = datosTiposPlatillosBase[codigo].nombre;
+        const clave = (typeof normalizarNombre === 'function') ? normalizarNombre(nombreBase) : nombreBase;
+        if (!datos.tiposPlatillos[clave]) {
+            datos.tiposPlatillos[clave] = { nombre: nombreBase, platillos: [] };
         }
     });
     localStorage.setItem(STORAGE_KEY_PLATILLOS, JSON.stringify(datos));
@@ -221,15 +286,23 @@ function obtenerTiposPlatillos() {
     return datos.tiposPlatillos;
 }
 
-// Agregar nuevo tipo de platillo
-function agregarTipoPlatillo(codigo, nombre) {
+// Agregar nuevo tipo de platillo identificado por nombre (no por código). Retorna true si creó, false si duplicado.
+function agregarTipoPlatillo(nombre) {
     const datos = cargarDatosPlatillos();
-    datos.tiposPlatillos[codigo] = {
-        codigo: codigo,
-        nombre: nombre,
+    const tipos = datos.tiposPlatillos || {};
+    const nombreNorm = (nombre || '').trim().toLowerCase();
+    const existe = Object.values(tipos).some(t => (t.nombre || '').trim().toLowerCase() === nombreNorm);
+    if (existe) {
+        return false;
+    }
+    const nombreFmt = normalizarNombre ? normalizarNombre(nombre) : (nombre || '').trim();
+    tipos[nombreFmt] = {
+        nombre: nombreFmt,
         platillos: []
     };
+    datos.tiposPlatillos = tipos;
     guardarDatosPlatillos(datos);
+    return true;
 }
 
 // Obtener nombre del tipo de platillo
@@ -242,8 +315,10 @@ function obtenerNombreTipoPlatillo(codigoTipo) {
 // Registrar platillo completo
 function registrarPlatillo(platillo) {
     const datos = cargarDatosPlatillos();
+    const codigoGenerado = obtenerSiguienteCodigoPlatillo(platillo.tipoCodigo);
     datos.platillosRegistrados.push({
         id: Date.now(),
+        codigo: codigoGenerado,
         ...platillo,
         fechaRegistro: new Date().toISOString()
     });
@@ -298,18 +373,26 @@ function actualizarPlatillo(id, campos) {
     return false;
 }
 
+// Obtener siguiente código de platillo global con formato PLA-<n>
+function obtenerSiguienteCodigoPlatillo(/* codigoTipo ignorado */) {
+    const actual = parseInt(localStorage.getItem(STORAGE_KEY_CONTADOR_PLATILLOS) || '0');
+    const siguiente = actual + 1;
+    localStorage.setItem(STORAGE_KEY_CONTADOR_PLATILLOS, siguiente.toString());
+    return `PLA-${siguiente}`;
+}
+
 // ================== TIPOS DE PLATILLOS PREDEFINIDOS ==================
 const datosTiposPlatillosBase = {
-    PAR: { codigo: 'PAR', nombre: 'PAR - Parrillada', platillos: [] },
-    DES: { codigo: 'DES', nombre: 'DES - Desayunos', platillos: [] },
-    ALM: { codigo: 'ALM', nombre: 'ALM - Almuerzos', platillos: [] },
-    CEN: { codigo: 'CEN', nombre: 'CEN - Cenas', platillos: [] },
-    POS: { codigo: 'POS', nombre: 'POS - Postres', platillos: [] },
-    ENT: { codigo: 'ENT', nombre: 'ENT - Entradas', platillos: [] },
-    SOP: { codigo: 'SOP', nombre: 'SOP - Sopas', platillos: [] },
-    BEB: { codigo: 'BEB', nombre: 'BEB - Bebidas', platillos: [] },
-    ESP: { codigo: 'ESP', nombre: 'ESP - Especiales', platillos: [] },
-    INT: { codigo: 'INT', nombre: 'INT - Internacional', platillos: [] }
+    PAR: { codigo: 'PAR', nombre: 'Parrillada', platillos: [] },
+    DES: { codigo: 'DES', nombre: 'Desayunos', platillos: [] },
+    ALM: { codigo: 'ALM', nombre: 'Almuerzos', platillos: [] },
+    CEN: { codigo: 'CEN', nombre: 'Cenas', platillos: [] },
+    POS: { codigo: 'POS', nombre: 'Postres', platillos: [] },
+    ENT: { codigo: 'ENT', nombre: 'Entradas', platillos: [] },
+    SOP: { codigo: 'SOP', nombre: 'Sopas', platillos: [] },
+    BEB: { codigo: 'BEB', nombre: 'Bebidas', platillos: [] },
+    ESP: { codigo: 'ESP', nombre: 'Especiales', platillos: [] },
+    INT: { codigo: 'INT', nombre: 'Internacional', platillos: [] }
 };
 
 // ================== PEDIDOS ==================
@@ -393,5 +476,67 @@ function eliminarPedido(id) {
         guardarDatosPedidos(datos);
         return true;
     }
+    return false;
+}
+
+// Restar cantidades de ingredientes del inventario cuando se confirma un pedido
+function restarIngredientesDelInventario(pedido) {
+    const datosInventario = cargarDatosInventario();
+    const platillos = obtenerPlatillosRegistrados();
+    const insumosRegistrados = datosInventario.insumosRegistrados;
+    
+    // Obtener totales globales actuales
+    const totalesGlobales = {};
+    insumosRegistrados.forEach(insumo => {
+        const clave = `${insumo.tipoCodigo || ''}::${insumo.insumoCodigo || ''}`;
+        if (!totalesGlobales[clave]) {
+            totalesGlobales[clave] = 0;
+        }
+        totalesGlobales[clave] += parseFloat(insumo.cantidad) || 0;
+    });
+    
+    // Calcular cantidades a restar
+    const cantidadesARestar = {};
+    
+    for (const platilloPedido of pedido.platillos) {
+        const platillo = platillos.find(p => p.id === platilloPedido.id);
+        if (platillo && platillo.ingredientes) {
+            for (const ingrediente of platillo.ingredientes) {
+                const clave = `${ingrediente.id}`;
+                if (!cantidadesARestar[clave]) {
+                    cantidadesARestar[clave] = 0;
+                }
+                cantidadesARestar[clave] += ingrediente.cantidad * platilloPedido.cantidad;
+            }
+        }
+    }
+    
+    // Restar cantidades de los insumos registrados
+    let cambiosRealizados = false;
+    for (const [insumoId, cantidadARestar] of Object.entries(cantidadesARestar)) {
+        const idInsumo = parseInt(insumoId);
+        let cantidadRestante = cantidadARestar;
+        
+        // Buscar insumos registrados y restar cantidades
+        for (let i = 0; i < insumosRegistrados.length && cantidadRestante > 0; i++) {
+            const insumo = insumosRegistrados[i];
+            if (insumo.id === idInsumo) {
+                const cantidadActual = parseFloat(insumo.cantidad) || 0;
+                if (cantidadActual > 0) {
+                    const cantidadARestarDeEste = Math.min(cantidadActual, cantidadRestante);
+                    insumo.cantidad = cantidadActual - cantidadARestarDeEste;
+                    cantidadRestante -= cantidadARestarDeEste;
+                    cambiosRealizados = true;
+                }
+            }
+        }
+    }
+    
+    if (cambiosRealizados) {
+        datosInventario.insumosRegistrados = insumosRegistrados;
+        guardarDatosInventario(datosInventario);
+        return true;
+    }
+    
     return false;
 }

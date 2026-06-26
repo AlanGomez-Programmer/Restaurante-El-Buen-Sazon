@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cargar tema guardado
     cargarTemaGuardado();
     
+    // Selecciona todos los elementos que tengan la clase .pantalla
     const pantallas = document.querySelectorAll(".pantalla");
 
     function mostrarPantalla(idPantalla) {
@@ -40,21 +41,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const btnRegresarMenu = document.getElementById("btnRegresa-menuPrincipal");
 
+    // Botón para regresar al menú principal
+    const btnRegresarMenu = document.getElementById("btnRegresa-menuPrincipal");
     btnRegresarMenu.addEventListener("click", () => {
         window.location.href = "./menu.html";
     });
 
+    // Botón para regresar al menú que corresponde
     const botonesRegresar = document.querySelectorAll(".btnRegresar");
-    const btnSalir = document.getElementById("btnSalir");
-
     botonesRegresar.forEach(boton => {
         boton.addEventListener("click", () => {
             mostrarPantalla("contenido__menu");
         });
     });
 
+    // Botón para salir y regresar al login
+    const btnSalir = document.getElementById("btnSalir");
     btnSalir.addEventListener('click', ()=> {
         localStorage.removeItem('el_buen_sazon_theme');
         window.location.href = "./index.html";
@@ -102,7 +105,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Cargar insumos por tipo seleccionado
     function cargarInsumosPorTipo(codigoTipo, selectInsumo) {
-        selectInsumo.innerHTML = '<option value="">Elige una opción</option>';
+        // Limpiar opciones previas y colocar placeholder
+        selectInsumo.innerHTML = '';
+        let eligeOpcion = document.createElement('option');
+        eligeOpcion.value = "";
+        eligeOpcion.textContent = 'Elige una opción';
+        selectInsumo.appendChild(eligeOpcion);
         
         if (!codigoTipo) return;
         
@@ -110,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         insumos.forEach(insumo => {
             const option = document.createElement('option');
             option.value = insumo.codigo;
-            option.textContent = `${insumo.codigo} - ${insumo.nombre}`;
+            option.textContent = `${insumo.nombre}`;
             selectInsumo.appendChild(option);
         });
     }
@@ -130,6 +138,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const tipoInsumo = document.getElementById('tipoInsumo');
     const insumo = document.getElementById('insumo');
     const unidadInsumo = document.getElementById('unidadInsumo');
+    const inputCantidadRegistro = document.getElementById('cantidadInsumo');
+    if (inputCantidadRegistro) {
+        inputCantidadRegistro.setAttribute('min', '0');
+    }
     
     if (tipoInsumo && insumo) {
         tipoInsumo.addEventListener('change', () => {
@@ -173,6 +185,18 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (!tipoInsumo.value || !insumo.value || !cantidadInsumo.value || !unidadInsumo.value || !fechaIngreso.value) {
                 mostrarMensaje('mensajeRegistro', 'Por favor complete todos los campos obligatorios', 'error');
+                return;
+            }
+            
+            const cantidadNum = parseFloat(cantidadInsumo.value);
+            // Validación explícita: cantidad válida y no negativa
+            if (isNaN(cantidadNum)) {
+                mostrarMensaje('mensajeRegistro', 'Ingrese una cantidad válida', 'error');
+                return;
+            }
+            if (cantidadNum < 0) {
+                alert('La cantidad no puede ser menor a 0. No se puede agregar el nuevo insumo.');
+                mostrarMensaje('mensajeRegistro', 'La cantidad no puede ser menor a 0', 'error');
                 return;
             }
             
@@ -284,7 +308,6 @@ document.addEventListener('DOMContentLoaded', () => {
             tarjeta.innerHTML = `
                 <h3>${insumo.insumoNombre}</h3>
                 <p><span class="info__destacada">Tipo:</span> ${insumo.tipoNombre}</p>
-                <p><span class="info__destacada">Código:</span> ${insumo.insumoCodigo}</p>
                 <p><span class="info__destacada">Cantidad:</span> ${insumo.cantidad} ${insumo.unidad}</p>
                 <p><span class="info__destacada">Fecha de ingreso:</span> ${insumo.fechaIngreso}</p>
                 <p><span class="info__destacada">Descripción:</span> ${insumo.descripcion || 'Sin descripción'}</p>
@@ -325,6 +348,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
+            // Validación: evitar nombres de tipo duplicados (insensible a mayúsculas/minúsculas)
+            const tipos = obtenerTiposInsumos() || {};
+            const nombreNorm = nombre.toLowerCase();
+            const existeTipo = Object.values(tipos).some(t => (t.nombre || '').trim().toLowerCase() === nombreNorm);
+            if (existeTipo) {
+                alert('Ya existe un tipo de insumo con ese nombre.');
+                mostrarMensaje('mensajeCrearTipo', 'El tipo de insumo ya existe', 'error');
+                return;
+            }
+
             // Extraer código del nombre (ej: "L - Lacteos" -> "L")
             const codigo = nombre.split(' - ')[0];
             
@@ -356,7 +389,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
-            agregarTipoInsumo(datosTipoTemporal.codigo, datosTipoTemporal.nombre, datosTipoTemporal.unidad);
+            const creado = agregarTipoInsumo(datosTipoTemporal.codigo, datosTipoTemporal.nombre, datosTipoTemporal.unidad);
+            if (!creado) {
+                alert('El tipo de insumo ya existe o el código ya está en uso.');
+                mostrarMensaje('mensajeCrearTipo', 'No se pudo crear: ya existe un tipo con ese nombre o código', 'error');
+                return;
+            }
             mostrarMensaje('mensajeCrearTipo', 'Tipo de insumo creado exitosamente', 'exito');
             
             const confNombre = document.getElementById('confNombreTipo');
@@ -409,22 +447,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
+            // Validación: solo letras y espacios (no números)
+            if (/\d/.test(nombreInsumo)) {
+                alert('No se aceptan números en el nombre del insumo, solo letras.');
+                mostrarMensaje('mensajeCrearInsumo', 'El nombre del insumo no debe contener números', 'error');
+                return;
+            }
+            
+            // Validación: evitar nombres duplicados en el mismo tipo
+            const existentes = obtenerInsumosPorTipo(codigoTipo) || [];
+            const nombreNormalizado = nombreInsumo.toLowerCase();
+            const yaExiste = existentes.some(i => (i.nombre || '').trim().toLowerCase() === nombreNormalizado);
+            if (yaExiste) {
+                alert('Ya existe un insumo con ese nombre en este tipo.');
+                mostrarMensaje('mensajeCrearInsumo', 'El insumo ya existe en este tipo', 'error');
+                return;
+            }
+            
             const nombreTipo = obtenerNombreTipo(codigoTipo);
-            const tipos = obtenerTiposInsumos();
-            const insumosExistentes = tipos[codigoTipo].insumos;
-            const nuevoCodigo = `${codigoTipo}-${insumosExistentes.length + 1}`;
             
             datosInsumoNuevoTemporal = {
                 codigoTipo: codigoTipo,
                 nombreTipo: nombreTipo,
-                codigoInsumo: nuevoCodigo,
                 nombreInsumo: nombreInsumo
             };
             
             const confTipo = document.getElementById('confTipoCrear');
             const confNuevo = document.getElementById('confNuevoInsumo');
             if (confTipo) confTipo.textContent = `Tipo: ${nombreTipo}`;
-            if (confNuevo) confNuevo.textContent = `Insumo: ${nuevoCodigo} - ${nombreInsumo}`;
+            if (confNuevo) confNuevo.textContent = `Insumo: ${nombreInsumo}`;
             
             const confirmacion = document.querySelector('#contenido__crearInsumo .confirmacionDatos');
             if (confirmacion) {
@@ -443,7 +494,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
-            agregarInsumo(datosInsumoNuevoTemporal.codigoTipo, datosInsumoNuevoTemporal.codigoInsumo, datosInsumoNuevoTemporal.nombreInsumo);
+            const creado = agregarInsumo(datosInsumoNuevoTemporal.codigoTipo, datosInsumoNuevoTemporal.nombreInsumo);
+            if (!creado) {
+                alert('El insumo ya existe en este tipo.');
+                mostrarMensaje('mensajeCrearInsumo', 'El insumo ya existe en este tipo', 'error');
+                return;
+            }
             mostrarMensaje('mensajeCrearInsumo', 'Insumo creado exitosamente', 'exito');
             
             const confTipo = document.getElementById('confTipoCrear');
@@ -500,14 +556,13 @@ document.addEventListener('DOMContentLoaded', () => {
             tarjeta.innerHTML = `
                 <h3>${insumo.insumoNombre}</h3>
                 <p><span class="info__destacada">Tipo:</span> ${insumo.tipoNombre}</p>
-                <p><span class="info__destacada">Código:</span> ${insumo.insumoCodigo}</p>
                 <p><span class="info__destacada">Cantidad:</span> ${insumo.cantidad} ${insumo.unidad}</p>
                 <p><span class="info__destacada">Fecha de ingreso:</span> ${insumo.fechaIngreso}</p>
                 <p><span class="info__destacada">Descripción:</span> ${insumo.descripcion || 'Sin descripción'}</p>
                 <button type="button" class="btnActualizarTarjeta" data-id="${insumo.id}">Actualizar</button>
                 <div class="formulario__actualizarTarjeta" id="formularioTarjeta-${insumo.id}">
                     <label>Nueva cantidad:</label>
-                    <input type="number" class="nuevaCantidadTarjeta" value="${insumo.cantidad}">
+                    <input type="number" class="nuevaCantidadTarjeta" value="${insumo.cantidad}" min="0">
                     <button type="button" class="btnGuardarTarjeta btnVerde" data-id="${insumo.id}">Guardar</button>
                     <button type="button" class="btnCancelarTarjeta btnRegresar" data-id="${insumo.id}">Cancelar</button>
                 </div>
@@ -532,13 +587,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 const id = parseInt(e.target.getAttribute('data-id'));
                 const formulario = document.getElementById(`formularioTarjeta-${id}`);
                 const input = formulario.querySelector('.nuevaCantidadTarjeta');
-                const nuevaCantidad = input.value;
+                const nuevaCantidad = parseFloat(input.value);
                 
-                if (!nuevaCantidad || nuevaCantidad === '') {
+                if (isNaN(nuevaCantidad)) {
                     if (mensaje) {
-                        mensaje.textContent = 'Por favor ingrese la nueva cantidad';
+                        mensaje.textContent = 'Por favor ingrese una cantidad válida';
                         mensaje.className = 'mensaje error';
                     }
+                    return;
+                }
+                
+                if (nuevaCantidad < 0) {
+                    if (mensaje) {
+                        mensaje.textContent = 'La cantidad no puede ser menor a 0';
+                        mensaje.className = 'mensaje error';
+                    }
+                    alert('La cantidad no puede ser menor a 0. No se puede actualizar el insumo.');
                     return;
                 }
                 
@@ -603,7 +667,6 @@ document.addEventListener('DOMContentLoaded', () => {
             tarjeta.innerHTML = `
                 <h3>${insumo.insumoNombre}</h3>
                 <p><span class="info__destacada">Tipo:</span> ${insumo.tipoNombre}</p>
-                <p><span class="info__destacada">Código:</span> ${insumo.insumoCodigo}</p>
                 <p><span class="info__destacada">Cantidad:</span> ${insumo.cantidad} ${insumo.unidad}</p>
                 <p><span class="info__destacada">Fecha de ingreso:</span> ${insumo.fechaIngreso}</p>
                 <p><span class="info__destacada">Descripción:</span> ${insumo.descripcion || 'Sin descripción'}</p>
@@ -635,7 +698,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="tarjeta__insumo" style="max-width: 400px; margin: 0 auto;">
                     <h3>${insumo.insumoNombre}</h3>
                     <p><span class="info__destacada">Tipo:</span> ${insumo.tipoNombre}</p>
-                    <p><span class="info__destacada">Código:</span> ${insumo.insumoCodigo}</p>
                     <p><span class="info__destacada">Cantidad:</span> ${insumo.cantidad} ${insumo.unidad}</p>
                     <p><span class="info__destacada">Fecha de ingreso:</span> ${insumo.fechaIngreso}</p>
                     <p><span class="info__destacada">Descripción:</span> ${insumo.descripcion || 'Sin descripción'}</p>

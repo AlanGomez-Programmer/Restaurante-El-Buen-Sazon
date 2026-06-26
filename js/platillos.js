@@ -63,9 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         selectsTipo.forEach(select => {
             select.innerHTML = '<option value="">Elige una opción</option>';
-            for (const [codigo, tipo] of Object.entries(tipos)) {
+            for (const [clave, tipo] of Object.entries(tipos)) {
                 const option = document.createElement('option');
-                option.value = codigo;
+                option.value = clave; // clave puede ser código base o nombre para los nuevos
                 option.textContent = tipo.nombre;
                 select.appendChild(option);
             }
@@ -115,14 +115,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Por favor ingrese un nombre para el tipo de platillo');
                 return;
             }
+            // Validación: no permitir números en el nombre del tipo de platillo
+            if (/\d/.test(nombre)) {
+                alert('No se aceptan números en el nombre del tipo de platillo, solo letras.');
+                return;
+            }
             
-            // Extraer código del nombre (ej: "PF - Platillo Fuerte" -> "PF")
-            const codigo = nombre.split(' - ')[0];
+            // Validación: evitar nombres de tipo de platillo duplicados (case-insensitive)
+            const tipos = obtenerTiposPlatillos() || {};
+            const nombreNorm = nombre.toLowerCase();
+            const existe = Object.values(tipos).some(t => (t.nombre || '').trim().toLowerCase() === nombreNorm);
+            if (existe) {
+                alert('Ya existe un tipo de platillo con ese nombre.');
+                return;
+            }
             
-            datosTipoPlatilloTemporal = {
-                codigo: codigo,
-                nombre: nombre
-            };
+            datosTipoPlatilloTemporal = { nombre };
+            
+            const confNombre = document.getElementById('confNombreTipo');
+            if (confNombre) confNombre.textContent = `Nombre: ${nombre}`;
             
             const confirmacion = document.querySelector('#contenido__crearTipo .confirmacionDatos');
             if (confirmacion) {
@@ -140,7 +151,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
-            agregarTipoPlatillo(datosTipoPlatilloTemporal.codigo, datosTipoPlatilloTemporal.nombre);
+            const creado = agregarTipoPlatillo(datosTipoPlatilloTemporal.nombre);
+            if (!creado) {
+                alert('El tipo de platillo ya existe.');
+                return;
+            }
+            
+            const confNombre = document.getElementById('confNombreTipo');
+            if (confNombre) confNombre.textContent = '';
             
             const confirmacion = document.querySelector('#contenido__crearTipo .confirmacionDatos');
             if (confirmacion) {
@@ -150,6 +168,18 @@ document.addEventListener('DOMContentLoaded', () => {
             datosTipoPlatilloTemporal = null;
             cargarTiposPlatillos();
             mostrarPantalla("contenido__menu");
+        });
+    }
+
+    // Limpiar confirmación al cancelar en Crear Tipo de Platillo
+    const btnCancelarTipoPlatillo = document.querySelector('#contenido__crearTipo .confirmacionDatos .btnRegresar');
+    if (btnCancelarTipoPlatillo) {
+        btnCancelarTipoPlatillo.addEventListener('click', () => {
+            const confNombre = document.getElementById('confNombreTipo');
+            if (confNombre) confNombre.textContent = '';
+            const confirmacion = document.querySelector('#contenido__crearTipo .confirmacionDatos');
+            if (confirmacion) confirmacion.classList.add('oculto');
+            datosTipoPlatilloTemporal = null;
         });
     }
 
@@ -163,6 +193,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlImagen = document.getElementById('urlImagen');
     const valorPlatillo = document.getElementById('valorPlatillo');
     const listaIngredientes = document.getElementById('listaIngredientes');
+    if (valorPlatillo) {
+        valorPlatillo.setAttribute('min', '0');
+        valorPlatillo.setAttribute('step', '0.01');
+    }
     
     // Cargar insumos en la lista de ingredientes
     function cargarIngredientes() {
@@ -204,10 +238,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const descripcion = descripcionPlatillo.value;
             const imagen = urlImagen.value;
             const valor = valorPlatillo.value;
+            const valorNum = parseFloat(valor);
+            if (isNaN(valorNum) || valorNum < 0) {
+                alert('El valor de venta no puede ser menor a 0');
+                return;
+            }
             
             // Obtener ingredientes seleccionados
             const checkboxes = document.querySelectorAll('.checkbox-ingrediente:checked');
             const ingredientesSeleccionados = [];
+            let hayErrorIng = false;
             
             checkboxes.forEach(checkbox => {
                 const id = parseInt(checkbox.getAttribute('data-id'));
@@ -215,6 +255,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const unidad = checkbox.getAttribute('data-unidad');
                 const cantidadInput = document.querySelector(`.cantidad-ingrediente[data-id="${id}"]`);
                 const cantidad = cantidadInput ? parseFloat(cantidadInput.value) || 0 : 0;
+                if (cantidad < 0) {
+                    hayErrorIng = true;
+                    return;
+                }
                 
                 if (cantidad > 0) {
                     ingredientesSeleccionados.push({
@@ -225,6 +269,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             });
+
+            if (hayErrorIng) {
+                alert('La cantidad de ingrediente no puede ser menor a 0');
+                return;
+            }
             
             if (!codigoTipo || !nombre || !valor) {
                 alert('Por favor complete los campos obligatorios');
@@ -326,6 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${platillo.imagen ? `<img src="${platillo.imagen}" alt="${platillo.nombre}">` : ''}
                 <h3>${platillo.nombre}</h3>
                 <p><span class="info__destacada">Tipo:</span> ${platillo.tipoNombre}</p>
+                <p><span class="info__destacada">Código:</span> ${platillo.codigo || platillo.tipoCodigo}</p>
                 <p><span class="info__destacada">Descripción:</span> ${platillo.descripcion || 'Sin descripción'}</p>
                 <p><span class="info__destacada">Valor:</span> $${platillo.valorVenta}</p>
                 <button class="btnVer" data-id="${platillo.id}">VER</button>
@@ -361,7 +411,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalImagen.style.display = platillo.imagen ? 'block' : 'none';
         modalNombre.textContent = platillo.nombre;
         modalTipo.textContent = platillo.tipoNombre;
-        modalCodigo.textContent = platillo.tipoCodigo;
+        modalCodigo.textContent = platillo.codigo || platillo.tipoCodigo;
         modalDescripcion.textContent = platillo.descripcion || 'Sin descripción';
         modalValor.textContent = `$${platillo.valorVenta}`;
         
@@ -452,15 +502,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 const nuevoPrecio = document.getElementById(`nuevoPrecio-${id}`).value;
                 const nuevaImagen = document.getElementById(`nuevaImagen-${id}`).value;
                 
-                if (!nuevoPrecio || parseFloat(nuevoPrecio) <= 0) {
+                const precioNum = parseFloat(nuevoPrecio);
+                if (isNaN(precioNum)) {
                     if (mensajeActualizar) {
                         mensajeActualizar.textContent = 'Por favor ingrese un precio válido';
                         mensajeActualizar.className = 'mensaje error';
                     }
                     return;
                 }
+                if (precioNum < 0) {
+                    alert('El valor de venta no puede ser menor a 0. No se puede actualizar el platillo.');
+                    if (mensajeActualizar) {
+                        mensajeActualizar.textContent = 'El valor de venta no puede ser menor a 0';
+                        mensajeActualizar.className = 'mensaje error';
+                    }
+                    return;
+                }
                 
-                const campos = { valorVenta: parseFloat(nuevoPrecio) };
+                const campos = { valorVenta: precioNum };
                 if (nuevaImagen.trim()) campos.imagen = nuevaImagen.trim();
                 
                 if (actualizarPlatillo(id, campos)) {
