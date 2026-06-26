@@ -5,6 +5,36 @@
         margin-bottom: 32px;
     }
 
+/* Botones del menú de Platillos (igual diseño que menú principal) */
+@media (min-width: 1024px) {
+    #contenido__menu .contenido__tarjetas .tarjeta__menu {
+        border: 1px solid #222;
+        background: #000000;
+        color: #ffffff;
+        box-shadow: 0 12px 0 rgba(0, 0, 0, 0.12);
+        transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+    }
+    #contenido__menu .contenido__tarjetas .tarjeta__menu:hover {
+        background: #111111;
+        border-color: #333333;
+        transform: translateY(-6px);
+        box-shadow: 0 18px 24px rgba(0, 0, 0, 0.16);
+    }
+    #contenido__menu .contenido__tarjetas .tarjeta__menu h1,
+    #contenido__menu .contenido__tarjetas .tarjeta__menu .material-symbols-outlined { color: inherit; }
+
+    body.tema-oscuro #contenido__menu .contenido__tarjetas .tarjeta__menu {
+        background: #ffffff;
+        color: #000000;
+        border-color: #dddddd;
+        box-shadow: 0 12px 0 rgba(255, 255, 255, 0.12);
+    }
+    body.tema-oscuro #contenido__menu .contenido__tarjetas .tarjeta__menu:hover {
+        background: #f5f5f5;
+        border-color: #cccccc;
+    }
+}
+
     #contenido__menu .contenido__tarjetas,
     .tarjetas__platillos,
     #contenido__mostrarPlatillos .tarjetas__platillos,
@@ -118,6 +148,17 @@
         color: var(--text-color);
     }
 
+    /* Mejora de estilo para input de crear tipo de platillo */
+    #contenido__crearTipo .formulario__creacionTipoPlatillo input::placeholder {
+        color: var(--text-secondary, #888);
+    }
+    #contenido__crearTipo .formulario__creacionTipoPlatillo input:focus {
+        outline: none;
+        border-color: var(--primary-color, #2e7d32);
+        box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+        background: var(--input-bg, #fff);
+    }
+
     .formulario__entradaPlatillo textarea,
     .formulario__actualizarPlatillo textarea {
         height: 100px;
@@ -171,12 +212,42 @@
 @media (min-width: 1440px) {
     #contenido__menu .contenido__tarjetas,
     .tarjetas__platillos {
-        grid-template-columns: repeat(3, minmax(240px, 1fr));
+        grid-template-columns: repeat(2, minmax(240px, 1fr));
     }
 
     .formulario__entradaPlatillo,
     .formulario__actualizarPlatillo,
     .formulario__creacionTipoPlatillo {
         grid-template-columns: repeat(3, minmax(240px, 1fr));
+    }
+}
+
+/* Botones del menú de Platillos (igual diseño que menú principal) */
+@media (min-width: 1024px) {
+    #contenido__menu .contenido__tarjetas .tarjeta__menu {
+        border: 1px solid #222;
+        background: #000000;
+        color: #ffffff;
+        box-shadow: 0 12px 0 rgba(0, 0, 0, 0.12);
+        transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+    }
+    #contenido__menu .contenido__tarjetas .tarjeta__menu:hover {
+        background: #111111;
+        border-color: #333333;
+        transform: translateY(-6px);
+        box-shadow: 0 18px 24px rgba(0, 0, 0, 0.16);
+    }
+    #contenido__menu .contenido__tarjetas .tarjeta__menu h1,
+    #contenido__menu .contenido__tarjetas .tarjeta__menu .material-symbols-outlined { color: inherit; }
+
+    body.tema-oscuro #contenido__menu .contenido__tarjetas .tarjeta__menu {
+        background: #ffffff;
+        color: #000000;
+        border-color: #dddddd;
+        box-shadow: 0 12px 0 rgba(255, 255, 255, 0.12);
+    }
+    body.tema-oscuro #contenido__menu .contenido__tarjetas .tarjeta__menu:hover {
+        background: #f5f5f5;
+        border-color: #cccccc;
     }
 }

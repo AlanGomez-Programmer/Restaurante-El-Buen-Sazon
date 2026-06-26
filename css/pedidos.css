@@ -28,26 +28,44 @@ MENU
     height: 100px;
     margin: auto;
     border-radius: 10px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
+    background: #000000;
+    border: 1px solid #222;
     box-shadow: var(--shadow-card);
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: var(--text-color);
+    color: #ffffff;
 }
 
 .tarjeta__menu h1 {
     font-size: 1.4rem;
     font-family: var(--font-Titulos);
     font-weight: 400;
+    color: inherit;
+}
+
+.tarjeta__menu .material-symbols-outlined {
+    color: inherit;
 }
 
 .tarjeta__menu:hover {
     cursor: pointer;
     transition: .3s;
+    background: #111111;
+    border-color: #333333;
     box-shadow: 0 0 10px var(--card-border);
+}
+
+body.tema-oscuro .tarjeta__menu {
+    background: #ffffff;
+    color: #000000;
+    border-color: #dddddd;
+}
+
+body.tema-oscuro .tarjeta__menu:hover {
+    background: #f5f5f5;
+    border-color: #cccccc;
 }
 
 
@@ -153,51 +171,19 @@ FORMULARIOS BASE
 /*=========================
 BOTONES BASE
 =========================*/
-.btnPrincipal,
-.btnVerde {
-    width: 180px;
-    height: 45px;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
+/* hereda desde layout-desktop.css */
 
-.btnPrincipal {
-    background: #000000;
-    color: #ffffff;
-    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
-}
+/* hereda desde layout-desktop.css */
 
-.btnPrincipal:hover {
-    background: #1f1f1f;
-    transform: translateY(-2px);
-}
+/* hereda desde layout-desktop.css */
 
-.btnPrincipal:active {
-    transform: translateY(0);
-}
+/* hereda desde layout-desktop.css */
 
-.btnVerde {
-    margin: 0 auto;
-    background: #2E7D32;
-    color: white;
-    box-shadow: 0 4px 0 rgba(33, 94, 37, 0.25);
-}
+/* hereda desde layout-desktop.css */
 
-.btnVerde:hover {
-    background: #1B5E20;
-    transform: translateY(-2px);
-}
+/* hereda desde layout-desktop.css */
 
-.btnVerde:active {
-    transform: translateY(0);
-}
+/* hereda desde layout-desktop.css */
 
 /* CREAR PEDIDO */
 #contenido__registroPedido .confirmacionDatos button {
@@ -725,22 +711,28 @@ BOTONES BASE
 /* TABLA DE PLATILLOS EN PEDIDO */
 .tabla__platillos,
 .modal__tabla {
-    display: block;
+    display: table;
     width: 100%;
     max-width: 100%;
-    overflow-x: auto;
+    table-layout: fixed;
     border-collapse: collapse;
     margin-top: 15px;
     border-radius: 8px;
 }
 
 .tabla__platillos thead,
+.modal__tabla thead {
+    display: table-header-group;
+}
+
 .tabla__platillos tbody,
-.modal__tabla thead,
 .modal__tabla tbody {
-    display: table;
-    width: 100%;
-    min-width: 600px;
+    display: table-row-group;
+}
+
+.tabla__platillos tr,
+.modal__tabla tr {
+    display: table-row;
 }
 
 .tabla__platillos {
@@ -786,6 +778,37 @@ BOTONES BASE
     width: 100%;
     border-collapse: collapse;
     margin: 15px 0;
+    table-layout: fixed;
+}
+
+.tabla__platillos th:nth-child(1),
+.tabla__platillos td:nth-child(1) {
+    width: 15%;
+}
+
+.tabla__platillos th:nth-child(2),
+.tabla__platillos td:nth-child(2) {
+    width: 25%;
+}
+
+.tabla__platillos th:nth-child(3),
+.tabla__platillos td:nth-child(3) {
+    width: 12%;
+}
+
+.tabla__platillos th:nth-child(4),
+.tabla__platillos td:nth-child(4) {
+    width: 10%;
+}
+
+.tabla__platillos th:nth-child(5),
+.tabla__platillos td:nth-child(5) {
+    width: 12%;
+}
+
+.tabla__platillos th:nth-child(6),
+.tabla__platillos td:nth-child(6) {
+    width: 8%;
 }
 
 .tabla__platillos th,
@@ -793,13 +816,26 @@ BOTONES BASE
     padding: 10px;
     text-align: center;
     border: 1px solid var(--card-border, #ccc);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
 
 .tabla__platillos th {
-    background: var(--card-bg, #f9f9f9);
+    background: #000000;
     font-weight: bold;
-    color: var(--text-color, #333);
+    color: #ffffff;
     text-align: center;
+    padding: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tabla__platillos th,
+.tabla__platillos td {
+    vertical-align: middle;
+    height: 50px;
 }
 
 .tabla__platillos td:first-child,
@@ -940,19 +976,97 @@ BOTONES BASE
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
+    table-layout: fixed;
+}
+
+.modal__tabla th:nth-child(1),
+.modal__tabla td:nth-child(1) {
+    width: 40%;
+}
+
+.modal__tabla th:nth-child(2),
+.modal__tabla td:nth-child(2) {
+    width: 20%;
+}
+
+.modal__tabla th:nth-child(3),
+.modal__tabla td:nth-child(3) {
+    width: 15%;
+}
+
+.modal__tabla th:nth-child(4),
+.modal__tabla td:nth-child(4) {
+    width: 25%;
 }
 
 .modal__tabla th,
 .modal__tabla td {
     padding: 12px;
-    text-align: left;
+    text-align: center;
     border-bottom: 1px solid var(--card-border);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
 
 .modal__tabla th {
-    background: var(--card-bg);
+    background: #000000;
     font-weight: bold;
-    color: var(--text-color);
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.modal__tabla th,
+.modal__tabla td {
+    vertical-align: middle;
+    padding: 12px;
+    height: 50px;
+}
+
+/* Tabla de confirmación de platillos */
+.tabla__platillos.platillosConfirmados {
+    table-layout: fixed;
+}
+
+.tabla__platillos.platillosConfirmados th,
+.tabla__platillos.platillosConfirmados td {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    height: 50px;
+}
+
+.tabla__platillos.platillosConfirmados th {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tabla__platillos.platillosConfirmados th:nth-child(1),
+.tabla__platillos.platillosConfirmados td:nth-child(1) {
+    width: 20%;
+}
+
+.tabla__platillos.platillosConfirmados th:nth-child(2),
+.tabla__platillos.platillosConfirmados td:nth-child(2) {
+    width: 30%;
+}
+
+.tabla__platillos.platillosConfirmados th:nth-child(3),
+.tabla__platillos.platillosConfirmados td:nth-child(3) {
+    width: 15%;
+}
+
+.tabla__platillos.platillosConfirmados th:nth-child(4),
+.tabla__platillos.platillosConfirmados td:nth-child(4) {
+    width: 15%;
+}
+
+.tabla__platillos.platillosConfirmados th:nth-child(5),
+.tabla__platillos.platillosConfirmados td:nth-child(5) {
+    width: 20%;
 }
 
 .modal__total {

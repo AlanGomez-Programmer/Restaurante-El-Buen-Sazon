@@ -11,7 +11,7 @@
     #contenido__actualizarPedido .tarjetas__pedidos,
     #contenido__eliminarPedido .tarjetas__pedidos {
         display: grid;
-        grid-template-columns: repeat(4, minmax(200px, 1fr));
+        grid-template-columns: repeat(2, minmax(200px, 1fr));
         gap: 26px;
         margin-top: 30px;
     }
@@ -121,13 +121,7 @@
     .tabla__confirmacion,
     .tabla__estadoPedidos {
         width: 100%;
-    }
-
-    .tabla__platillos thead,
-    .tabla__platillos tbody,
-    .modal__tabla thead,
-    .modal__tabla tbody {
-        min-width: 960px;
+        table-layout: fixed;
     }
 
     .modal__contenido {
@@ -136,14 +130,38 @@
 }
 
 @media (min-width: 1440px) {
-    .formulario__entradaPedido {
-        grid-template-columns: repeat(3, minmax(240px, 1fr));
+     #contenido__menu .contenido__tarjetas,
+    .tarjetas__platillos {
+        grid-template-columns: repeat(2, minmax(240px, 1fr));
     }
+}
 
-    .tabla__platillos thead,
-    .tabla__platillos tbody,
-    .modal__tabla thead,
-    .modal__tabla tbody {
-        min-width: 1040px;
+/* Botones del menú de Pedidos (igual diseño que menú principal) */
+@media (min-width: 1024px) {
+    #menu__pedidos .tarjeta__menu {
+        border: 1px solid #222;
+        background: #000000;
+        color: #ffffff;
+        box-shadow: 0 12px 0 rgba(0, 0, 0, 0.12);
+        transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+    }
+    #menu__pedidos .tarjeta__menu:hover {
+        background: #111111;
+        border-color: #333333;
+        transform: translateY(-6px);
+        box-shadow: 0 18px 24px rgba(0, 0, 0, 0.16);
+    }
+    #menu__pedidos .tarjeta__menu h1,
+    #menu__pedidos .tarjeta__menu .material-symbols-outlined { color: inherit; }
+
+    body.tema-oscuro #menu__pedidos .tarjeta__menu {
+        background: #ffffff;
+        color: #000000;
+        border-color: #dddddd;
+        box-shadow: 0 12px 0 rgba(255, 255, 255, 0.12);
+    }
+    body.tema-oscuro #menu__pedidos .tarjeta__menu:hover {
+        background: #f5f5f5;
+        border-color: #cccccc;
     }
 }

@@ -12,19 +12,35 @@
     justify-content: space-between;
     gap: 16px;
     padding: 20px 24px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    background: var(--card-bg, var(--background-principal));
+    border-bottom: 1px solid #222;
+    background: #000000;
+    color: #ffffff;
 }
 
-body.tema-oscuro .layout__sidebar {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
+body.tema-oscuro .layout__sidebar { border-bottom: 1px solid #555; }
 
 
 .sidebar__brand,
 .sidebar__nav {
     display: none;
 }
+
+/* Forzar íconos blancos dentro del sidebar (light y dark) */
+.layout__sidebar .material-symbols-outlined { color: #ffffff; }
+.layout__sidebar .sidebar__logout .material-symbols-outlined { color: #ffffff; }
+.layout__sidebar .sidebar__logout:hover .material-symbols-outlined { color: #000000; }
+/* Asegurar que el texto 'Cerrar sesión' también sea blanco */
+.layout__sidebar .sidebar__logout span { color: #ffffff; }
+.layout__sidebar .sidebar__logout:hover span { color: #000000; }
+
+/* Textos dentro del sidebar en blanco (usuario, marca y botón salir) */
+.layout__sidebar .informacion__usuario,
+.layout__sidebar .informacion__usuario *,
+.layout__sidebar .sidebar__brand h1,
+.layout__sidebar .sidebar__brand p,
+.layout__sidebar .sidebar__logout { color: #ffffff; }
+.layout__sidebar .sidebar__logout { border-color: #ffffff; }
+.layout__sidebar .sidebar__logout:hover { background: #ffffff; color: #000000; }
 
 .sidebar__userbar {
     display: flex;
@@ -67,6 +83,84 @@ body.tema-oscuro .layout__sidebar {
     padding: 20px;
 }
 
+/* Botones base globales para consistencia en todos los módulos */
+.btn,
+.btnPrincipal,
+.btnVerde,
+.sidebar__logout {
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+/* Variantes comunes */
+.btn,
+.btnPrincipal,
+.btnVerde {
+    min-width: 180px;
+    height: 45px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+}
+
+.btnPrincipal {
+    background: #000000;
+    color: #ffffff;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+}
+.btnPrincipal:hover { background: #1f1f1f; transform: translateY(-2px); }
+.btnPrincipal:active { transform: translateY(0); }
+
+/* Tema oscuro: botones principales en blanco */
+body.tema-oscuro .btn,
+body.tema-oscuro .btnPrincipal {
+    background: #ffffff;
+    color: #000000;
+    box-shadow: 0 4px 0 rgba(255, 255, 255, 0.25);
+}
+body.tema-oscuro .btnPrincipal:hover { background: #f2f2f2; transform: translateY(-2px); }
+body.tema-oscuro .btnPrincipal:active { transform: translateY(0); }
+
+.btnVerde {
+    background: #2E7D32;
+    color: #ffffff;
+    box-shadow: 0 4px 0 rgba(33, 94, 37, 0.25);
+}
+.btnVerde:hover { background: #1B5E20; transform: translateY(-2px); }
+.btnVerde:active { transform: translateY(0); }
+
+/* Alertas/Mensajes globales (unificar look & feel) */
+.mensaje,
+.alert {
+    width: 100%;
+    max-width: 900px;
+    margin: 12px auto;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    text-align: center;
+    border: 1px solid transparent;
+}
+
+.mensaje.exito,
+.alert--success {
+    background: var(--success-bg, #e8f5e9);
+    color: var(--success-text, #1b5e20);
+    border-color: var(--success-border, #c8e6c9);
+}
+
+.mensaje.error,
+.alert--error {
+    background: var(--error-bg, #ffebee);
+    color: var(--error-text, #b71c1c);
+    border-color: var(--error-border, #ffcdd2);
+}
+
 .layout__divider,
 .layout__content > .contenido__usuario,
 .layout__content > .divider {
@@ -88,25 +182,28 @@ body.tema-oscuro .layout__sidebar {
         align-items: flex-start;
         gap: 32px;
         border-bottom: none;
-        border-right: 1px solid rgba(0, 0, 0, 0.1);
+        border-right: 1px solid #222;
         position: sticky;
         top: 0;
     }
 
-    body.tema-oscuro .layout__sidebar {
-        border-right: 1px solid rgba(255, 255, 255, 0.1);
-    }
+    body.tema-oscuro .layout__sidebar { border-right: 1px solid #555; }
 
     .sidebar__brand {
         display: grid;
         gap: 6px;
-        text-align: left;
+        place-items: center;
+        text-align: center;
     }
 
     .sidebar__logo {
         width: 70px;
         height: 70px;
         object-fit: contain;
+        display: block;
+        margin: 0 auto;
+        /* Hacer el ícono (PNG) blanco sobre fondo negro */
+        filter: invert(1) brightness(1.8);
     }
 
     .sidebar__brand h1 {
@@ -129,6 +226,16 @@ body.tema-oscuro .layout__sidebar {
         justify-content: center;
     }
 
+    /* Botón de salir con buen contraste en sidebar negro */
+    .layout__sidebar .sidebar__logout {
+        border-color: #ffffff;
+        color: #ffffff;
+    }
+    .layout__sidebar .sidebar__logout:hover {
+        background: #ffffff;
+        color: #000000;
+    }
+
     .sidebar__nav {
         width: 100%;
         display: grid;
@@ -141,7 +248,7 @@ body.tema-oscuro .layout__sidebar {
         gap: 10px;
         padding: 12px 18px;
         border-radius: 12px;
-        color: var(--background-secundario);
+        color: #ffffff;
         text-decoration: none;
         font-weight: 600;
         transition: background-color 0.3s ease, transform 0.2s ease;
@@ -154,20 +261,10 @@ body.tema-oscuro .layout__sidebar {
     }
 
     .sidebar__link:hover,
-    .sidebar__link--active {
-        background: rgba(0, 0, 0, 0.08);
-        transform: translateX(4px);
-    }
-
-    body.tema-oscuro .sidebar__link {
-        color: var(--background-principal);
-        background: rgba(255, 255, 255, 0.04);
-    }
-
+    .sidebar__link--active { background: rgba(255, 255, 255, 0.12); transform: translateX(4px); }
+    body.tema-oscuro .sidebar__link { color: #ffffff; }
     body.tema-oscuro .sidebar__link:hover,
-    body.tema-oscuro .sidebar__link--active {
-        background: rgba(255, 255, 255, 0.12);
-    }
+    body.tema-oscuro .sidebar__link--active { background: rgba(255, 255, 255, 0.18); }
 
     .layout__content {
         padding: 40px 52px;
@@ -178,6 +275,37 @@ body.tema-oscuro .layout__sidebar {
         max-width: 1160px;
         margin: 0 auto 72px;
     }
+
+    /* Tarjetas de menú unificadas (para todos los módulos que usen .tarjeta__menu) */
+    .contenido__tarjetas {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(220px, 1fr));
+        gap: 32px;
+        justify-items: stretch;
+        margin-top: 40px;
+    }
+
+    .tarjeta__menu {
+        width: 100%;
+        min-height: 184px;
+        padding: 26px;
+        border-radius: 18px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 12px 0 rgba(0, 0, 0, 0.12);
+        background: var(--card-bg, var(--background-principal));
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .tarjeta__menu:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 14px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .tarjeta__menu h1 { font-size: 1.6rem; letter-spacing: 0.6px; }
+    .tarjeta__menu span.material-symbols-outlined { font-size: 1.9rem; }
 }
 
 @media (min-width: 1440px) {
@@ -188,4 +316,12 @@ body.tema-oscuro .layout__sidebar {
     .layout__content .contenido {
         max-width: 1320px;
     }
+
+    /* Ajustes para pantallas grandes */
+    .contenido__tarjetas {
+        grid-template-columns: repeat(3, minmax(260px, 1fr));
+        gap: 40px;
+    }
+
+    .tarjeta__menu { padding: 32px; display: flex; }
 }

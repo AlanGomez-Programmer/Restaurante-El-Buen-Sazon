@@ -28,26 +28,44 @@ MENU
     height: 100px;
     margin: auto;
     border-radius: 10px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
+    background: #000000;
+    border: 1px solid #222;
     box-shadow: var(--shadow-card);
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: var(--text-color);
+    color: #ffffff;
 }
 
 .tarjeta__menu h1 {
     font-size: 1.4rem;
     font-family: var(--font-Titulos);
     font-weight: 400;
+    color: inherit;
+}
+
+.tarjeta__menu .material-symbols-outlined {
+    color: inherit;
 }
 
 .tarjeta__menu:hover {
     cursor: pointer;
     transition: .3s;
+    background: #111111;
+    border-color: #333333;
     box-shadow: 0 0 10px var(--card-border);
+}
+
+body.tema-oscuro .tarjeta__menu {
+    background: #ffffff;
+    color: #000000;
+    border-color: #dddddd;
+}
+
+body.tema-oscuro .tarjeta__menu:hover {
+    background: #f5f5f5;
+    border-color: #cccccc;
 }
 
 
@@ -171,51 +189,7 @@ FORMULARIOS BASE
 /*=========================
 BOTONES BASE
 =========================*/
-.btnPrincipal,
-.btnVerde {
-    width: 180px;
-    height: 45px;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.btnPrincipal {
-    background: #000000;
-    color: #ffffff;
-    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
-}
-
-.btnPrincipal:hover {
-    background: #1f1f1f;
-    transform: translateY(-2px);
-}
-
-.btnPrincipal:active {
-    transform: translateY(0);
-}
-
-.btnVerde {
-    margin: 0 auto;
-    background: #2E7D32;
-    color: #ffffff;
-    box-shadow: 0 4px 0 rgba(33, 94, 37, 0.25);
-}
-
-.btnVerde:hover {
-    background: #1B5E20;
-    transform: translateY(-2px);
-}
-
-.btnVerde:active {
-    transform: translateY(0);
-}
+ 
 
 #btnCrearTipo {
     margin-top: 20px;
