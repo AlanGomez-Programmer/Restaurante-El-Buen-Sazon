@@ -20,7 +20,7 @@
         flex-direction: column;
         justify-content: space-between;
         transition: transform 0.25s ease, box-shadow 0.25s ease;
-        animation: ingreso 2s ease-in-out;
+        animation: ingreso 1s ease-in-out;
     }
 
     @keyframes ingreso {
